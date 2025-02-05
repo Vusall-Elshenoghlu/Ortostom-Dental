@@ -1,6 +1,7 @@
 import express from "express"
 import { ProductController } from "../controller/ProductController.js"
 import { ProductMiddleware } from "../middlewares/ProductMiddleWare.js"
+import { AuthMiddleware } from "../middlewares/AuthMiddleware.js"
 export const route = express.Router()
 route.get("/",ProductController.getAll)
 route.post("/",ProductMiddleware,ProductController.postData)

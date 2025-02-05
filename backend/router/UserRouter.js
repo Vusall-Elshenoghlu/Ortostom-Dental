@@ -1,11 +1,11 @@
 import express from "express"
-import { UserContoller } from "../controller/UserController.js"
+import  {UserController}  from "../controller/UserController.js"
 export const userRoute = express.Router()
 
-userRoute.get("/",UserContoller.getAll)
-userRoute.get("/:id",UserContoller.getById)
-userRoute.delete("/:id",UserContoller.deleteUser)
-userRoute.put("/:id",UserContoller.editUser)
-userRoute.post("/register",UserContoller.register)
-userRoute.post("/login",UserContoller.login)
-userRoute.post("/confirm",UserContoller.confirm)
+userRoute.get("/",UserController.getAll)
+userRoute.get("/:id",UserController.getById)
+userRoute.delete("/:id",UserController.deleteUser)
+userRoute.put("/:id",UserController.editUser)
+userRoute.post("/register",UserController.register)
+userRoute.post("/login",UserController.login)
+userRoute.post("/confirm",UserController.confirm)
