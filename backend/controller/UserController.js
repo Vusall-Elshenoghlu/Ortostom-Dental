@@ -90,22 +90,23 @@ export const UserController = {
             html: `<p>Your confirmation code: <strong>${confirmCode}</strong></p>`,
         });
 
-        res.send({ message: "Confirmation code sent to your email.", userId: user._id,confirmCode });
+        res.send({ message: "Confirmation code sent to your email.", userId: user._id,confirmCode ,user});
     },
 
     confirm: async (req, res) => {
-        let { confirmPassword } = req.body;
-        let user = await UserModel.findOne({ confirmPassword });
-
+        let { userId, confirmPassword } = req.body;
+        let user = await UserModel.findOne({ _id: userId, confirmPassword });
+    
         if (!user) {
             return res.status(400).send("Incorrect confirmation code.");
         }
-
+    
         let token = jwt.sign({ userId: user._id, email: user.email }, secretKey, { expiresIn: "1h" });
-
+    
         user.confirmPassword = null;
         await user.save();
-
+    
         res.send({ message: "Login successful.", token });
+    
     }
 };

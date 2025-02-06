@@ -5,6 +5,7 @@ import Appointments from "../pages/Admin/Appointments";
 import DashBoard from "../pages/Admin/DashBoard";
 import EditProduct from "../pages/Admin/EditProduct";
 import Users from "../pages/Admin/Users";
+import Confirm from "../pages/User/Confirm";
 import Home from "../pages/User/Home";
 import Login from "../pages/User/Login";
 import NoPage from "../pages/User/NoPage";
@@ -32,6 +33,10 @@ export const ROUTES = [
             {
                 path:"register",
                 element:<Register/>
+            },
+            {
+                path:"confirm",
+                element:<Confirm/>
             },
         ]
     },

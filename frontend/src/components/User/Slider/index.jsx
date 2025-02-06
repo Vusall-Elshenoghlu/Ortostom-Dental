@@ -30,8 +30,8 @@ const Slider = () => {
           </div>
         ))}
       </div>
-      <button className="prev" onClick={prevSlide}>❮</button>
-      <button className="next" onClick={nextSlide}>❯</button>
+      <button className="prev slider-button" onClick={prevSlide}>❮</button>
+      <button className="next slider-button" onClick={nextSlide}>❯</button>
     </div>
   );
 };
