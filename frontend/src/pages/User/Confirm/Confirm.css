@@ -1,12 +1,12 @@
 
-body {
-    background: linear-gradient(135deg, #7b42f6, #b82efc);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-  }
+.confirmm {
+  background: linear-gradient(135deg, #7b42f6, #b82efc);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
   
   .confirm-container {
     display: flex;
@@ -29,12 +29,12 @@ body {
   
   .confirm-container::before {
     top: 10%;
-    left: 10%;
+    left: 20%;
   }
   
   .confirm-container::after {
     bottom: 10%;
-    right: 10%;
+    right: 20%;
   }
   
   .confirm-box {

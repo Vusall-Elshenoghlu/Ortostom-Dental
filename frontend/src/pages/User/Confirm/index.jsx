@@ -28,25 +28,27 @@ const Confirm = () => {
 
     return (
         <>
-            <div className="confirm-container">
-                <Helmet>
-                    <title>Confirm</title>
-                </Helmet>
-                <div className="confirm-box">
-                    <h2 className="confirm-title">{translations[lang].confirm}</h2>
-                    <form onSubmit={handleConfirm} className="confirm-form">
-                        <h2 className='text-center'>{translations[lang].confirmCode}</h2>
-                        <input
-                            type="text"
-                            name="confirmCode"
-                            placeholder={translations[lang].enterConfirm}
-                            value={confirmCode}
-                            onChange={(e) => setConfirmCode(e.target.value)}
-                            className="confirm-input"
-                        />
-                        {error && <div className="text-danger mt-2">{error}</div>}
-                        <button type="submit" className="confirm-button">{translations[lang].confirm}</button>
-                    </form>
+            <div className="confirmm">
+                <div className="confirm-container">
+                    <Helmet>
+                        <title>Confirm</title>
+                    </Helmet>
+                    <div className="confirm-box">
+                        <h2 className="confirm-title">{translations[lang].confirm}</h2>
+                        <form onSubmit={handleConfirm} className="confirm-form">
+                            <h2 className='text-center'>{translations[lang].confirmCode}</h2>
+                            <input
+                                type="text"
+                                name="confirmCode"
+                                placeholder={translations[lang].enterConfirm}
+                                value={confirmCode}
+                                onChange={(e) => setConfirmCode(e.target.value)}
+                                className="confirm-input"
+                            />
+                            {error && <div className="text-danger mt-2">{error}</div>}
+                            <button type="submit" className="confirm-button">{translations[lang].confirm}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </>

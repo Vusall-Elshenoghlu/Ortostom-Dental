@@ -36,6 +36,8 @@ const Register = () => {
   });
 
   return (
+    <>
+    <div className="registration">
     <div className="register-container">
       <Helmet>
         <title>Register</title>
@@ -52,6 +54,8 @@ const Register = () => {
         <p className="register-redirect">{translations[lang].account} <a href="/login" className="register-link">{translations[lang].login}</a></p>
       </div>
     </div>
+    </div>
+   </>
   );
 };
 

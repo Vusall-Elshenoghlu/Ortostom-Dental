@@ -10,6 +10,7 @@ import Home from "../pages/User/Home";
 import Login from "../pages/User/Login";
 import NoPage from "../pages/User/NoPage";
 import Register from "../pages/User/Register";
+import UserAppointment from "../pages/User/UseraAppointment";
 import ProductDetail from "../pages/User/UserProdDetail";
 import UserRoot from "../pages/User/UserRoot";
 
@@ -37,6 +38,10 @@ export const ROUTES = [
             {
                 path:"confirm",
                 element:<Confirm/>
+            },
+            {
+                path:"appointment",
+                element:<UserAppointment />
             },
         ]
     },

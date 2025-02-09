@@ -6,7 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Helmet from "react-helmet"
-import "./Login.css"; 
+import "./Login.css";
 import { LanguageContext } from "../../../context/LanguageContext";
 const Login = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Login = () => {
       localStorage.setItem("userId", res.data.userId);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      setUser(res.data.user); 
+      setUser(res.data.user);
 
       alert("Login successful");
       navigate("/confirm");
@@ -51,21 +51,25 @@ const Login = () => {
   });
 
   return (
-    <div className="auth-container">
-      <Helmet>
-        <title>Login</title>
-      </Helmet>
-      <form className="auth-form form-box" onSubmit={formik.handleSubmit}>
-        <h2 className="form-title">{translations[lang].login}</h2>
-        <input type="email" name="email" placeholder={translations[lang].email} {...formik.getFieldProps("email")} className="form-control input-field mt-2" />
-        <input type="password" name="password" placeholder={translations[lang].password} {...formik.getFieldProps("password")} className="form-control input-field mt-2" />
-        
-        {error && <div className="text-danger mt-2">{error}</div>}
+    <>
+    <div className="loginn">
+      <div className="auth-container">
+        <Helmet>
+          <title>Login</title>
+        </Helmet>
+        <form className="auth-form form-box" onSubmit={formik.handleSubmit}>
+          <h2 className="form-title">{translations[lang].login}</h2>
+          <input type="email" name="email" placeholder={translations[lang].email} {...formik.getFieldProps("email")} className="form-control input-field mt-2" />
+          <input type="password" name="password" placeholder={translations[lang].password} {...formik.getFieldProps("password")} className="form-control input-field mt-2" />
 
-        <button type="submit" className="btn btn-primary submit-btn mt-3">{translations[lang].login}</button>
-        <p className="redirect-text">{translations[lang].dontAccount} <a href="/register" className="redirect-link">{translations[lang].register}</a></p>
-      </form>
-    </div>
+          {error && <div className="text-danger mt-2">{error}</div>}
+
+          <button type="submit" className="btn btn-primary submit-btn mt-3">{translations[lang].login}</button>
+          <p className="redirect-text">{translations[lang].dontAccount} <a href="/register" className="redirect-link">{translations[lang].register}</a></p>
+        </form>
+      </div>
+      </div>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import { LanguageContext } from "../../../context/LanguageContext";
 import HeroSection from "../../../components/User/HeroSection";
 import Slider from "../../../components/User/Slider";
 import Helmet from "react-helmet"
+import "./Home.css"
 
 const Home = () => {
   const { lang } = useContext(LanguageContext);
