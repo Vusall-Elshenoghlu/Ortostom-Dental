@@ -24,6 +24,7 @@ const UserNavbar = () => {
             <Nav.Link as={Link} to="/contact">{translations[lang].contact}</Nav.Link>
             <Nav.Link as={Link} to="/appointment">{translations[lang].reservation}</Nav.Link>
             <Nav.Link as={Link} to="/video-call">{translations[lang].video_call}</Nav.Link>
+            <Nav.Link as={Link} to="/dental-care">{translations[lang].care}</Nav.Link>
           </Nav>
 
           {/* Dark Mode Toggle */}
@@ -43,16 +44,23 @@ const UserNavbar = () => {
             </Dropdown.Menu>
           </Dropdown>
 
-          {/* User/Login/Register */}
+          {/* User Dropdown Menu */}
           {user ? (
-            <div className="ms-3 d-flex align-items-center">
-              <span className="me-3">👤 {user.name}</span>
-              <Button variant="danger" onClick={logout}>Logout</Button>
-            </div>
+            <Dropdown className="ms-3">
+              <Dropdown.Toggle variant="outline-secondary" id="user-dropdown">
+                👤 {user.name}
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to="/my-profile">{translations[lang].profile}</Dropdown.Item>
+                <Dropdown.Item as={Link} to="/my-appointments">{translations[lang].appointments}</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={logout} className="text-danger">{translations[lang].logout}</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           ) : (
             <div className="ms-3 d-flex">
-              <Link to="/login" className="btn btn-primary me-2">Login</Link>
-              <Link to="/register" className="btn btn-secondary">Register</Link>
+              <Link to="/login" className="btn btn-primary me-2">{translations[lang].login}</Link>
+              <Link to="/register" className="btn btn-secondary">{translations[lang].register}</Link>
             </div>
           )}
         </Navbar.Collapse>

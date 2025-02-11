@@ -1,56 +1,108 @@
+/* Ümumi səhifə üçün daha zərif və modern görünüş */
 .hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px;
+  background: linear-gradient(135deg, #0f4c75, #3282b8);
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: background 0.5s ease;
+}
+
+.hero:hover {
+  background: linear-gradient(135deg, #3282b8, #0f4c75);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.5rem;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.hero-button {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: #ffd700;
+  color: #333;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-button:hover {
+  background-color: #ffcc00;
+  transform: scale(1.05);
+}
+
+/* Şəkil bölməsi */
+.hero-image {
+  max-width: 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease;
+}
+
+/* Hover zamanı parallax effekt */
+.hero-image img:hover {
+  transform: scale(1.1) rotate(2deg);
+}
+
+/* Kiçik ekranlar (telefonlar) üçün tənzimləmələr */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
     padding: 40px;
-    background-color: #f3f3f3;
   }
-  
-  .hero-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-  }
-  
+
   .hero-text {
-    max-width: 50%;
+    max-width: 100%;
+    text-align: center;
   }
-  
+
   .hero-text h1 {
     font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
   }
-  
+
   .hero-text p {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 20px;
+    font-size: 1.3rem;
   }
-  
-  .hero-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .hero-button:hover {
-    background-color: #0056b3;
-  }
-  
+
   .hero-image {
-    max-width: 40%;
+    max-width: 100%;
+    margin-top: 20px;
   }
-  
+
+  /* Telefon üçün şəkilin ölçüsü tənzimlənir */
   .hero-image img {
-    width: 100%;
+    width: 90%;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+}

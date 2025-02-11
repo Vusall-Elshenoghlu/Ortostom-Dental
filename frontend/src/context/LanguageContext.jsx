@@ -4,10 +4,58 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export const LanguageContext = createContext();
 
 const translations = {
-  az: { home: "Ana səhifə", about: "Haqqımızda", contact: "Əlaqə", reservation: "Rezervasiya", video_call: "Video Zəng", language: "Dil Seçimi", dark_mode: "Qaranlıq rejim", login:"Daxil ol", register:"Qeydiyyat",name:"Ad",surname:"Soyad",email:"E-mail",password:"Parol",account:"Artıq hesabınız var?",dontAccount:"Hesabınız yoxdur?",confirm:"Təsdiqlə",confirmCode:"Kodunuzu təsdiqləyin",enterConfirm:"Təsdiq kodunu daxil edin" },
-  en: { home: "Home", about: "About Us", contact: "Contact", reservation: "Reservation", video_call: "Video Call", language: "Language", dark_mode: "Dark Mode", login:"Login", register:"Register",name:"Name",surname:"Surname",email:"Email",password:"Password",account:"Already have an account?",dontAccount:"Don't have an account?",confirm:"Confirm",confirmCode:"Confirm your code",enterConfirm:"Enter Confirmation Code" },
-  ru: { home: "Главная", about: "О нас", contact: "Контакты", reservation: "Бронирование", video_call: "Видеозвонок", language: "Выбор языка", dark_mode: "Тёмный режим", login:"Вход", register:"Регистрация",name:"Имя",surname:"Фамилия",email:"Электронная почта",password:"Пароль",account:"У вас уже есть аккаунт?",dontAccount:"У вас нет аккаунта?",confirm:"Подтвердить",confirmCode:"Подтвердите ваш код",enterConfirm:"Введите код подтверждения" },
+  az: { home: "Ana səhifə", about: "Haqqımızda", contact: "Əlaqə", reservation: "Rezervasiya", video_call: "Video Zəng", language: "Dil Seçimi", dark_mode: "Qaranlıq rejim", login: "Daxil ol", register: "Qeydiyyat", name: "Ad", surname: "Soyad", email: "E-mail", password: "Parol", account: "Artıq hesabınız var?", dontAccount: "Hesabınız yoxdur?", confirm: "Təsdiqlə", confirmCode: "Kodunuzu təsdiqləyin", enterConfirm: "Təsdiq kodunu daxil edin", care: "Diş qayğısı",profile: "Profilim",appointments:"Rezervasiyalarım", logout:"Çıxış" },
+  en: { home: "Home", about: "About Us", contact: "Contact", reservation: "Reservation", video_call: "Video Call", language: "Language", dark_mode: "Dark Mode", login: "Login", register: "Register", name: "Name", surname: "Surname", email: "Email", password: "Password", account: "Already have an account?", dontAccount: "Don't have an account?", confirm: "Confirm", confirmCode: "Confirm your code", enterConfirm: "Enter Confirmation Code", care: "Dental care",profile:"My Profile",appointments:"My Appointments",logout:"Logout" },
+  ru: { home: "Главная", about: "О нас", contact: "Контакты", reservation: "Бронирование", video_call: "Видеозвонок", language: "Выбор языка", dark_mode: "Тёмный режим", login: "Вход", register: "Регистрация", name: "Имя", surname: "Фамилия", email: "Электронная почта", password: "Пароль", account: "У вас уже есть аккаунт?", dontAccount: "У вас нет аккаунта?", confirm: "Подтвердить", confirmCode: "Подтвердите ваш код", enterConfirm: "Введите код подтверждения", care: "Уход за зубами",profile:"Мой профиль",appointments:"Мои бронирования",logout:"Выход" },
 };
+
+const doctorss = {
+  az: { doctors: "Həkimlərimiz", showMore: "Daha çox göstər", experience: "Təcrübə", year: "il", education: "Təhsil", certificart: "Sertifikatlar", appoint: "Rezervasiya et" },
+  en: { doctors: "Our Doctors", showMore: "Show More", experience: "Experience", year: "year", education: "Education", certificart: "Certificates", appoint: "Book an appointment" },
+  ru: { doctors: "Hаши врачи", showMore: "Показать больше", experience: "Опыт", year: "Год", education: "Образование", certificart: "Сертификаты", appoint: "Записаться на консультацию" }
+}
+const profil = {
+  en: {
+      contact: "Contact Information",
+      email: "Email",
+      phone: "Phone",
+      address: "Address",
+      basicInfo: "Basic Information",
+      gender: "Gender",
+      birthday: "Birthday",
+      saveInfo: "Save Information",
+      edit: "Edit",
+      male: "Male",
+      female: "Female",
+  },
+  az: {
+      contact: "Əlaqə Məlumatları",
+      email: "E-mail",
+      phone: "Telefon",
+      address: "Ünvan",
+      basicInfo: "Əsas Məlumatlar",
+      gender: "Cinsiyyət",
+      birthday: "Doğum Tarixi",
+      saveInfo: "Məlumatları Yadda Saxla",
+      edit: "Redaktə Et",
+      male: "Kişi",
+      female: "Qadın",
+  },
+  ru: {
+      contact: "Контактная информация",
+      email: "Электронная почта",
+      phone: "Телефон",
+      address: "Адрес",
+      basicInfo: "Основная информация",
+      gender: "Пол",
+      birthday: "Дата рождения",
+      saveInfo: "Сохранить информацию",
+      edit: "Редактировать",
+      male: "Мужчина",
+      female: "Женщина",
+  },
+};
+
 
 const content = {
   az: {
@@ -37,7 +85,7 @@ const LanguageProvider = ({ children }) => {
   }, [darkMode]);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, darkMode, setDarkMode, translations, content }}>
+    <LanguageContext.Provider value={{ lang, setLang, darkMode, setDarkMode, translations, content, doctorss,profil }}>
       {children}
     </LanguageContext.Provider>
   );
