@@ -1,7 +1,7 @@
 import AddProduct from "../pages/Admin/AddProduct";
 import AdminLogin from "../pages/Admin/AdminLogin";
 import AdminProducts from "../pages/Admin/AdminProducts";
-import AdminRoot from "../pages/Admin/AdminRoot";
+import AdminRoot from "../pages/Admin/AdminRoot/AdminRoot";
 import Appointments from "../pages/Admin/Appointments";
 import DashBoard from "../pages/Admin/DashBoard";
 import EditProduct from "../pages/Admin/EditProduct";
@@ -11,6 +11,7 @@ import About from "../pages/User/About";
 import Confirm from "../pages/User/Confirm";
 import Contact from "../pages/User/Contact";
 import DentalCare from "../pages/User/DentalCare";
+import DentalCareDetail from "../pages/User/DentalCareDetail";
 import DoctorDetail from "../pages/User/DoctorDetail";
 import Doctors from "../pages/User/Doctors";
 import Home from "../pages/User/Home";
@@ -80,6 +81,10 @@ export const ROUTES = [
             {
                 path: "dental-care",
                 element: <DentalCare />
+            },
+            {
+                path: "dental-care/:topic",
+                element: <DentalCareDetail />
             },
         ]
     },

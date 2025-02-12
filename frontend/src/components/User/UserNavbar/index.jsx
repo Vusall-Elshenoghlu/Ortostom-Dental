@@ -7,15 +7,20 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
-
+import "./UserNavbar.css"
 const UserNavbar = () => {
   const { user, logout } = useContext(AuthContext);
   const { lang, setLang, darkMode, setDarkMode, translations } = useContext(LanguageContext);
 
   return (
     <Navbar expand="lg" className={`bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} sticky="top">
-      <Container>
-        <Navbar.Brand as={Link} to="/" className="fw-bold">Ortostom Dental</Navbar.Brand>
+        <Navbar.Brand>
+          <div className="logo-container">
+            <Link to="/">
+
+            </Link>
+          </div>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
@@ -27,12 +32,10 @@ const UserNavbar = () => {
             <Nav.Link as={Link} to="/dental-care">{translations[lang].care}</Nav.Link>
           </Nav>
 
-          {/* Dark Mode Toggle */}
           <Button variant="outline-dark" onClick={() => setDarkMode(!darkMode)} className="me-3">
-            {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+            {darkMode ? "☀" : "🌙"}
           </Button>
 
-          {/* Language Selector */}
           <Dropdown>
             <Dropdown.Toggle variant="outline-primary">
               🌍 {lang.toUpperCase()}
@@ -44,7 +47,6 @@ const UserNavbar = () => {
             </Dropdown.Menu>
           </Dropdown>
 
-          {/* User Dropdown Menu */}
           {user ? (
             <Dropdown className="ms-3">
               <Dropdown.Toggle variant="outline-secondary" id="user-dropdown">
@@ -64,7 +66,6 @@ const UserNavbar = () => {
             </div>
           )}
         </Navbar.Collapse>
-      </Container>
     </Navbar>
   );
 };

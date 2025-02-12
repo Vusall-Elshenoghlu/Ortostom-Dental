@@ -6,7 +6,9 @@ const UserFooter = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-logo">
-          <img src="logo.png" alt="Dental Logo" />
+          <div className="logo-container">
+            
+          </div>
           <p>Dental Clinic</p>
         </div>
         <div className="footer-links">

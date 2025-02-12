@@ -17,7 +17,14 @@
     max-width: 120px;
     margin-bottom: 10px;
   }
-  
+  .logo-container {
+    width: 400px ;
+    height: 80px ;
+    background-image: url("../../../public/images/Artboard 3@4x-8.png");
+    background-size: cover; 
+    background-position: center;
+}
+
   .footer-logo p {
     font-size: 20px;
     font-weight: bold;

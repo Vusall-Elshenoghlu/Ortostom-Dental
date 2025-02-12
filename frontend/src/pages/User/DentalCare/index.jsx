@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
+import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LanguageContext } from "../../../context/LanguageContext";
+import { Link } from "react-router";
 
 const DentalCare = () => {
-  const { lang, translations } = useContext(LanguageContext); 
+  const { lang, translations } = useContext(LanguageContext);
   const topics = {
-    az: ["Bebeğin Dişləri", "Braket Baxımı", "Diqqətlə Təmizləmə", "Uşaqların Dişləri", "Diş Telini Təmizləmə", "Diqqət Edilməli Gəmiricilər", "Implant Baxımı", "Məhsul Bələdçisi"],
+    az: ["Körpənin Dişləri", "Braket Baxımı", "Diqqətlə Təmizləmə", "Uşaqların Dişləri", "Diş Telini Təmizləmə", "Diqqət Edilməli Gəmiricilər", "Implant Baxımı", "Məhsul Bələdçisi"],
     en: ["Baby's Teeth", "Braces Care", "Brushing", "Children's Teeth", "Flossing", "Gum Health", "Implant Care", "Product Guide"],
     ru: ["Зубы младенцев", "Уход за брекетами", "Чистка зубов", "Детские зубы", "Чистка зубной нитью", "Забота о деснах", "Уход за имплантами", "Руководство по продуктам"]
   };
@@ -24,30 +26,49 @@ const DentalCare = () => {
   return (
     <div className="container py-5">
       <div className="row align-items-center">
-        <div className="col-md-6 text-center">
+        <motion.div
+          className="col-md-6 text-center"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <img
             src="../../../../public/images/dentalCare.webp"
             alt="Oral Care"
             className="img-fluid rounded shadow"
             style={{ width: "500px", height: "500px" }}
           />
-          <h3 className="text-center">{translations[lang].care}</h3> 
-        </div>
+          <h3 className="text-center">{translations[lang].care}</h3>
+        </motion.div>
 
-        <div className="col-md-6">
+        <motion.div
+          className="col-md-6"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+        >
           {topics[lang].map((topic, index) => (
-            <button
-              key={index}
-              className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
-            >
-              <span className="me-2">➤</span> {topic}
-            </button>
+            <Link to={`/dental-care/${topic}`}>
+              <button
+                key={index}
+                className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
+              >
+                <span className="me-2">➤</span> {topic}
+              </button>
+            </Link>
           ))}
-        </div>
+        </motion.div>
       </div>
+
       <br /><br /><br />
+
       <div className="row align-items-center">
-        <div className="col-md-6 text-center d-md-none">
+        <motion.div
+          className="col-md-6 text-center d-md-none"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        >
           <img
             src="../../../../public/images/dentalInformation.webp"
             alt="Dental Information"
@@ -55,21 +76,35 @@ const DentalCare = () => {
             style={{ width: "500px", height: "350px" }}
           />
           <h3 className="text-center">{translations[lang].info}</h3>
-        </div>
-        <div className="col-md-6">
+        </motion.div>
+
+        <motion.div
+          className="col-md-6"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+        >
           <div className="row row-cols-1 row-cols-md-2 g-2">
             {dentalInformation[lang].map((topic, index) => (
               <div className="col" key={index}>
-                <button
-                  className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
-                >
-                  <span className="me-2">➤</span> {topic}
-                </button>
+                <Link to={`/dental-care/${topic}`}>
+                  <button
+                    className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
+                  >
+                    <span className="me-2">➤</span> {topic}
+                  </button>
+                </Link>
               </div>
             ))}
           </div>
-        </div>
-        <div className="col-md-6 text-center d-none d-md-block">
+        </motion.div>
+
+        <motion.div
+          className="col-md-6 text-center d-none d-md-block"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        >
           <img
             src="../../../../public/images/dentalInformation.webp"
             alt="Dental Information"
@@ -77,7 +112,7 @@ const DentalCare = () => {
             style={{ width: "550px", height: "550px" }}
           />
           <h3 className="text-center">{translations[lang].info}</h3>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
