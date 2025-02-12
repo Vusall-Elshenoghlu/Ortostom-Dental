@@ -1,10 +1,12 @@
 import AddProduct from "../pages/Admin/AddProduct";
+import AdminLogin from "../pages/Admin/AdminLogin";
 import AdminProducts from "../pages/Admin/AdminProducts";
 import AdminRoot from "../pages/Admin/AdminRoot";
 import Appointments from "../pages/Admin/Appointments";
 import DashBoard from "../pages/Admin/DashBoard";
 import EditProduct from "../pages/Admin/EditProduct";
 import Users from "../pages/Admin/Users";
+import DoctorLogin from "../pages/Doctor/DoctorLogin";
 import About from "../pages/User/About";
 import Confirm from "../pages/User/Confirm";
 import Contact from "../pages/User/Contact";
@@ -24,96 +26,102 @@ import VideoCall from "../pages/User/VideoCall";
 
 export const ROUTES = [
     {
-        path:"/",
-        element:<UserRoot/>,
-        children:[
+        path: "/",
+        element: <UserRoot />,
+        children: [
             {
-                path:"",
-                element:<Home/>
+                path: "",
+                element: <Home />
             },
             {
-                path:"products/:id",
-                element:<ProductDetail/>
+                path: "products/:id",
+                element: <ProductDetail />
             },
             {
-                path:"login",
-                element:<Login/>
+                path: "login",
+                element: <Login />
             },
             {
-                path:"register",
-                element:<Register/>
+                path: "register",
+                element: <Register />
             },
             {
-                path:"confirm",
-                element:<Confirm/>
+                path: "confirm",
+                element: <Confirm />
             },
             {
-                path:"about",
-                element:<About/>
+                path: "about",
+                element: <About />
             },
             {
-                path:"contact",
-                element:<Contact/>
+                path: "contact",
+                element: <Contact />
             },
             {
-                path:"my-profile",
-                element:<MyProfile/>
+                path: "my-profile",
+                element: <MyProfile />
             },
             {
-                path:"my-appointments",
-                element:<MyAppointments/>
+                path: "my-appointments",
+                element: <MyAppointments />
             },
             {
-                path:"doctors/:id",
-                element:<DoctorDetail/>
+                path: "doctors/:id",
+                element: <DoctorDetail />
             },
             {
-                path:"appointment/:docId",
-                element:<UserAppointment />
+                path: "appointment/:docId",
+                element: <UserAppointment />
             },
             {
-                path:"video-call",
-                element:<VideoCall/>
+                path: "video-call",
+                element: <VideoCall />
             },
             {
-                path:"dental-care",
-                element:<DentalCare/>
+                path: "dental-care",
+                element: <DentalCare />
             },
         ]
     },
     {
-        path:"*",
-        element:<NoPage/>
+        path: "*",
+        element: <NoPage />
     },
     {
-        path:"/admin",
-        element:<AdminRoot/>,
-        children:[
+        path: "/admin",
+        element: <AdminLogin />
+    },
+    {
+        path: "dashboard",
+        element: <AdminRoot />,
+        children: [
             {
-                path:"",
-                element:<DashBoard/>
+                path: "products",
+                element: <AdminProducts />
             },
             {
-                path:"products",
-                element:<AdminProducts/>
+                path: "addproduct",
+                element: <AddProduct />
             },
             {
-                path:"addproduct",
-                element:<AddProduct/>
+                path: "editproduct",
+                element: <EditProduct />
             },
             {
-                path:"editproduct",
-                element:<EditProduct/>
+                path: "users",
+                element: <Users />
             },
             {
-                path:"users",
-                element:<Users/>
+                path: "appointments",
+                element: <Appointments />
             },
-            {
-                path:"appointments",
-                element:<Appointments/>
-            },
-            
         ]
+    },
+    {
+        path:"/doctor",
+        element:<DoctorLogin/>
     }
+
+
 ]
+

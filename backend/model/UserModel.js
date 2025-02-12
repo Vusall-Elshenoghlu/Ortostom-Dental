@@ -5,6 +5,10 @@ export const UserSchema = new Schema({
     surname:String,
     email:String,
     password:String,
+    address:{type:Object,default:{line1:"",line2:""}},
+    gender:{type:String,default:"Not selected"},
+    dob:{type:String,default:"Not Selected"},
+    phone:{type:String,default:"000000000"},
     confirmPassword:Number
 })
 export const UserModel = model("user",UserSchema)

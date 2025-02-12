@@ -2,6 +2,8 @@ import Joi from 'joi';
 
 const doctorValidationSchema = Joi.object({
   firstName: Joi.string().required(),
+  email: Joi.string().required(),
+  password: Joi.string().required(),
   lastName: Joi.string().required(),
   specialty: Joi.string().required(),
   profileImage: Joi.string().uri(),
