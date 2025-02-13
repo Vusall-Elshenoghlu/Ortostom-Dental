@@ -14,6 +14,11 @@ const doctorss = {
   en: { doctors: "Our Doctors", showMore: "Show More", experience: "Experience", year: "year", education: "Education", certificart: "Certificates", appoint: "Book an appointment" },
   ru: { doctors: "Hаши врачи", showMore: "Показать больше", experience: "Опыт", year: "Год", education: "Образование", certificart: "Сертификаты", appoint: "Записаться на консультацию" }
 }
+const daysOfWeek = {
+  az: ["BAZ", "B.E", "Ç.A", "ÇƏR", "C.A", "C", "ŞƏN"],
+  en: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
+  ru: ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"],
+};
 const profil = {
   en: {
       contact: "Contact Information",
@@ -85,7 +90,7 @@ const LanguageProvider = ({ children }) => {
   }, [darkMode]);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, darkMode, setDarkMode, translations, content, doctorss,profil }}>
+    <LanguageContext.Provider value={{ lang, setLang, darkMode, setDarkMode, translations, content, doctorss,profil,daysOfWeek }}>
       {children}
     </LanguageContext.Provider>
   );

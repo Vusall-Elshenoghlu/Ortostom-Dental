@@ -5,54 +5,44 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { LanguageContext } from "../../../context/LanguageContext";
 
 const DoctorDetail = () => {
-  const { id } = useParams(); // URL parametri ilə həkim ID-sini götürürük
+  const { id } = useParams();
   const [doctor, setDoctor] = useState(null);
-  const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { doctorss, lang, translations } = useContext(LanguageContext)
-  const [docSlots, setDocSlots] = useState([])
-  const [slotIndex, setSlotIndex] = useState(0)
-  const [slotTime, setSlotTime] = useState("")
+  const { doctorss, lang, translations, daysOfWeek } = useContext(LanguageContext);
+  const [docSlots, setDocSlots] = useState([]);
+  const [slotIndex, setSlotIndex] = useState(0);
+  const [slotTime, setSlotTime] = useState("");
 
   async function getAvailableSlots() {
-    setDocSlots([])
-
-    let today = new Date()
+    setDocSlots([]);
+    let today = new Date();
     for (let i = 0; i < 7; i++) {
-      //gettin date with index
-      let currentDate = new Date(today)
-      currentDate.setDate(today.getDate() + i)
+      let currentDate = new Date(today);
+      currentDate.setDate(today.getDate() + i);
 
-      //setting end time of the date with index
-      let endTime = new Date()
-      endTime.setDate(today.getDate() + i)
-      endTime.setHours(21, 0, 0, 0)
+      let endTime = new Date();
+      endTime.setDate(today.getDate() + i);
+      endTime.setHours(21, 0, 0, 0);
 
-      //setting hours
-      if (today.getDate === currentDate.getDate()) {
-        currentDate.setHours(currentDate.getHours > 10 ? currentDate.getHours() + 1 : 10)
-        currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0)
+      if (today.getDate() === currentDate.getDate()) {
+        currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10);
+        currentDate.setMinutes(currentDate.getMinutes() > 30 ? 30 : 0);
       } else {
-        currentDate.setHours(10)
-        currentDate.setMinutes(0)
+        currentDate.setHours(10);
+        currentDate.setMinutes(0);
       }
 
-      let timeSlots = []
+      let timeSlots = [];
       while (currentDate < endTime) {
-        let formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-        //add slot to timeSlots array
+        let formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         timeSlots.push({
           dateTime: new Date(currentDate),
-          time: formattedTime
-        })
-
-        //Increment current time by 30 minutes
-        currentDate.setMinutes(currentDate.getMinutes() + 30)
+          time: formattedTime,
+        });
+        currentDate.setMinutes(currentDate.getMinutes() + 30);
       }
-
-      setDocSlots(prev => ([...prev, timeSlots]))
+      setDocSlots((prev) => [...prev, timeSlots]);
     }
   }
 
@@ -63,19 +53,16 @@ const DoctorDetail = () => {
         setDoctor(response.data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Həkim məlumatları alınarkən xəta baş verdi");
         setLoading(false);
       });
   }, [id]);
 
   useEffect(() => {
-    getAvailableSlots()
-  }, [doctor])
+    getAvailableSlots();
+  }, [doctor]);
 
-  useEffect(() => {
-    console.log(docSlots)
-  }, [docSlots])
   if (loading) {
     return <p>Yüklənir...</p>;
   }
@@ -109,38 +96,46 @@ const DoctorDetail = () => {
               </li>
             ))}
           </ul>
-          {/* Booking Slots */}
+          
+          {/* Günlər və saatlar */}
           <div className="d-flex justify-content-start gap-3 overflow-auto mt-4 p-2">
-            {
-              docSlots.length && docSlots.map((item, index) => (
+            {docSlots.length > 0 &&
+              docSlots.map((item, index) => (
                 <div
                   key={index}
                   onClick={() => setSlotIndex(index)}
-                  className={`text-center py-4 px-3 rounded-pill ${slotIndex === index ? 'bg-primary text-white' : 'border border-secondary bg-light'}`}
-                  style={{ minWidth: '4rem', cursor: "pointer" }}
+                  className={`text-center py-4 px-3 rounded-pill ${
+                    slotIndex === index ? "bg-primary text-white" : "border border-secondary bg-light"
+                  }`}
+                  style={{ minWidth: "4rem", cursor: "pointer" }}
                 >
-                  <p className="mb-0 fw-bold">{item[0] && daysOfWeek[item[0].dateTime.getDay()].slice(0, 3).toUpperCase()}</p> {/* Gün adı */}
-                  <p className="mb-0">{item[0] && item[0].dateTime.getDate()}</p> {/* Gün tarixi */}
+                  <p className="mb-0 fw-bold">
+                    {item[0] && daysOfWeek[lang][item[0].dateTime.getDay()]}
+                  </p>
+                  <p className="mb-0">{item[0] && item[0].dateTime.getDate()}</p>
                 </div>
-              ))
-            }
+              ))}
           </div>
+
           <div className="d-flex align-items-center gap-3 w-100 overflow-auto mt-4">
-            {docSlots.length && docSlots[slotIndex].map((item, index) => (
-              <p
-                key={index}
-                onClick={() => setSlotTime(item.time)}
-                style={{ cursor: "pointer" }}
-                className={`small fw-light flex-shrink-0 px-3 py-2 rounded-pill ${item.time === slotTime ? 'bg-primary text-white' : 'text-muted border border-secondary'}`}>
-                {item.time.toLowerCase()}
-              </p>
-            ))}
+            {docSlots.length > 0 &&
+              docSlots[slotIndex].map((item, index) => (
+                <p
+                  key={index}
+                  onClick={() => setSlotTime(item.time)}
+                  style={{ cursor: "pointer" }}
+                  className={`small fw-light flex-shrink-0 px-3 py-2 rounded-pill ${
+                    item.time === slotTime ? "bg-primary text-white" : "text-muted border border-secondary"
+                  }`}
+                >
+                  {item.time.toLowerCase()}
+                </p>
+              ))}
           </div>
 
           <Button variant="primary">{doctorss[lang].appoint}</Button>
         </Col>
       </Row>
-
     </Container>
   );
 };

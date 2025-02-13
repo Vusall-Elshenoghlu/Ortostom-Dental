@@ -22,7 +22,7 @@ function AdminNavbar() {
                 localStorage.removeItem("adminToken")
                 navigate("/")
               Swal.fire({
-                title: "Deleted!",
+                title: "Logged Out!",
                 text: "Logged Out",
                 icon: "success"
               });

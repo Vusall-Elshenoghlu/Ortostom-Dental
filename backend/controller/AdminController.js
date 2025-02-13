@@ -1,18 +1,15 @@
 import bcrypt from "bcrypt"
 import { DoctorModel } from "../model/DoctorModel.js"
 import jwt from "jsonwebtoken"
-//API for adding doctor
 
 export const addDoctor = async (req, res) => {
     try {
 
         const { firstName, lastName, email, password, specialty, profileImage, experienceYears, education, ratings, certificates, availableTimes, bio, contact } = req.body
-        //checking for all data to add doctor
         if (!firstName || !lastName || !email || !password || !specialty || !profileImage || !experienceYears || !education || !ratings || !certificates || !availableTimes || !bio || !contact) {
             return res.json({ success: false, message: "Missing Details..." })
         }
 
-        //hashing doctor password
         const doctor = await DoctorModel.findOne({ email });
 
         if (doctor) {
@@ -48,7 +45,6 @@ export const addDoctor = async (req, res) => {
 }
 
 
-//API for admin login 
 
 export const loginAdmin = async (req, res) => {
     try {

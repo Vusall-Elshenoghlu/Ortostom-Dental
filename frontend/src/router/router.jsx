@@ -1,4 +1,6 @@
+import AddDoctor from "../pages/Admin/AddDoctor";
 import AddProduct from "../pages/Admin/AddProduct";
+import AdminDoctors from "../pages/Admin/AdminDoctors";
 import AdminLogin from "../pages/Admin/AdminLogin";
 import AdminProducts from "../pages/Admin/AdminProducts";
 import AdminRoot from "../pages/Admin/AdminRoot/AdminRoot";
@@ -119,6 +121,14 @@ export const ROUTES = [
             {
                 path: "appointments",
                 element: <Appointments />
+            },
+            {
+                path: "admin-doctors",
+                element: <AdminDoctors />
+            },
+            {
+                path: "add-doctor",
+                element: <AddDoctor />
             },
         ]
     },

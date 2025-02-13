@@ -21,9 +21,6 @@ function AdminRoot() {
       <AdminNavbar />
       <div className="admin-layout">
         <Sidebar />
-        <div className="admin-content">
-          <Outlet />
-        </div>
       </div>
     </div>
   );
