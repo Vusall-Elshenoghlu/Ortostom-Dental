@@ -5,7 +5,7 @@ import { connect } from "mongoose"
 import { userRoute } from "./router/UserRouter.js"
 import dotenv from 'dotenv';
 import { AppointmentRouter } from "./router/AppointmentRouter.js"
-import DoctorRouter from "./router/DoctorRouter.js"
+import {DoctorRouter} from "./router/DoctorRouter.js"
 import { AdminRouter } from "./router/AdminRoute.js"
 dotenv.config();
 const app = express()

@@ -97,7 +97,6 @@ const DoctorDetail = () => {
             ))}
           </ul>
           
-          {/* Günlər və saatlar */}
           <div className="d-flex justify-content-start gap-3 overflow-auto mt-4 p-2">
             {docSlots.length > 0 &&
               docSlots.map((item, index) => (

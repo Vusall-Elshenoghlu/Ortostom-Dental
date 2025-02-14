@@ -18,8 +18,10 @@ export const doctorSchema = new mongoose.Schema({
     }
   ],
   availableTimes: { type: Array, required: true }, 
+  available:{type:Boolean,default:true},
   bio: { type: String }, 
   contact: { type: String }, 
+  slots_booked:{type:Object,default:{}}
 });
 
 export const DoctorModel = mongoose.model('Doctor', doctorSchema);

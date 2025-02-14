@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import { FaTachometerAlt, FaCalendarAlt, FaUserMd, FaUsers } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, Outlet } from "react-router-dom"; // Router ilə Outlet import et
+import { Link, Outlet } from "react-router-dom"; 
 
 const Sidebar = () => {
   const [active, setActive] = useState("Dashboard");
@@ -41,8 +41,8 @@ const Sidebar = () => {
         </ListGroup>
       </div>
 
-      <div className="p-4 w-100">
-        <Outlet /> {/* Dinamik səhifə kontenti burada göstəriləcək */}
+      <div style={{height:"130vh",}}>
+        <Outlet /> 
       </div>
     </div>
   );

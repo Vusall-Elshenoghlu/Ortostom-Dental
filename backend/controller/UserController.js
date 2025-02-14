@@ -94,8 +94,8 @@ export const UserController = {
     },
 
     confirm: async (req, res) => {
-        let { userId, confirmPassword } = req.body;
-        let user = await UserModel.findOne({ _id: userId, confirmPassword });
+        let { userId, confirmPasswordd } = req.body;
+        let user = await UserModel.findOne({ _id: userId, confirmPassword:confirmPasswordd });
     
         if (!user) {
             return res.status(400).send("Incorrect confirmation code.");
@@ -110,3 +110,18 @@ export const UserController = {
     
     }
 };
+
+export const getProfile = async (req,res) =>{
+
+    try{
+
+        const {userId} = req.body
+        const userData = await UserModel.findById(userId).select("-password")
+
+        res.json({success:true,userData})
+
+    }catch(error){
+        console.log(error)
+        res.json({success:false,message:error.message})
+    }
+}

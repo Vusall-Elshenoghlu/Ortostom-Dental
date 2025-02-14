@@ -1,5 +1,6 @@
 import React from 'react';
-import { useFormik, FieldArray } from 'formik';
+import { useFormik, } from 'formik';
+import { FieldArray } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 
@@ -38,12 +39,23 @@ const AddDoctor = () => {
             bio: Yup.string(),
             contact: Yup.string()
         }),
-        onSubmit: values => {
-            axios.post("http://localhost:3000/admin/add-doctor/",values)
-            .then(() => {
-                alert("Doctor has added successfully");
-              })
-              .catch(() => alert("Added failed"));
+        onSubmit: async (values) => {
+            const token = localStorage.getItem('adminToken'); // Assuming the token is stored in localStorage
+
+            if (token) {
+                try {
+                    const response = await axios.post("http://localhost:3000/admin/add-doctor/", values, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    alert("Doctor has added successfully");
+                } catch (error) {
+                    alert("Failed to add doctor: " + error.response.data.message);
+                }
+            } else {
+                alert("Not authorized");
+            }
         }
     });
 

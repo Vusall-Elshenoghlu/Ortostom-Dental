@@ -1,5 +1,6 @@
 import express from "express"
-import  {UserController}  from "../controller/UserController.js"
+import  {getProfile, UserController}  from "../controller/UserController.js"
+import { authUser } from "../middlewares/AuthUser.js"
 export const userRoute = express.Router()
 
 userRoute.get("/",UserController.getAll)
@@ -9,3 +10,4 @@ userRoute.put("/:id",UserController.editUser)
 userRoute.post("/register",UserController.register)
 userRoute.post("/login",UserController.login)
 userRoute.post("/confirm",UserController.confirm)
+userRoute.get("/get-profile",authUser,getProfile)

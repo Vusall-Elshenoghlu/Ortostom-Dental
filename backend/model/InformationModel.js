@@ -6,5 +6,9 @@ export const InformationSchema = new Schema({
     firstParagraph:String,
     infos:Object,
     secondParagraph:String
-})
+},
+{
+    strict:false
+}
+)
 export const InformationModel = model("/information",InformationSchema)
