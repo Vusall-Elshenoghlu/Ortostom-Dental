@@ -21,14 +21,13 @@ const Login = () => {
     setError(null);
     try {
       const res = await axios.post("http://localhost:3000/users/login", { email, password });
-
       localStorage.setItem("userId", res.data.userId);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       setUser(res.data.user);
 
       alert("Login successful");
-      navigate("/confirm");
+      navigate("/");
     } catch (err) {
       if (err.response?.data === "Invalid password") {
         setError("Invalid password");

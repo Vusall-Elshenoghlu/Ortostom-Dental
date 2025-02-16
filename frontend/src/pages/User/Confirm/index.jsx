@@ -18,7 +18,9 @@ const Confirm = () => {
         axios.post("http://localhost:3000/users/confirm", { userId, confirmPassword: confirmCode })
             .then((res) => {
                 alert("Login successful!");
+                console.log(userId)
                 localStorage.setItem("token", res.data.token);
+                console.log(res.data.userId)
                 navigate('/');
             })
             .catch((err) => {

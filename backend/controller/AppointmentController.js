@@ -1,4 +1,4 @@
-import AppointmentModel from "../model/AppointmentModel.js";
+import {AppointmentModel} from "../model/AppointmentModel.js";
 import nodemailer from "nodemailer";
 import crypto from "crypto"; 
 

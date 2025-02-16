@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { LanguageContext } from "../../../context/LanguageContext";
 import Container from "react-bootstrap/Container";
@@ -7,11 +7,39 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import Swal from "sweetalert2"
 import "./UserNavbar.css"
 const UserNavbar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user,setUser } = useContext(AuthContext);
   const { lang, setLang, darkMode, setDarkMode, translations } = useContext(LanguageContext);
+  const navigate = useNavigate()
 
+
+  const logout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes,log out!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/")
+        setUser(!user)
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        setUser(null);
+        Swal.fire({
+          title: "Logged Out!",
+          text: "Logged Out Successfully..",
+          icon: "success"
+        });
+      }
+    });
+
+  };
   return (
     <Navbar expand="lg" className={`bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} sticky="top">
       <Navbar.Brand>

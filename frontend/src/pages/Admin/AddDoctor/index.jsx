@@ -16,7 +16,6 @@ const AddDoctor = () => {
             experienceYears: '',
             education: '',
             ratings: '',
-            certificates: [{ title: '', date: '', organization: '' }],
             availableTimes: '',
             bio: '',
             contact: ''
@@ -28,20 +27,13 @@ const AddDoctor = () => {
             password: Yup.string().required('Required'),
             specialty: Yup.string().required('Required'),
             experienceYears: Yup.number().required('Required'),
-            certificates: Yup.array().of(
-                Yup.object({
-                    title: Yup.string().required('Required'),
-                    date: Yup.date().required('Required'),
-                    organization: Yup.string().required('Required')
-                })
-            ),
             availableTimes: Yup.string().required('Required'),
             bio: Yup.string(),
             contact: Yup.string()
         }),
         onSubmit: async (values) => {
             const token = localStorage.getItem('adminToken'); // Assuming the token is stored in localStorage
-
+        
             if (token) {
                 try {
                     const response = await axios.post("http://localhost:3000/admin/add-doctor/", values, {
@@ -51,12 +43,14 @@ const AddDoctor = () => {
                     });
                     alert("Doctor has added successfully");
                 } catch (error) {
-                    alert("Failed to add doctor: " + error.response.data.message);
+                    console.log(error); // Konsolda səhv məlumatını yoxlaya bilərsiniz
+                    alert("Failed to add doctor: " + error.response ? error.response.data.message : error.message);
                 }
             } else {
                 alert("Not authorized");
             }
         }
+        
     });
 
     return (
@@ -207,58 +201,6 @@ const AddDoctor = () => {
 
                 <div className="col-12">
                     <label htmlFor="certificates" className="form-label">Certificates</label>
-                    <FieldArray
-                        name="certificates"
-                        render={arrayHelpers => (
-                            <div>
-                                {formik.values.certificates.map((certificate, index) => (
-                                    <div key={index} className="row g-3">
-                                        <div className="col-md-4">
-                                            <input
-                                                name={`certificates.${index}.title`}
-                                                type="text"
-                                                className={`form-control ${formik.touched.certificates?.[index]?.title && formik.errors.certificates?.[index]?.title ? 'is-invalid' : ''}`}
-                                                placeholder="Certificate Title"
-                                                value={certificate.title}
-                                                onChange={formik.handleChange}
-                                            />
-                                            {formik.touched.certificates?.[index]?.title && formik.errors.certificates?.[index]?.title && (
-                                                <div className="invalid-feedback">{formik.errors.certificates[index].title}</div>
-                                            )}
-                                        </div>
-                                        <div className="col-md-4">
-                                            <input
-                                                name={`certificates.${index}.date`}
-                                                type="date"
-                                                className={`form-control ${formik.touched.certificates?.[index]?.date && formik.errors.certificates?.[index]?.date ? 'is-invalid' : ''}`}
-                                                value={certificate.date}
-                                                onChange={formik.handleChange}
-                                            />
-                                            {formik.touched.certificates?.[index]?.date && formik.errors.certificates?.[index]?.date && (
-                                                <div className="invalid-feedback">{formik.errors.certificates[index].date}</div>
-                                            )}
-                                        </div>
-                                        <div className="col-md-4">
-                                            <input
-                                                name={`certificates.${index}.organization`} 
-                                                type="text"
-                                                className={`form-control ${formik.touched.certificates?.[index]?.organization && formik.errors.certificates?.[index]?.organization ? 'is-invalid' : ''}`}
-                                                placeholder="Organization"
-                                                value={certificate.organization}
-                                                onChange={formik.handleChange}
-                                            />
-                                            {formik.touched.certificates?.[index]?.organization && formik.errors.certificates?.[index]?.organization && (
-                                                <div className="invalid-feedback">{formik.errors.certificates[index].organization}</div>
-                                            )}
-                                        </div>
-                                    </div>
-                                ))}
-                                <button type="button" className="btn btn-outline-secondary mt-2" onClick={() => arrayHelpers.push({ title: '', date: '', organization: '' })}>
-                                    Add Certificate
-                                </button>
-                            </div>
-                        )}
-                    />
                 </div>
 
                 <div className="col-12">

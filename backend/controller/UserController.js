@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import {DoctorModel} from "../model/DoctorModel.js"
+import {AppointmentModel} from "../model/AppointmentModel.js"
 
 dotenv.config();
 
@@ -24,26 +26,7 @@ export const UserController = {
         res.send(users);
     },
 
-    getById: async (req, res) => {
-        let id = req.params.id;
-        let myUser = await UserModel.findById(id);
-        res.send(myUser);
-    },
 
-    deleteUser: async (req, res) => {
-        let id = req.params.id;
-        await UserModel.findByIdAndDelete(id);
-        res.send("User deleted successfully.");
-    },
-
-    editUser: async (req, res) => {
-        let id = req.params.id;
-        let updatedUser = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
-        res.send({
-            message: "User updated successfully.",
-            data: updatedUser
-        });
-    },
 
     register: async (req, res) => {
         const { email, name, surname, password } = req.body;
@@ -66,6 +49,7 @@ export const UserController = {
     },
 
     login: async (req, res) => {
+
         let { email, password } = req.body;
         const user = await UserModel.findOne({ email });
 
@@ -78,50 +62,127 @@ export const UserController = {
             return res.status(401).send("Wrong password.");
         }
 
-        let confirmCode = Math.floor(100000 + Math.random() * 900000); 
-        user.confirmPassword = confirmCode;
-        await user.save();
+        console.log("Found UserID:", user._id);
 
-        await transporter.sendMail({
-            from: process.env.SMTP_USER,
-            to: user.email,
-            subject: "Confirmation Code",
-            text: `Your confirmation code: ${confirmCode}`,
-            html: `<p>Your confirmation code: <strong>${confirmCode}</strong></p>`,
-        });
-
-        res.send({ message: "Confirmation code sent to your email.", userId: user._id,confirmCode ,user});
-    },
-
-    confirm: async (req, res) => {
-        let { userId, confirmPasswordd } = req.body;
-        let user = await UserModel.findOne({ _id: userId, confirmPassword:confirmPasswordd });
-    
-        if (!user) {
-            return res.status(400).send("Incorrect confirmation code.");
-        }
-    
         let token = jwt.sign({ userId: user._id, email: user.email }, secretKey, { expiresIn: "1h" });
-    
         user.confirmPassword = null;
         await user.save();
-    
-        res.send({ message: "Login successful.", token });
-    
+
+        res.send({ message: "Login successful.", token, userId: user._id, user });
+    }
+}
+
+export const getProfile = async (req, res) => {
+
+    try {
+
+        const { userId } = req.body
+        const userData = await UserModel.findById(userId).select("-password")
+        res.json({ success: true, userData })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+export const updateUser = async (req, res) => {
+    try {
+        const { userId, name, phone, address, dob, gender } = req.body;
+        console.log(req.body)
+        if (!name || !phone || !dob || !gender) {
+            return res.json({ success: false, message: "Missing Data..." });
+        }
+
+        let parsedAddress;
+        if (typeof address === 'string') {
+            try {
+                parsedAddress = JSON.parse(address); 
+            } catch (err) {
+                return res.json({ success: false, message: "Invalid address format" });
+            }
+        } else {
+            parsedAddress = address; 
+        }
+
+        await UserModel.findByIdAndUpdate(userId, { name, phone, address: parsedAddress, dob, gender });
+
+        res.json({ success: true, message: "Profile Updated" });
+        console.log(req.body)
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
 };
 
-export const getProfile = async (req,res) =>{
+//Api to book appointment
+
+export const bookAppointment = async (req,res) =>{
+
+    try{
+
+        const {userId,docId,slotDate,slotTime} = req.body
+
+        const docData = await DoctorModel.findById(docId).select("-password")
+        if (!docData.available){
+            return res.json({success:false,message:"Doctor is not available"})
+        }
+
+        let slots_booked = docData.slots_booked
+        //checking for slots availability
+
+        if (slots_booked[slotDate]) {
+            if(slots_booked[slotDate].includes(slotTime)){
+                return res.json({success:false,message:"Slot is not available"})
+            }else{
+                slots_booked[slotDate].push(slotTime)
+            }
+        }else{
+            slots_booked[slotDate] = []
+            slots_booked[slotDate].push(slotTime)
+        }
+
+        const userData = await UserModel.findById(userId).select("-password")
+
+        delete docData.slots_booked
+
+        const appointmentData = {
+            userId,
+            docId,
+            userData,
+            docData,
+            slotTime,
+            slotDate,
+            date:Date.now()
+        }
+
+        const newAppointment = new AppointmentModel(appointmentData)
+
+        await newAppointment.save()
+
+        //save new slots data in docData
+
+        await DoctorModel.findByIdAndUpdate(docId,{slots_booked})
+        res.json({success:true,message:"Appointment Booked..."})
+
+    }catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+//API to get user appointments for frontend  my-appointment page
+
+export const userListAppointments = async (req,res) =>{
+    
 
     try{
 
         const {userId} = req.body
-        const userData = await UserModel.findById(userId).select("-password")
+        const appointments = await AppointmentModel.find({userId})
+        res.json({success:true,appointments})
 
-        res.json({success:true,userData})
-
-    }catch(error){
-        console.log(error)
-        res.json({success:false,message:error.message})
+    }catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
 }

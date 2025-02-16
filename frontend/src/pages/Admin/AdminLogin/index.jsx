@@ -52,7 +52,7 @@ const AdminLogin = () => {
                   toast.error('An error occurred during login');
                 }
               } finally {
-                setSubmitting(false); // Formun göndərilməsi tamamlanıb
+                setSubmitting(false); 
               }
             }}
           >

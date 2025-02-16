@@ -1,24 +1,79 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { LanguageContext } from '../../../context/LanguageContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 function MyProfile() {
     const { lang, profil } = useContext(LanguageContext);
 
-    const [userData, setUserData] = useState({
-        name: "Vusal Huseynli",
-        email: "hvusal085@gmail.com",
-        phone: "+994 050 343 7822",
-        address: {
-            line1: "Xetai Rayonu",
-            line2: "Sadiqcan 4a V bloku men.88"
-        },
-        gender: "male",
-        dob: "2005-08-22"
-    });
-
+    const [userData, setUserData] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
 
-    return (
+    const token = localStorage.getItem("token");
+
+    async function loadUserProfileData() {
+        try {
+            const { data } = await axios.get("http://localhost:3000/users/get-profile", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            if (data.success) {
+                setUserData(data.userData);
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+    }
+    async function updateUserProfileData() {
+
+        try {
+
+            const formData = new FormData();
+
+            formData.append("name", userData.name || "");
+            formData.append("phone", userData.phone || "");
+            formData.append("gender", userData.gender || "");
+            formData.append("dob", userData.dob || "");
+            formData.append("address", JSON.stringify(userData.address || {}));
+
+            const formObject = {};
+            formData.forEach((value, key) => {
+                formObject[key] = value;
+            });
+            console.log(formObject)
+
+            const { data } = await axios.post("http://localhost:3000/users/update-profile", formObject, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(data);
+            if (data.success) {
+                toast.success(data.message);
+                await loadUserProfileData();
+                setIsEdit(false);
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (token) {
+            loadUserProfileData();
+        } else {
+            setUserData(false);
+        }
+    }, [token]);
+
+    return userData && (
         <div className="container p-4 bg-light rounded">
             {
                 isEdit
@@ -85,7 +140,7 @@ function MyProfile() {
             <div>
                 {
                     isEdit
-                        ? <button className="btn btn-primary mt-3" onClick={() => setIsEdit(false)}>{profil[lang].saveInfo}</button>
+                        ? <button className="btn btn-primary mt-3" onClick={() => updateUserProfileData()}>{profil[lang].saveInfo}</button>
                         : <button className="btn btn-secondary mt-3" onClick={() => setIsEdit(true)}>{profil[lang].edit}</button>
                 }
             </div>
