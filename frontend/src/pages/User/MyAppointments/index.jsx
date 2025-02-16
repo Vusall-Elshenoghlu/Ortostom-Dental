@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import {Button} from "react-bootstrap"
 
 function MyAppointments() {
   const [appointments, setAppointments] = useState([]);
@@ -53,6 +54,7 @@ function MyAppointments() {
                     <span className="fw-medium">Date & Time:</span> {item.slotDate} | {item.slotTime}
                   </p>
                 </div>
+                <Button variant='danger'> Cancel appointment</Button>
               </div>
             </div>
           ))
