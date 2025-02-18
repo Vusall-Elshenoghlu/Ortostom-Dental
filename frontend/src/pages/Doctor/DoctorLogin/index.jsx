@@ -13,6 +13,8 @@ const LoginSchema = Yup.object().shape({
 const DoctorLogin = () => {
   const [passwordVisible, setPasswordVisible] = useState(false); 
   const navigate = useNavigate();
+  const [dToken,setDToken] = useState(localStorage.getItem("doctorToken" ? localStorage.getItem("doctorToken") : ""))
+  
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible); 
@@ -32,12 +34,14 @@ const DoctorLogin = () => {
             validationSchema={LoginSchema}
             onSubmit={async (values, { setSubmitting }) => {
               try {
-                const response = await axios.post('http://localhost:3000/admin/login', values);
+                const response = await axios.post('http://localhost:3000/doctors/login', values);
 
                 if (response.data.success) {
-                  localStorage.setItem('adminToken', response.data.token);
+                  localStorage.setItem('doctorToken', response.data.token);
+                  setDToken(response.data.token)
                   alert('Login successful!');
-                  navigate('/dashboard'); 
+                  console.log(response.data.token)
+                  navigate("/doctor-dashboard")
                 } else {
                   alert('Invalid email or password');
                 }

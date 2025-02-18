@@ -4,14 +4,14 @@ import { FaTachometerAlt, FaCalendarAlt, FaUserMd, FaUsers } from "react-icons/f
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, Outlet } from "react-router-dom";
 
-const Sidebar = () => {
+const DoctorSidebar = () => {
   const [active, setActive] = useState("Dashboard");
 
   const menuItems = [
-    { name: "Dashboard", path: "/dashboard", icon: <FaTachometerAlt className="me-2" /> },
-    { name: "Appointments", path: "/dashboard/appointments", icon: <FaCalendarAlt className="me-2" /> },
-    { name: "Add Doctor", path: "/dashboard/add-doctor", icon: <FaUserMd className="me-2" /> },
-    { name: "Doctors List", path: "/dashboard/admin-doctors", icon: <FaUsers className="me-2" /> },
+    { name: "Dashboard", path: "/doctor-dashboard", icon: <FaTachometerAlt className="me-2" /> },
+    { name: "Appointments", path: "/doctor-dashboard/appointments", icon: <FaCalendarAlt className="me-2" /> },
+    { name: "Profile", path: "/doctor-dashboard/profile", icon: <FaUserMd className="me-2" /> },
+    
   ];
 
   return (
@@ -61,4 +61,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default DoctorSidebar;

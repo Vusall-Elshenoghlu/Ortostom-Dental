@@ -8,7 +8,11 @@ import Appointments from "../pages/Admin/Appointments";
 import DashBoard from "../pages/Admin/DashBoard";
 import EditProduct from "../pages/Admin/EditProduct";
 import Users from "../pages/Admin/Users";
+import DoctorAppointments from "../pages/Doctor/DoctorAppointments";
+import DoctorDashBoard from "../pages/Doctor/DoctorDashBoard";
 import DoctorLogin from "../pages/Doctor/DoctorLogin";
+import DoctorProfile from "../pages/Doctor/DoctorProfile";
+import DoctorRoot from "../pages/Doctor/DoctorRoot/DoctorRoot";
 import About from "../pages/User/About";
 import Confirm from "../pages/User/Confirm";
 import Contact from "../pages/User/Contact";
@@ -139,6 +143,24 @@ export const ROUTES = [
     {
         path:"/doctor",
         element:<DoctorLogin/>
+    },
+    {
+        path:"/doctor-dashboard",
+        element:<DoctorRoot/>,
+        children:[
+            {
+                path:"",
+                element:<DoctorDashBoard/>
+            },
+            {
+                path:"appointments",
+                element:<DoctorAppointments/>
+            },
+            {
+                path:"profile",
+                element:<DoctorProfile/>
+            },
+        ]
     }
 
 

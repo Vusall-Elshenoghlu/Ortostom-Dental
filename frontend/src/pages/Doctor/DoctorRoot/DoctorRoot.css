@@ -1,12 +1,12 @@
-.admin-root {
+.doctor-root {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 97vh;
     max-height: auto;
     background-color: #f4f7fc;
   }
   
-  .admin-layout {
+  .doctor-layout {
     display: flex;
     height: 90vh;
   }
