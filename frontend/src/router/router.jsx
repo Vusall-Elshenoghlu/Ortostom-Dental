@@ -103,6 +103,10 @@ export const ROUTES = [
         element: <AdminRoot />,
         children: [
             {
+                path: "",
+                element: <DashBoard />
+            },
+            {
                 path: "products",
                 element: <AdminProducts />
             },

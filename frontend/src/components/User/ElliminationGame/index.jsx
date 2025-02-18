@@ -45,10 +45,10 @@ const ToothCupGame = () => {
     if (shuffling) return;
     if (cups[index]) {
       setMessage("Düz tapdın! 🎉");
-      setCombo(combo + 1); // Combo artır
+      setCombo(combo + 1); 
     } else {
       setMessage("Yanlış! 😢 Bir daha cəhd et.");
-      setCombo(1); // Combo sıfırlanır
+      setCombo(1);
     }
   };
 

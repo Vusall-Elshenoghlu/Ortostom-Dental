@@ -32,7 +32,7 @@ const AddDoctor = () => {
             contact: Yup.string()
         }),
         onSubmit: async (values) => {
-            const token = localStorage.getItem('adminToken'); // Assuming the token is stored in localStorage
+            const token = localStorage.getItem('adminToken'); 
         
             if (token) {
                 try {
@@ -54,7 +54,7 @@ const AddDoctor = () => {
     });
 
     return (
-        <div className="container d-flex align-items-center justify-content-center" style={{ height: '90vh' }}>
+        <div className="container d-flex align-items-center justify-content-center mt-5" style={{ height: '90vh' }}>
             <form className="row g-3 w-100" onSubmit={formik.handleSubmit}>
                 <div className="col-md-6">
                     <label htmlFor="firstName" className="form-label">First Name</label>

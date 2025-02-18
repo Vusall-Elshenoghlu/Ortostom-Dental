@@ -64,7 +64,7 @@ function AdminDoctors() {
   }
 
   return (
-    <div>
+    <div style={{marginTop:"100px"}}>
       <h2>All Doctors</h2>
       <div className="container">
         <div className="row">

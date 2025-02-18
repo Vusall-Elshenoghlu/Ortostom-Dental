@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router';
 import Sidebar from '../../../components/Admin/SideBar';
 import AdminNavbar from '../../../components/Admin/AdminNavbar';
 import './AdminRoot.css';
+import DashBoard from '../DashBoard';
 
 function AdminRoot() {
   const navigate = useNavigate();

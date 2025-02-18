@@ -16,7 +16,19 @@ const Sidebar = () => {
 
   return (
     <div className="d-flex">
-      <div className="bg-light vh-90 p-4 shadow-sm" style={{ width: "260px" }}>
+      <div
+        className="bg-light p-4 shadow-sm"
+        style={{
+          width: "260px",
+          position: "fixed",
+          top: "0",
+          left: "0",
+          bottom: "0",
+          height: "90vh",  // Tam ekran uzunluğu
+          zIndex: "1000",
+          marginTop:"13vh"  // Digər elementlərdən yuxarıda görünsün
+        }}
+      >
         <ListGroup className="gap-3">
           {menuItems.map((item) => (
             <Link
@@ -26,7 +38,6 @@ const Sidebar = () => {
               onClick={() => setActive(item.name)}
             >
               <ListGroup.Item
-                key={item.name}
                 action
                 className={`d-flex align-items-center rounded py-2 px-3 border-0 ${active === item.name
                     ? "bg-white shadow-sm border-start border-primary"
@@ -41,7 +52,7 @@ const Sidebar = () => {
         </ListGroup>
       </div>
 
-      <div style={{height:"130vh",}}>
+      <div style={{ marginLeft: "260px", height: "100vh" }}>
         <Outlet /> 
       </div>
     </div>

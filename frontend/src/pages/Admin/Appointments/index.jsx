@@ -1,74 +1,122 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { FaTimes } from "react-icons/fa";
 
 const Appointments = () => {
-  const [appointments, setAppointments] = useState([]);
-  const [filter, setFilter] = useState('');
-  const [sort, setSort] = useState('patientName');
+  const slotDateFormat = (slotDate) => {
+    const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    if (!slotDate) {
+      return "Invalid Date";  // Date mövcud deyilsə, uyğun mesaj qaytarır
+    }
 
-  useEffect(() => {
-    axios.get(`/appointments?dentistName=${filter}`).then((res) => {
-      setAppointments(res.data);
-    }).catch((err) => {
-      console.error("Error fetching appointments:", err);
-    });
-  }, [filter]);
+    const dateArray = slotDate.split("_");
 
-  const handleSort = (field) => {
-    setSort(field);
-    const sortedAppointments = [...appointments].sort((a, b) => {
-      if (a[field] > b[field]) return 1;
-      if (a[field] < b[field]) return -1;
-      return 0;
-    });
-    setAppointments(sortedAppointments);
+    if (dateArray.length !== 3) {
+      return "Invalid Date Format";  // Əgər format uyğun deyilsə, mesaj qaytarır
+    }
+
+    return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
   };
 
-  const handleDelete = async (id) => {
+  
+
+  const calculateAge = (dob) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    return age;
+  };
+
+  const [appointments, setAppointments] = useState([]);
+  const [aToken, setAToken] = useState(localStorage.getItem("adminToken"));
+
+  const getAllAppointments = async () => {
     try {
-      await axios.delete(`/appointments/${id}`);
-      setAppointments(appointments.filter(appointment => appointment._id !== id));
+      const { data } = await axios.get("http://localhost:3000/admin/all-appointments", {
+        headers: {
+          Authorization: `Bearer ${aToken}`,
+        },
+      });
+
+      setAppointments(data.appointments);
+
+      if (data.success) {
+        setAppointments(data.appointments);
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
-      console.error("Error deleting appointment:", error);
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (aToken) {
+      getAllAppointments();
+    }
+  }, [aToken]);
+  const cancelAppointment = async (appointmentId) => {
+    try {
+      const { data } = await axios.post("http://localhost:3000/admin/cancel-appointment", { appointmentId }, {
+        headers: {
+          Authorization: `Bearer ${aToken}`,
+        },
+      });
+
+      
+      if (data.success) {
+        toast.success(data.message);
+        getAllAppointments();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Appointments</h2>
-      <div className="mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Filter by dentist"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-      </div>
-
-      <table className="table table-striped">
-        <thead>
+    <div style={{ marginTop: "100px", marginLeft: "10px" }}>
+      <h2 className="mb-4 text-center">All Appointments</h2>
+      <table className="table table-bordered table-striped" style={{ width: "100%", minWidth: "800px" }}>
+        <thead className="table-dark text-center">
           <tr>
-            <th onClick={() => handleSort('patientName')}>Patient Name</th>
-            <th onClick={() => handleSort('appointmentDate')}>Appointment Date</th>
-            <th onClick={() => handleSort('time')}>Time</th>
-            <th onClick={() => handleSort('status')}>Status</th>
-            <th>Actions</th>
+            <th style={{ width: "5%" }}>#</th>
+            <th style={{ width: "20%" }}>Patient</th>
+            <th style={{ width: "10%" }}>Age</th>
+            <th style={{ width: "15%" }}>Date & Time</th>
+            <th style={{ width: "20%" }}>Doctor Name</th>
+            <th style={{ width: "10%" }}>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {appointments.map((appointment) => (
-            <tr key={appointment._id}>
-              <td>{appointment.patientName}</td>
-              <td>{new Date(appointment.appointmentDate).toLocaleDateString()}</td>
-              <td>{appointment.time}</td>
-              <td>{appointment.status}</td>
-              <td>
-                <button className="btn btn-danger" onClick={() => handleDelete(appointment._id)}>Delete</button>
-              </td>
+        <tbody className="text-center">
+          {appointments.length > 0 ? (
+            appointments.map((appointment, index) => (
+              <tr key={appointment._id}>
+                <td>{index + 1}</td>
+                <td>{appointment.userData.name + " " + appointment.userData.surname}</td>
+                <td>{calculateAge(appointment.userData.dob)}</td>
+                <td>{slotDateFormat(appointment.slotDate)}, {appointment.slotTime}</td>
+                <td style={{ display: "flex", justifyContent: "center" }}>
+                  <img className="w-25 full-rounded-circle" style={{ marginRight: "50px" }} src={appointment.docData.profileImage} alt="" />
+                  <p style={{ marginRight: "100px" }}>Dr.{appointment.docData.firstName}</p>
+                </td>
+                <td>
+                  {
+                    appointment.cancelled
+                      ? <p className="text-danger fs-6 fw-medium">Cancelled</p>
+                      : <button className="btn btn-secondary btn-sm" onClick={() => cancelAppointment(appointment._id)}><FaTimes /></button>
+                  }
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6" className="text-center py-3">No appointments available</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

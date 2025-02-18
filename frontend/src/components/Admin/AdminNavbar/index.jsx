@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router';
 import Swal from "sweetalert2"
 
 function AdminNavbar() {
-    const navigate = useNavigate()
-    function handleLogout(){
+    const navigate = useNavigate();
+
+    function handleLogout() {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -17,34 +18,42 @@ function AdminNavbar() {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, Log out!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                localStorage.removeItem("adminToken")
-                navigate("/")
-              Swal.fire({
-                title: "Logged Out!",
-                text: "Logged Out",
-                icon: "success"
-              });
+                localStorage.removeItem("adminToken");
+                navigate("/");
+                Swal.fire({
+                    title: "Logged Out!",
+                    text: "Logged Out",
+                    icon: "success"
+                });
             }
-          });
+        });
     }
-  return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-        <Navbar.Brand style={{marginRight:"100px"}}>
-            <div className="logo-container">
 
-            </div>
-        </Navbar.Brand>
-        <h6>Admin panel</h6>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-           <Button variant='danger' style={{marginRight:"200px"}} onClick={() => handleLogout()}>Logout</Button>
-          </Nav>
-        </Navbar.Collapse>
-    </Navbar>
-  );
+    return (
+        <Navbar expand="lg" className="bg-body-tertiary" style={{
+            position: "fixed",
+            top: "0",
+            left: "0",
+            right: "0",
+            zIndex: "1000",
+            height: "80px" // Navbar hündürlüyünü müəyyən edirik
+        }}>
+            <Navbar.Brand style={{ marginRight: "100px" }}>
+                <div className="logo-container">
+                    {/* Logo burada */}
+                </div>
+            </Navbar.Brand>
+            <h6>Admin panel</h6>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ms-auto">
+                    <Button variant='danger' style={{ marginRight: "200px" }} onClick={() => handleLogout()}>Logout</Button>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    );
 }
 
 export default AdminNavbar;
