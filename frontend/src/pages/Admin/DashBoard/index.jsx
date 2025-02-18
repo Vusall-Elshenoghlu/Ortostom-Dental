@@ -101,9 +101,21 @@ function DashBoard() {
         </div>
       </div>
 
-      <div>
-        <div>
-          
+      <div className='bg-white'>
+        <div className='d-flex align-items-center  px-4 py-2 gap-2 border' style={{ marginTop: '20px', borderRadius: '0.5rem 0.5rem 0 0' }}>
+          <img style={{height:"30px",width:"30px"}} src="../../../images/clipboard.png" alt="" />
+          <p style={{ fontWeight:"600",marginTop:"10px" }}>Latest Booking</p>
+        </div>
+
+        <div className='pt-4 border' style={{ borderTop: '0'}}>
+         {
+          dashData.latestAppointments.map((item,index) =>(
+            <div key={index}>
+              <img src={item.docData.profileImage} alt="" />
+              <p>{item.slotDate}</p>
+            </div>
+          ))
+         } 
         </div>
       </div>
 
