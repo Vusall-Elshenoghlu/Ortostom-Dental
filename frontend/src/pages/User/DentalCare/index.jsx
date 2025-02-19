@@ -6,22 +6,36 @@ import { Link } from "react-router";
 
 const DentalCare = () => {
   const { lang, translations } = useContext(LanguageContext);
-  const topics = {
-    az: ["Körpənin Dişləri", "Braket Baxımı", "Diqqətlə Təmizləmə", "Uşaqların Dişləri", "Diş Telini Təmizləmə", "Diqqət Edilməli Gəmiricilər", "Implant Baxımı", "Məhsul Bələdçisi"],
-    en: ["Baby's Teeth", "Braces Care", "Brushing", "Children's Teeth", "Flossing", "Gum Health", "Implant Care", "Product Guide"],
-    ru: ["Зубы младенцев", "Уход за брекетами", "Чистка зубов", "Детские зубы", "Чистка зубной нитью", "Забота о деснах", "Уход за имплантами", "Руководство по продуктам"]
-  };
-  const dentalInformation = {
-    az: [
-      "Pis nəfəs", "Bondinq", "Bruksizm", "Diş qorxusu", "Diabet", "Quru ağız", "Diş ətlərinin xəstəliyi", "Yeni protezlər", "Ağız lezyonları", "Ağız pirsinqləri", "Çıxarış sonrası", "Hamiləlik", "Həssas dişlər", "TMJ pozğunluğu", "Tütün", "Ağıl dişləri"
-    ],
-    en: [
-      "Bad Breath", "Bonding", "Bruxism", "Dental Phobia", "Diabetes", "Dry Mouth", "Gum Disease", "New Dentures", "Oral Lesions", "Oral Piercings", "Post-Extractions", "Pregnancy", "Sensitive Teeth", "TMJ Disorder", "Tobacco", "Wisdom Teeth"
-    ],
-    ru: [
-      "Неприятный запах", "Бондинг", "Бруксизм", "Стоматофобия", "Диабет", "Сухость во рту", "Заболевание десен", "Новые протезы", "Оральные поражения", "Оральные пирсинги", "После удаления", "Беременность", "Чувствительные зубы", "Дисфункция ВНЧС", "Табак", "Зубы мудрости"
-    ]
-  };
+  const topics = [
+    { id: 1, az: "Körpənin Dişləri", en: "Baby's Teeth", ru: "Зубы младенцев" },
+    { id: 2, az: "Braket Baxımı", en: "Braces Care", ru: "Уход за брекетами" },
+    { id: 3, az: "Diqqətlə Təmizləmə", en: "Brushing", ru: "Чистка зубов" },
+    { id: 4, az: "Uşaqların Dişləri", en: "Children's Teeth", ru: "Детские зубы" },
+    { id: 5, az: "Diş Telini Təmizləmə", en: "Flossing", ru: "Чистка зубной нитью" },
+    { id: 6, az: "Diqqət Edilməli Gəmiricilər", en: "Gum Health", ru: "Забота о деснах" },
+    { id: 7, az: "Implant Baxımı", en: "Implant Care", ru: "Уход за имплантами" },
+    { id: 8, az: "Məhsul Bələdçisi", en: "Product Guide", ru: "Руководство по продуктам" }
+  ];
+
+  const dentalInformation = [
+    { id: 9, az: "Pis nəfəs", en: "Bad Breath", ru: "Неприятный запах" },
+    { id: 10, az: "Bondinq", en: "Bonding", ru: "Бондинг" },
+    { id: 11, az: "Bruksizm", en: "Bruxism", ru: "Бруксизм" },
+    { id: 12, az: "Diş qorxusu", en: "Dental Phobia", ru: "Стоматофобия" },
+    { id: 13, az: "Diabet", en: "Diabetes", ru: "Диабет" },
+    { id: 14, az: "Quru ağız", en: "Dry Mouth", ru: "Сухость во рту" },
+    { id: 15, az: "Diş ətlərinin xəstəliyi", en: "Gum Disease", ru: "Заболевание десен" },
+    { id: 16, az: "Yeni protezlər", en: "New Dentures", ru: "Новые протезы" },
+    { id: 17, az: "Ağız lezyonları", en: "Oral Lesions", ru: "Оральные поражения" },
+    { id: 18, az: "Ağız pirsinqləri", en: "Oral Piercings", ru: "Оральные пирсинги" },
+    { id: 19, az: "Çıxarış sonrası", en: "Post-Extractions", ru: "После удаления" },
+    { id: 20, az: "Hamiləlik", en: "Pregnancy", ru: "Беременность" },
+    { id: 21, az: "Həssas dişlər", en: "Sensitive Teeth", ru: "Чувствительные зубы" },
+    { id: 22, az: "TMJ pozğunluğu", en: "TMJ Disorder", ru: "Дисфункция ВНЧС" },
+    { id: 23, az: "Tütün", en: "Tobacco", ru: "Табак" },
+    { id: 24, az: "Ağıl dişləri", en: "Wisdom Teeth", ru: "Зубы мудрости" }
+  ];
+
 
   return (
     <div className="container py-5">
@@ -47,16 +61,14 @@ const DentalCare = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
-          {topics[lang].map((topic, index) => (
-            <Link to={`/dental-care/${topic}`}>
-              <button
-                key={index}
-                className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
-              >
-                <span className="me-2">➤</span> {topic}
+          {topics.map((topic, index) => (
+            <Link key={index} to={`/dental-care/${topic.id}`}>
+              <button className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start">
+                <span className="me-2">➤</span> {topic[lang]}
               </button>
             </Link>
           ))}
+
         </motion.div>
       </div>
 
@@ -85,17 +97,16 @@ const DentalCare = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
           <div className="row row-cols-1 row-cols-md-2 g-2">
-            {dentalInformation[lang].map((topic, index) => (
+            {dentalInformation.map((info, index) => (
               <div className="col" key={index}>
-                <Link to={`/dental-care/${topic}`}>
-                  <button
-                    className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
-                  >
-                    <span className="me-2">➤</span> {topic}
+                <Link to={`/dental-care/${info.id}`}>
+                  <button className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start">
+                    <span className="me-2">➤</span> {info[lang]}
                   </button>
                 </Link>
               </div>
             ))}
+
           </div>
         </motion.div>
 

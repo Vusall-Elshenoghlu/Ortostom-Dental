@@ -14,10 +14,9 @@ import DoctorLogin from "../pages/Doctor/DoctorLogin";
 import DoctorProfile from "../pages/Doctor/DoctorProfile";
 import DoctorRoot from "../pages/Doctor/DoctorRoot/DoctorRoot";
 import About from "../pages/User/About";
-import Confirm from "../pages/User/Confirm";
 import Contact from "../pages/User/Contact";
 import DentalCare from "../pages/User/DentalCare";
-import DentalCareDetail from "../pages/User/DentalCareDetail";
+import BabysTeeth from "../pages/User/DentalCareDetail/BabysTeeth";
 import DoctorDetail from "../pages/User/DoctorDetail";
 import Doctors from "../pages/User/Doctors";
 import Home from "../pages/User/Home";
@@ -53,10 +52,6 @@ export const ROUTES = [
                 element: <Register />
             },
             {
-                path: "confirm",
-                element: <Confirm />
-            },
-            {
                 path: "about",
                 element: <About />
             },
@@ -89,9 +84,10 @@ export const ROUTES = [
                 element: <DentalCare />
             },
             {
-                path: "dental-care/:topic",
-                element: <DentalCareDetail />
+                path: "/dental-care/1",
+                element: <BabysTeeth />
             },
+            
         ]
     },
     {
