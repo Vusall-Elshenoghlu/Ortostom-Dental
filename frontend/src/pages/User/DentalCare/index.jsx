@@ -11,8 +11,8 @@ const DentalCare = () => {
     { id: 2, az: "Braket Baxımı", en: "Braces Care", ru: "Уход за брекетами" },
     { id: 3, az: "Diqqətlə Təmizləmə", en: "Brushing", ru: "Чистка зубов" },
     { id: 4, az: "Uşaqların Dişləri", en: "Children's Teeth", ru: "Детские зубы" },
-    { id: 5, az: "Diş Telini Təmizləmə", en: "Flossing", ru: "Чистка зубной нитью" },
-    { id: 6, az: "Diqqət Edilməli Gəmiricilər", en: "Gum Health", ru: "Забота о деснах" },
+    { id: 5, az: "Diş ipi", en: "Flossing", ru: "Чистка зубной нитью" },
+    { id: 6, az: "Diş əti sağlığı", en: "Gum Health", ru: "Забота о деснах" },
     { id: 7, az: "Implant Baxımı", en: "Implant Care", ru: "Уход за имплантами" },
     { id: 8, az: "Məhsul Bələdçisi", en: "Product Guide", ru: "Руководство по продуктам" }
   ];
