@@ -17,6 +17,7 @@ const Home = () => {
       <HeroSection language = "az"/>
       <Slider/>
       <DoctorList language = "az"/>
+      
     </div>
   );
 };
