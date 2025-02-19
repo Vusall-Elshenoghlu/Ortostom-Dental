@@ -1,39 +1,66 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const VideoCall = () => {
   const jitsiContainerRef = useRef(null);
+  const [isInCall, setIsInCall] = useState(false); 
 
   useEffect(() => {
-    // Jitsi Meet skriptini əlavə etmək
     const script = document.createElement('script');
     script.src = 'https://meet.jit.si/external_api.js';
     script.async = true;
     document.body.appendChild(script);
 
     script.onload = () => {
-      // Jitsi Meet API çağırışını işə salmaq
       const domain = 'meet.jit.si';
       const options = {
-        roomName: 'DentalPageVideoCallRoom', // Otaq adı (istədiyin adı verə bilərsən)
+        roomName: 'DentalPageVideoCallRoom', 
         width: '100%',
         height: 600,
         parentNode: jitsiContainerRef.current,
+        configOverwrite: { 
+          startWithAudioMuted: true, 
+          startWithVideoMuted: true, 
+        },
+        interfaceConfigOverwrite: {
+          filmStripOnly: false, 
+        },
       };
+
       const api = new window.JitsiMeetExternalAPI(domain, options);
 
-      // İstənilən digər Jitsi funksiyalarını buradan idarə edə bilərsən
       api.addEventListener('videoConferenceJoined', () => {
         console.log('Video zəngə qoşuldun!');
+        setIsInCall(true); 
       });
+
+      api.addEventListener('videoConferenceLeft', () => {
+        console.log('Video zəngi tərk etdiniz');
+        setIsInCall(false); 
+      });
+
+      api.executeCommand('toggleAudio');
+      api.executeCommand('toggleVideo');
     };
 
     return () => {
-      // Skripti silmək
-      document.body.removeChild(script);
+      document.body.removeChild(script); // Skripti silmək
     };
   }, []);
 
-  return <div ref={jitsiContainerRef} style={{ width: '100%', height: '600px' }} />;
+  const handleCallEnd = () => {
+    if (api) api.executeCommand('hangup');
+  };
+
+  return (
+    <div>
+      <div ref={jitsiContainerRef} style={{ width: '100%', height: '600px' }} />
+      {isInCall ? (
+        <button onClick={handleCallEnd}>Zəngi Bitir</button>
+      ) : (
+        <p>Video zəngə qoşulmadınız.</p>
+      )}
+    </div>
+  );
 };
 
 export default VideoCall;

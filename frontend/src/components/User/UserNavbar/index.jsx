@@ -10,7 +10,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Swal from "sweetalert2"
 import "./UserNavbar.css"
 const UserNavbar = () => {
-  const { user,setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { lang, setLang, darkMode, setDarkMode, translations } = useContext(LanguageContext);
   const navigate = useNavigate()
 
@@ -43,9 +43,8 @@ const UserNavbar = () => {
   return (
     <Navbar expand="lg" className={`bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} sticky="top">
       <Navbar.Brand>
-        <div className="logo-container">
+        <div className="logo-container d-flex align-items-center">
           <Link to="/">
-
           </Link>
         </div>
       </Navbar.Brand>
@@ -55,7 +54,7 @@ const UserNavbar = () => {
           <Nav.Link as={Link} to="/">{translations[lang].home}</Nav.Link>
           <Nav.Link as={Link} to="/about">{translations[lang].about}</Nav.Link>
           <Nav.Link as={Link} to="/contact">{translations[lang].contact}</Nav.Link>
-          <Nav.Link as={Link} to="/appointment">{translations[lang].reservation}</Nav.Link>
+          <Nav.Link href="#doctors">{translations[lang].reservation}</Nav.Link>
           <Nav.Link as={Link} to="/video-call">{translations[lang].video_call}</Nav.Link>
           <Nav.Link as={Link} to="/dental-care">{translations[lang].care}</Nav.Link>
         </Nav>

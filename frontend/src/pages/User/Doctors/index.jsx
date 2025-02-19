@@ -22,7 +22,7 @@ const DoctorList = () => {
   }, []);
 
   return (
-    <div className="container py-5">
+    <div className="container py-5"  id="doctors">
         <h1 className="text-center">{doctorss[lang].doctors}</h1>
         <br />
       <Row>
