@@ -18,10 +18,8 @@ import Contact from "../pages/User/Contact";
 import DentalCare from "../pages/User/DentalCare";
 import BabysTeeth from "../pages/User/DentalCareDetail/BabysTeeth";
 import BadBreath from "../pages/User/DentalCareDetail/BadBreath";
-import Bonding from "../pages/User/DentalCareDetail/Bonding";
 import BracesCare from "../pages/User/DentalCareDetail/BracesCare";
 import Brushing from "../pages/User/DentalCareDetail/Brushing";
-import Bruxism from "../pages/User/DentalCareDetail/Bruxism";
 import ChildrensTeeth from "../pages/User/DentalCareDetail/ChildrensTeeth";
 import DentalPhobia from "../pages/User/DentalCareDetail/DentalPhobia";
 import Diabetes from "../pages/User/DentalCareDetail/Diabetes";
@@ -30,12 +28,10 @@ import Flossing from "../pages/User/DentalCareDetail/Flossing";
 import GumDisease from "../pages/User/DentalCareDetail/GumDisease";
 import GumHealth from "../pages/User/DentalCareDetail/GumHealth";
 import ImplantCare from "../pages/User/DentalCareDetail/ImplantCare";
-import NewDentures from "../pages/User/DentalCareDetail/NewDentures";
 import OralLesions from "../pages/User/DentalCareDetail/OralLesions";
 import OralPiercings from "../pages/User/DentalCareDetail/OralPiercings";
 import PostExtractions from "../pages/User/DentalCareDetail/PostExtractions";
 import Pregnancy from "../pages/User/DentalCareDetail/Pregnancy";
-import ProductGuide from "../pages/User/DentalCareDetail/ProductGuide";
 import SensitiveTeeth from "../pages/User/DentalCareDetail/SensitiveTeeth";
 import TMJDisorder from "../pages/User/DentalCareDetail/TMJDisorder";
 import Tobacco from "../pages/User/DentalCareDetail/Tobacco";
@@ -113,15 +109,11 @@ export const ROUTES = [
             { path: "/dental-care/5", element: <Flossing /> },
             { path: "/dental-care/6", element: <GumHealth /> },
             { path: "/dental-care/7", element: <ImplantCare /> },
-            { path: "/dental-care/8", element: <ProductGuide /> },
             { path: "/dental-care/9", element: <BadBreath /> },
-            { path: "/dental-care/10", element: <Bonding /> },
-            { path: "/dental-care/11", element: <Bruxism /> },
             { path: "/dental-care/12", element: <DentalPhobia /> },
             { path: "/dental-care/13", element: <Diabetes /> },
             { path: "/dental-care/14", element: <DryMouth /> },
             { path: "/dental-care/15", element: <GumDisease /> },
-            { path: "/dental-care/16", element: <NewDentures /> },
             { path: "/dental-care/17", element: <OralLesions /> },
             { path: "/dental-care/18", element: <OralPiercings /> },
             { path: "/dental-care/19", element: <PostExtractions /> },

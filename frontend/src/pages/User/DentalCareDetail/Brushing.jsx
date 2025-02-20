@@ -91,8 +91,8 @@ function Brushing() {
         cursor: 'pointer',
     };
     return (
-        <Container fluid className="py-5" style={{ backgroundColor: '#3c1a6f', color: '#fff' }}>
-            <Row className="justify-content-center align-items-center text-center">
+        <Container fluid className="py-5" >
+            <Row className="justify-content-center align-items-center text-center" style={{ backgroundColor: '#3c1a6f', color: '#fff' }}>
                 <Col md={6}>
                     <h1 className="display-4">{translationss[lang].title}</h1>
                     <p>{translationss[lang].intro}</p>

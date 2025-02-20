@@ -64,8 +64,8 @@ function BracesCare() {
 
 
   return (
-    <Container fluid className="py-5" style={{ backgroundColor: '#3c1a6f', color: '#fff' }}>
-      <Row className="justify-content-center align-items-center text-center">
+    <Container fluid className="py-5">
+      <Row className="justify-content-center align-items-center text-center" style={{ backgroundColor: '#3c1a6f', color: '#fff' }}>
         <Col md={6}>
           <h1 className="display-4">{translations[lang].care}</h1>
           <p>{translations[lang].misalignedTeeth}</p>

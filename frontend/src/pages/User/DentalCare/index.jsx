@@ -14,18 +14,14 @@ const DentalCare = () => {
     { id: 5, az: "Diş ipi", en: "Flossing", ru: "Чистка зубной нитью" },
     { id: 6, az: "Diş əti sağlığı", en: "Gum Health", ru: "Забота о деснах" },
     { id: 7, az: "Implant Baxımı", en: "Implant Care", ru: "Уход за имплантами" },
-    { id: 8, az: "Məhsul Bələdçisi", en: "Product Guide", ru: "Руководство по продуктам" }
   ];
 
   const dentalInformation = [
     { id: 9, az: "Pis nəfəs", en: "Bad Breath", ru: "Неприятный запах" },
-    { id: 10, az: "Bondinq", en: "Bonding", ru: "Бондинг" },
-    { id: 11, az: "Bruksizm", en: "Bruxism", ru: "Бруксизм" },
     { id: 12, az: "Diş qorxusu", en: "Dental Phobia", ru: "Стоматофобия" },
     { id: 13, az: "Diabet", en: "Diabetes", ru: "Диабет" },
     { id: 14, az: "Quru ağız", en: "Dry Mouth", ru: "Сухость во рту" },
     { id: 15, az: "Diş ətlərinin xəstəliyi", en: "Gum Disease", ru: "Заболевание десен" },
-    { id: 16, az: "Yeni protezlər", en: "New Dentures", ru: "Новые протезы" },
     { id: 17, az: "Ağız lezyonları", en: "Oral Lesions", ru: "Оральные поражения" },
     { id: 18, az: "Ağız pirsinqləri", en: "Oral Piercings", ru: "Оральные пирсинги" },
     { id: 19, az: "Çıxarış sonrası", en: "Post-Extractions", ru: "После удаления" },
@@ -33,7 +29,8 @@ const DentalCare = () => {
     { id: 21, az: "Həssas dişlər", en: "Sensitive Teeth", ru: "Чувствительные зубы" },
     { id: 22, az: "TMJ pozğunluğu", en: "TMJ Disorder", ru: "Дисфункция ВНЧС" },
     { id: 23, az: "Tütün", en: "Tobacco", ru: "Табак" },
-    { id: 24, az: "Ağıl dişləri", en: "Wisdom Teeth", ru: "Зубы мудрости" }
+    { id: 24, az: "Ağıl dişləri", en: "Wisdom Teeth", ru: "Зубы мудрости" },
+    { id: 25, az: "Geri Dön", en: "Back menu", ru: "Назад меню" }
   ];
 
 
@@ -99,9 +96,13 @@ const DentalCare = () => {
           <div className="row row-cols-1 row-cols-md-2 g-2">
             {dentalInformation.map((info, index) => (
               <div className="col" key={index}>
-                <Link to={`/dental-care/${info.id}`}>
-                  <button className="btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start">
-                    <span className="me-2">➤</span> {info[lang]}
+                <Link to={info.id == 25 ? "/" : `/dental-care/${info.id}`}>
+                  <button className={
+                    info.id == 25
+                      ? "btn btn-lg btn-danger w-100 my-2 d-flex align-items-center justify-content-start no-underline"
+                      : "btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
+                  }>
+                    <span className="me-2">{info.id == 25 ? "◀" : "➤"}</span> {info[lang]}
                   </button>
                 </Link>
               </div>
