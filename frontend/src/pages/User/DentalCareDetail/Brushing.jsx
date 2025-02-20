@@ -132,7 +132,7 @@ function Brushing() {
                         </ul>
                     </div>
                     <div style={instructionCardStyle}>
-                        <h3>Electric Toothbrushing:</h3>
+                        <h3>{translationss[lang].electric}</h3>
                         <ul>
                             <li>{translationss[lang].electricStep1}</li>
                             <li>{translationss[lang].electricStep2}</li>
