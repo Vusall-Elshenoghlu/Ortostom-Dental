@@ -1,39 +1,53 @@
-import React, { useState } from "react";
-import "./Slider.css";
+import React from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+import './Slider.css';
 
-const Slider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const slides = [
-    { title: "First Slide", description: "Healthy smile begins with us!" },
-    { title: "Second Slide", description: "Achieve the perfect smile." },
-    { title: "Third Slide", description: "Professional care for healthy teeth." }
-  ];
-
-  const nextSlide = () => {
-    setCurrentIndex((currentIndex + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((currentIndex - 1 + slides.length) % slides.length);
-  };
-
+function Slider() {
   return (
-    <div className="slider">
-      <div className="slider-content">
-        {slides.map((slide, index) => (
-          <div
-            className={`slide ${index === currentIndex ? "active" : ""}`}
-            key={index}
-          >
-            <h2>{slide.title}</h2>
-            <p>{slide.description}</p>
-          </div>
-        ))}
-      </div>
-      <button className="prev slider-button" onClick={prevSlide}>❮</button>
-      <button className="next slider-button" onClick={nextSlide}>❯</button>
-    </div>
+    <Carousel interval={3000} fade>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="path_to_image/first_slide.jpg"
+          alt="First slide"
+        />
+        <Carousel.Caption className="carousel-caption">
+          <h3 className="carousel-title">Healthy Smile</h3>
+          <p className="carousel-description">
+            Nulla vitae elit libero, a pharetra augue mollis interdum.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="path_to_image/second_slide.jpg"
+          alt="Second slide"
+        />
+        <Carousel.Caption className="carousel-caption">
+          <h3 className="carousel-title">Perfect Smile</h3>
+          <p className="carousel-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="path_to_image/third_slide.jpg"
+          alt="Third slide"
+        />
+        <Carousel.Caption className="carousel-caption">
+          <h3 className="carousel-title">Professional Care</h3>
+          <p className="carousel-description">
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
   );
-};
+}
 
 export default Slider;

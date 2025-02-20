@@ -9,16 +9,18 @@ const ToothCupGame = () => {
   const [positions, setPositions] = useState([0, 1, 2]);
   const [combo, setCombo] = useState(1);
 
+  // Dişi gizlətmək üçün useEffect
   useEffect(() => {
-    setTimeout(() => setShowTooth(false), 1500); // Oyunun əvvəlində dişi göstər
+    setTimeout(() => setShowTooth(false), 1500); // Oyunun əvvəlində dişi göstər və sonra gizlət
   }, []);
 
+  // Stəkanları qarışdıran funksiya
   const shuffleCups = () => {
     setMessage("Qarışdırılır...");
     setShuffling(true);
 
     let newPositions = [...positions];
-    const shuffleTimes = 2 + combo; // Combo artdıqca qarışdırma sayı artır
+    const shuffleTimes = Math.min(2 + combo, 5); // Combo artdıqca qarışdırma sayı artır, amma max 5 olsun
     for (let i = 0; i < shuffleTimes; i++) {
       const index1 = Math.floor(Math.random() * 3);
       let index2 = Math.floor(Math.random() * 3);
@@ -29,7 +31,7 @@ const ToothCupGame = () => {
     }
 
     // Dişi yeni mövqeyə uyğun yerləşdiririk
-    const toothPosition = newPositions.indexOf(Math.floor(Math.random() * 3));
+    const toothPosition = Math.floor(Math.random() * 3); // Dişi təsadüfi bir stəkanda yerləşdiririk
     let newCups = [false, false, false];
     newCups[toothPosition] = true;
 
@@ -38,17 +40,19 @@ const ToothCupGame = () => {
       setPositions(newPositions);
       setShuffling(false);
       setMessage("Diş hansı stəkandadır?");
-    }, 2000 + shuffleTimes * 200);
+    }, 2000 + shuffleTimes * 200); // Qarışdırma sonrası gözləmə müddəti
   };
 
+  // İstifadəçinin seçimi
   const handleGuess = (index) => {
-    if (shuffling) return;
+    if (shuffling) return; // Əgər stəkanlar qarışdırılırsa, hərəkət etmə
+
     if (cups[index]) {
       setMessage("Düz tapdın! 🎉");
-      setCombo(combo + 1); 
+      setCombo(combo + 1); // Düzgün tapıldıqda kombonun sayını artır
     } else {
       setMessage("Yanlış! 😢 Bir daha cəhd et.");
-      setCombo(1);
+      setCombo(1); // Yanlış olduğunda kombonu sıfırla
     }
   };
 
@@ -65,7 +69,7 @@ const ToothCupGame = () => {
           >
             <div className="cup-shape"></div>
             {cups[index] && (showTooth || message.includes("Düz tapdın")) ? (
-              <div className="tooth">🦷</div>
+              <div className="tooth">🦷</div> // Dişi göstər
             ) : null}
           </div>
         ))}

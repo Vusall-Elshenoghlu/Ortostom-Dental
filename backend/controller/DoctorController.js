@@ -169,3 +169,35 @@ export const doctorDashboard = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+//API to get Doctor Profile to doctor panel
+
+export const doctorProfile = async (req,res) =>{
+
+  try{
+    const {docId} = req.body
+    const profileData = await DoctorModel.findById(docId).select("-password")
+
+    res.json({success:true,profileData})
+
+
+  }catch (error) {
+    console.log("Error in doctorDashboard:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
+//API for update doctor data in doctor panel
+export const updateDoctdotProfile = async (req,res) =>{
+    try{
+
+      const {docId,available} = req.body
+      
+      await DoctorModel.findOneAndUpdate(docId,{available})
+      res.json({success:true,message:"Profile updated..."})
+      
+
+    }catch (error) {
+    console.log("Error in doctorDashboard:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+}
