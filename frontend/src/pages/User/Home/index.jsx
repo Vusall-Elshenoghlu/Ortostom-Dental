@@ -5,6 +5,8 @@ import Slider from "../../../components/User/Slider";
 import Helmet from "react-helmet"
 import "./Home.css"
 import DoctorList from "../Doctors";
+import Mapp from "../../../components/User/Map";
+import About from "../About";
 
 const Home = () => {
   const { lang } = useContext(LanguageContext);
@@ -17,6 +19,10 @@ const Home = () => {
       <HeroSection language = "az"/>
       <Slider/>
       <DoctorList language = "az"/>
+      <br /><br />
+      <About/>
+      <br />
+      <Mapp/>
       
     </div>
   );

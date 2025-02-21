@@ -8,8 +8,10 @@ function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="path_to_image/first_slide.jpg"
+          src="dent.webp"
           alt="First slide"
+          style={{height:"70vh",}}
+          
         />
         <Carousel.Caption className="carousel-caption">
           <h3 className="carousel-title">Healthy Smile</h3>
@@ -22,7 +24,7 @@ function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="path_to_image/second_slide.jpg"
+          src="slider2.webp"
           alt="Second slide"
         />
         <Carousel.Caption className="carousel-caption">
@@ -36,7 +38,7 @@ function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="path_to_image/third_slide.jpg"
+          src="slider1.jpg"
           alt="Third slide"
         />
         <Carousel.Caption className="carousel-caption">

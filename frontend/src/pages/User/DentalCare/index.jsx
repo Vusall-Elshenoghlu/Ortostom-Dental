@@ -99,10 +99,10 @@ const DentalCare = () => {
                 <Link to={info.id == 25 ? "/" : `/dental-care/${info.id}`}>
                   <button className={
                     info.id == 25
-                      ? "btn btn-lg btn-danger w-100 my-2 d-flex align-items-center justify-content-start no-underline"
+                      ? "btn btn-lg btn-danger w-100 my-2  align-items-center justify-content-start no-underline text-decoration-none"
                       : "btn btn-lg btn-primary w-100 my-2 d-flex align-items-center justify-content-start"
                   }>
-                    <span className="me-2">{info.id == 25 ? "◀" : "➤"}</span> {info[lang]}
+                    <span className="me-2">{info.id == 25 ? "" : "➤"}</span> {info[lang]}
                   </button>
                 </Link>
               </div>

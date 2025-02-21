@@ -3,7 +3,7 @@ import { Card, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { LanguageContext } from '../../../context/LanguageContext';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const about = {
     az: {
@@ -34,23 +34,24 @@ const About = () => {
             transition={{ duration: 0.8 }}
         >
             <Container>
-                <Row className="justify-content-center">
-                    <Col md={8}>
-                        <Card className="shadow-lg rounded">
-                            <Row noGutters>
-                                <Col md={6}>
-                                    <Image src="https://royalimplant.com/blogs/wp-content/uploads/2022/06/doctor-and-dentist-thumbs-up-510x340.jpg" fluid className="rounded-start" />
+                <Row className="justify-content-center align-items-center">
+                    <Col lg={10}>
+                        <Card className="shadow-lg rounded overflow-hidden border-0">
+                            <Row className="g-0 align-items-center">
+                                <Col md={6} className="d-none d-md-block">
+                                    <Image 
+                                        src="https://royalimplant.com/blogs/wp-content/uploads/2022/06/doctor-and-dentist-thumbs-up-510x340.jpg" 
+                                        fluid className="rounded-start w-100 h-100 object-fit-cover" 
+                                    />
                                 </Col>
-                                <Col md={6}>
-                                    <Card.Body className="text-center p-4">
-                                        <h1 className="display-4 mb-3">{about[lang].title}</h1>
-                                        <p className="lead">{about[lang].description}</p>
-                                        <Link to={"/dental-care"}>
-                                            <Button href={about[lang].learnMoreLink} variant="primary" className="mt-3">
-                                                {lang === 'az' ? 'Daha çox öyrən' : lang === 'en' ? 'Learn More' : 'Узнать больше'}
-                                            </Button>
-                                        </Link>
-                                    </Card.Body>
+                                <Col md={6} className="p-4 text-center">
+                                    <h1 className="fw-bold text-primary mb-3">{about[lang].title}</h1>
+                                    <p className="text-muted lead">{about[lang].description}</p>
+                                    <Link to={"dental-care"}>
+                                        <Button variant="primary" className="mt-3 px-4 py-2 fw-bold shadow-sm">
+                                            {lang === 'az' ? 'Daha çox öyrən' : lang === 'en' ? 'Learn More' : 'Узнать больше'}
+                                        </Button>
+                                    </Link>
                                 </Col>
                             </Row>
                         </Card>
