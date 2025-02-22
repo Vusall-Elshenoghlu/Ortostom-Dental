@@ -41,9 +41,8 @@ function AdminNavbar() {
             height: "80px" // Navbar hündürlüyünü müəyyən edirik
         }}>
             <Navbar.Brand style={{ marginRight: "100px" }}>
-                <div className="logo-container">
-                    {/* Logo burada */}
-                </div>
+                {/* <div className="logo-containerr">
+                </div> */}
             </Navbar.Brand>
             <h6>Admin panel</h6>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

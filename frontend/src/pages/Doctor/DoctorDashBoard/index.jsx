@@ -19,7 +19,7 @@ function DoctorDashBoard() {
           },
         }
       );
-      console.log(data);
+      // console.log(data);
       if (data.success) {
         console.log(data.dashData);
         setDashData(data.dashData);  
@@ -114,6 +114,7 @@ function DoctorDashBoard() {
             }}
             onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
             onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            onClick={() =>navigate("profile")}
   
           >
             <FaUserMd style={{ width: "65px", height: "65px" }} />

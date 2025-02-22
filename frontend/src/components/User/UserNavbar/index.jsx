@@ -43,10 +43,10 @@ const UserNavbar = () => {
   return (
     <Navbar expand="lg" className={`bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} sticky="top">
       <Navbar.Brand>
-        <div className="logo-container d-flex align-items-center">
+        
           <Link to="/">
+          <img src="images/logoo.jpg" alt="" className="logo-img"/>
           </Link>
-        </div>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -55,7 +55,7 @@ const UserNavbar = () => {
           <Nav.Link as={Link} to="/about">{translations[lang].about}</Nav.Link>
           <Nav.Link as={Link} to="/contact">{translations[lang].contact}</Nav.Link>
           <Nav.Link href="#doctors">{translations[lang].reservation}</Nav.Link>
-          <Nav.Link as={Link} to="/video-call">{translations[lang].video_call}</Nav.Link>
+          <Nav.Link as={Link} to="/video-call-lobby">{translations[lang].video_call}</Nav.Link>
           <Nav.Link as={Link} to="/dental-care">{translations[lang].care}</Nav.Link>
         </Nav>
 

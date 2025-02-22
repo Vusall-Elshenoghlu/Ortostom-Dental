@@ -18,7 +18,7 @@ function DoctorAppointments() {
       );
 
       if (data.success) {
-        console.log(data.appointments)
+        // console.log(data.appointments)
         setAppointments(data.appointments);
       } else {
         toast.error(data.message);

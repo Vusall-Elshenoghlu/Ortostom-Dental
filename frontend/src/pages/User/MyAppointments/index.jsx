@@ -26,7 +26,6 @@ function MyAppointments() {
           Authorization: `Bearer ${token}`,
         },
       });
-
       if (data.success) {
         setAppointments(data.appointments.reverse());
       }
@@ -45,7 +44,6 @@ function MyAppointments() {
           Authorization: `Bearer ${token}`,
         },
       });
-
       if (data.success) {
         toast.success(data.message)
         getUserAppointments()
@@ -94,7 +92,7 @@ function MyAppointments() {
                     </p>
                   </div>
     
-                  {!item.cancelled && (
+                  { !item.cancelled && !item.isCompleted &&(
                     <Button
                       variant='warning'
                       onMouseEnter={(e) => e.target.style.backgroundColor = 'red'}
@@ -110,6 +108,16 @@ function MyAppointments() {
                       {lang === "az" ? "Rezervasiya ləğv edildi" : lang === "ru" ? "Запись отменена" : "Appointment cancelled"}
                     </Button>
                   )}
+                  {
+                    item.isCompleted && (
+                      <Button variant='success' style={{ backgroundColor: "#fff", border: "2px solid green", color: "green" }}> 
+                        {lang === "az" ? "Tamamlandı" : lang === "ru" ? "Завершено" : "Completed"}
+                      </Button>
+                    )
+                      
+                    
+                  }
+                  
                 </div>
               </div>
             ))

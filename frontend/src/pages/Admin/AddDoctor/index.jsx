@@ -1,212 +1,218 @@
-import React from 'react';
-import { useFormik, } from 'formik';
-import { FieldArray } from 'formik';
-import * as Yup from 'yup';
-import axios from 'axios';
+import React from "react";
+import { Formik, Form, Field, FieldArray } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 
 const AddDoctor = () => {
-    const formik = useFormik({
-        initialValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            specialty: '',
-            profileImage: '',
-            experienceYears: '',
-            education: '',
-            ratings: '',
-            availableTimes: '',
-            bio: '',
-            contact: ''
-        },
-        validationSchema: Yup.object({
-            firstName: Yup.string().required('Required'),
-            lastName: Yup.string().required('Required'),
-            email: Yup.string().email('Invalid email address').required('Required'),
-            password: Yup.string().required('Required'),
-            specialty: Yup.string().required('Required'),
-            experienceYears: Yup.number().required('Required'),
-            availableTimes: Yup.string().required('Required'),
-            bio: Yup.string(),
-            contact: Yup.string()
-        }),
-        onSubmit: async (values) => {
-            const token = localStorage.getItem('adminToken'); 
-        
-            if (token) {
-                try {
-                    const response = await axios.post("http://localhost:3000/admin/add-doctor/", values, {
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-                    alert("Doctor has added successfully");
-                } catch (error) {
-                    console.log(error); // Konsolda səhv məlumatını yoxlaya bilərsiniz
-                    alert("Failed to add doctor: " + error.response ? error.response.data.message : error.message);
-                }
-            } else {
-                alert("Not authorized");
-            }
-        }
-        
+    const initialValues = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        specialty: "",
+        experienceYears: "",
+        education: "",
+        ratings: "",
+        availableTimes: ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"],
+        bio: "",
+        contact: "",
+        certificates: [{ title: "", date: "", organization: "" }],
+        profileImage:""
+    };
+
+
+    const validationSchema = Yup.object({
+        firstName: Yup.string().required("First Name is required"),
+        lastName: Yup.string().required("Last Name is required"),
+        email: Yup.string().email("Invalid email").required("Email is required"),
+        password: Yup.string().required("Password is required"),
+        specialty: Yup.string().required("Specialty is required"),
+        experienceYears: Yup.number().required("Experience is required"),
+        education: Yup.string().required("Education is required"),
+        ratings: Yup.number(),
+        availableTimes: Yup.array()
+            .of(Yup.string().matches(/^([01]\d|2[0-3]):([0-5]\d)$/, "Invalid time format"))
+            .min(1, "At least one available time is required")
+            .required("Available times are required"),
+        bio: Yup.string(),
+        contact: Yup.string(),
+        certificates: Yup.array().of(
+            Yup.object().shape({
+                title: Yup.string().required("Certificate title is required"),
+                date: Yup.string().required("Certificate date is required"),
+                organization: Yup.string().required("Issuing organization is required"),
+            })
+        ),
+        profileImage: Yup.string().url("Invalid URL")
     });
 
+    const onSubmit = async (values) => {
+        const token = localStorage.getItem("adminToken");
+        console.log(values)
+
+        if (token) {
+            try {
+                await axios.post("http://localhost:3000/admin/add-doctor/", values, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                alert("Doctor has been added successfully");
+            } catch (error) {
+                alert(
+                    "Failed to add doctor: " + (error.response ? error.response.data.message : error.message)
+                );
+            }
+        } else {
+            alert("Not authorized");
+        }
+    };
+
     return (
-        <div className="container d-flex align-items-center justify-content-center mt-5" style={{ height: '90vh' }}>
-            <form className="row g-3 w-100" onSubmit={formik.handleSubmit}>
-                <div className="col-md-6">
-                    <label htmlFor="firstName" className="form-label">First Name</label>
-                    <input
-                        id="firstName"
-                        name="firstName"
-                        type="text"
-                        className={`form-control ${formik.touched.firstName && formik.errors.firstName ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.firstName}
-                    />
-                    {formik.touched.firstName && formik.errors.firstName ? (
-                        <div className="invalid-feedback">{formik.errors.firstName}</div>
-                    ) : null}
-                </div>
+        <div className="container mt-5" style={{width:"500px",marginLeft:"200px",padding:"50px"}}>
+            <h2>Add Doctor</h2>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                {({ values }) => (
+                    <Form>
+                        <div className="mb-3">
+                            <label>Profile Image URL</label>
+                            <Field type="text" className="form-control" name="profileImage" />
+                        </div>
+                        
+                        <div className="mb-3">
+                            <label>First Name</label>
+                            <Field type="text" className="form-control" name="firstName" />
+                        </div>
 
-                <div className="col-md-6">
-                    <label htmlFor="lastName" className="form-label">Last Name</label>
-                    <input
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        className={`form-control ${formik.touched.lastName && formik.errors.lastName ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.lastName}
-                    />
-                    {formik.touched.lastName && formik.errors.lastName ? (
-                        <div className="invalid-feedback">{formik.errors.lastName}</div>
-                    ) : null}
-                </div>
+                        <div className="mb-3">
+                            <label>Last Name</label>
+                            <Field type="text" className="form-control" name="lastName" />
+                        </div>
 
-                <div className="col-md-6">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        className={`form-control ${formik.touched.email && formik.errors.email ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.email}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                        <div className="invalid-feedback">{formik.errors.email}</div>
-                    ) : null}
-                </div>
+                        <div className="mb-3">
+                            <label>Email</label>
+                            <Field type="email" className="form-control" name="email" />
+                        </div>
 
-                <div className="col-md-6">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        className={`form-control ${formik.touched.password && formik.errors.password ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.password}
-                    />
-                    {formik.touched.password && formik.errors.password ? (
-                        <div className="invalid-feedback">{formik.errors.password}</div>
-                    ) : null}
-                </div>
+                        <div className="mb-3">
+                            <label>Password</label>
+                            <Field type="password" className="form-control" name="password" />
+                        </div>
 
-                <div className="col-md-6">
-                    <label htmlFor="specialty" className="form-label">Specialty</label>
-                    <input
-                        id="specialty"
-                        name="specialty"
-                        type="text"
-                        className={`form-control ${formik.touched.specialty && formik.errors.specialty ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.specialty}
-                    />
-                    {formik.touched.specialty && formik.errors.specialty ? (
-                        <div className="invalid-feedback">{formik.errors.specialty}</div>
-                    ) : null}
-                </div>
+                        <div className="mb-3">
+                            <label>Specialty</label>
+                            <Field type="text" className="form-control" name="specialty" />
+                        </div>
 
-                <div className="col-md-6">
-                    <label htmlFor="experienceYears" className="form-label">Experience Years</label>
-                    <input
-                        id="experienceYears"
-                        name="experienceYears"
-                        type="number"
-                        className={`form-control ${formik.touched.experienceYears && formik.errors.experienceYears ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.experienceYears}
-                    />
-                    {formik.touched.experienceYears && formik.errors.experienceYears ? (
-                        <div className="invalid-feedback">{formik.errors.experienceYears}</div>
-                    ) : null}
-                </div>
+                        
 
-                <div className="col-md-6">
-                    <label htmlFor="education" className="form-label">Education</label>
-                    <input
-                        id="education"
-                        name="education"
-                        type="text"
-                        className={`form-control ${formik.touched.education && formik.errors.education ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.education}
-                    />
-                    {formik.touched.education && formik.errors.education ? (
-                        <div className="invalid-feedback">{formik.errors.education}</div>
-                    ) : null}
-                </div>
+                        <div className="mb-3">
+                            <label>Experience Years</label>
+                            <Field type="number" className="form-control" name="experienceYears" />
+                        </div>
 
-                <div className="col-md-6">
-                    <label htmlFor="bio" className="form-label">Bio</label>
-                    <textarea
-                        id="bio"
-                        name="bio"
-                        className={`form-control ${formik.touched.bio && formik.errors.bio ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.bio}
-                    />
-                    {formik.touched.bio && formik.errors.bio ? (
-                        <div className="invalid-feedback">{formik.errors.bio}</div>
-                    ) : null}
-                </div>
+                        <div className="mb-3">
+                            <label>Education</label>
+                            <Field type="text" className="form-control" name="education" />
+                        </div>
 
-                <div className="col-md-6">
-                    <label htmlFor="contact" className="form-label">Contact</label>
-                    <input
-                        id="contact"
-                        name="contact"
-                        type="text"
-                        className={`form-control ${formik.touched.contact && formik.errors.contact ? 'is-invalid' : ''}`}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.contact}
-                    />
-                    {formik.touched.contact && formik.errors.contact ? (
-                        <div className="invalid-feedback">{formik.errors.contact}</div>
-                    ) : null}
-                </div>
+                        <div className="mb-3">
+                            <label>Ratings</label>
+                            <Field type="number" className="form-control" name="ratings" />
+                        </div>
 
-                <div className="col-12">
-                    <label htmlFor="certificates" className="form-label">Certificates</label>
-                </div>
+                        <FieldArray name="availableTimes">
+                            {({ push, remove }) => (
+                                <div>
+                                    <label>Available Times</label>
+                                    {values.availableTimes.map((time, index) => (
+                                        <div key={index} className="d-flex mb-2">
+                                            <Field
+                                                type="time"
+                                                className="form-control me-2"
+                                                name={`availableTimes.${index}`}
+                                            />
+                                            <button type="button" className="btn btn-danger" onClick={() => remove(index)}>Remove</button>
+                                        </div>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        className="btn btn-success mt-2"
+                                        onClick={() => push("")}
+                                    >
+                                        Add Time
+                                    </button>
+                                </div>
+                            )}
+                        </FieldArray>
 
-                <div className="col-12">
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </div>
-            </form>
+                        <div className="mb-3">
+                            <label>Bio</label>
+                            <Field as="textarea" className="form-control" name="bio" />
+                        </div>
+
+                        <div className="mb-3">
+                            <label>Contact</label>
+                            <Field type="text" className="form-control" name="contact" />
+                        </div>
+
+                        <FieldArray name="certificates">
+                            {({ push, remove }) => (
+                                <div>
+                                    <label>Certificates</label>
+                                    {values.certificates.map((certificate, index) => (
+                                        <div key={index} className="mb-3 border p-3 rounded">
+                                            <label>Title</label>
+                                            <Field
+                                                type="text"
+                                                className="form-control mb-2"
+                                                name={`certificates.${index}.title`} // name yox, title istifadə et
+                                                placeholder="Enter Certificate Title"
+                                            />
+
+                                            <label>Date</label>
+                                            <Field
+                                                type="date"
+                                                className="form-control mb-2"
+                                                name={`certificates.${index}.date`}
+                                            />
+
+                                            <label>Organization</label>
+                                            <Field
+                                                type="text"
+                                                className="form-control mb-2"
+                                                name={`certificates.${index}.organization`}
+                                                placeholder="Enter Issuing Organization"
+                                            />
+
+                                            <button
+                                                type="button"
+                                                className="btn btn-danger"
+                                                onClick={() => remove(index)}
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
+                                    ))}
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-success mt-2"
+                                        onClick={() => push({ title: "", date: "", organization: "" })}
+                                    >
+                                        Add Certificate
+                                    </button>
+                                </div>
+                            )}
+                        </FieldArray>
+
+
+                        <button type="submit" className="btn btn-primary mt-3">
+                            Submit
+                        </button>
+                    </Form>
+                )}
+            </Formik>
         </div>
     );
 };

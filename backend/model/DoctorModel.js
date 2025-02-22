@@ -18,7 +18,7 @@ export const doctorSchema = new mongoose.Schema(
     contact: { type: String },
     slots_booked: { type: Object, default: {} }
   },
-  { minimize: false } // Boş obyektlərin saxlanmasını təmin edir
+  { minimize: false } 
 );
 
 export const DoctorModel = mongoose.model('Doctor', doctorSchema);

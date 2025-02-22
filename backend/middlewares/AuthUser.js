@@ -10,9 +10,8 @@ export const authUser = async (req, res, next) => {
         const decodeToken = jwt.verify(token, process.env.JWT_SECRET);
 
         req.body.userId = decodeToken.userId; 
-
         next();
     } catch (error) {
-        res.json({ success: false, message: error.message });
-    }
+        res.json({ success: false, message: error.message });
+    }
 };

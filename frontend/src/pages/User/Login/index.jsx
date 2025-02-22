@@ -24,6 +24,7 @@ const Login = () => {
       localStorage.setItem("userId", res.data.userId);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      sessionStorage.setItem("userEmail",res.data.user.email)
       setUser(res.data.user);
 
       alert("Login successful");

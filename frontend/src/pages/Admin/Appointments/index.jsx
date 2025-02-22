@@ -19,7 +19,7 @@ const Appointments = () => {
     return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
   };
 
-  
+
 
   const calculateAge = (dob) => {
     const today = new Date();
@@ -39,7 +39,6 @@ const Appointments = () => {
           Authorization: `Bearer ${aToken}`,
         },
       });
-
       setAppointments(data.appointments);
 
       if (data.success) {
@@ -65,7 +64,7 @@ const Appointments = () => {
         },
       });
 
-      
+
       if (data.success) {
         toast.success(data.message);
         getAllAppointments();
@@ -93,7 +92,7 @@ const Appointments = () => {
         </thead>
         <tbody className="text-center">
           {appointments.length > 0 ? (
-            appointments.map((appointment, index) => (
+            appointments.reverse().map((appointment, index) => (
               <tr key={appointment._id}>
                 <td>{index + 1}</td>
                 <td>{appointment.userData.name + " " + appointment.userData.surname}</td>
@@ -107,7 +106,9 @@ const Appointments = () => {
                   {
                     appointment.cancelled
                       ? <p className="text-danger fs-6 fw-medium">Cancelled</p>
-                      : <button className="btn btn-secondary btn-sm" onClick={() => cancelAppointment(appointment._id)}><FaTimes /></button>
+                      : appointment.isCompleted
+                        ? <p className="text-success fs-6 fw-medium">Completed</p>
+                        : <button className="btn btn-secondary btn-sm" onClick={() => cancelAppointment(appointment._id)}><FaTimes /></button>
                   }
                 </td>
               </tr>

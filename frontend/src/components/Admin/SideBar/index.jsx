@@ -12,6 +12,8 @@ const Sidebar = () => {
     { name: "Appointments", path: "/dashboard/appointments", icon: <FaCalendarAlt className="me-2" /> },
     { name: "Add Doctor", path: "/dashboard/add-doctor", icon: <FaUserMd className="me-2" /> },
     { name: "Doctors List", path: "/dashboard/admin-doctors", icon: <FaUsers className="me-2" /> },
+    { name: "Patient", path: "/dashboard/all-patients", icon: <FaUsers className="me-2" /> },
+    { name: "Add Patient", path: "/dashboard/add-patient", icon: <FaUsers className="me-2" /> },
   ];
 
   return (

@@ -1,5 +1,6 @@
 import AddDoctor from "../pages/Admin/AddDoctor";
 import AddProduct from "../pages/Admin/AddProduct";
+import AddUser from "../pages/Admin/AddUser";
 import AdminDoctors from "../pages/Admin/AdminDoctors";
 import AdminLogin from "../pages/Admin/AdminLogin";
 import AdminProducts from "../pages/Admin/AdminProducts";
@@ -7,6 +8,7 @@ import AdminRoot from "../pages/Admin/AdminRoot/AdminRoot";
 import Appointments from "../pages/Admin/Appointments";
 import DashBoard from "../pages/Admin/DashBoard";
 import EditProduct from "../pages/Admin/EditProduct";
+import EditUser from "../pages/Admin/EditUser";
 import Users from "../pages/Admin/Users";
 import DoctorAppointments from "../pages/Doctor/DoctorAppointments";
 import DoctorDashBoard from "../pages/Doctor/DoctorDashBoard";
@@ -48,6 +50,7 @@ import UserAppointment from "../pages/User/UseraAppointment";
 import ProductDetail from "../pages/User/UserProdDetail";
 import UserRoot from "../pages/User/UserRoot";
 import VideoCall from "../pages/User/VideoCall";
+import VideoCallLobby from "../pages/User/VideoCallLobby";
 
 export const ROUTES = [
     {
@@ -95,8 +98,12 @@ export const ROUTES = [
                 element: <UserAppointment />
             },
             {
-                path: "video-call",
+                path: "videocall/:room",
                 element: <VideoCall />
+            },
+            {
+                path: "video-call-lobby",
+                element: <VideoCallLobby />
             },
             {
                 path: "dental-care",
@@ -155,10 +162,6 @@ export const ROUTES = [
                 element: <EditProduct />
             },
             {
-                path: "users",
-                element: <Users />
-            },
-            {
                 path: "appointments",
                 element: <Appointments />
             },
@@ -169,6 +172,18 @@ export const ROUTES = [
             {
                 path: "add-doctor",
                 element: <AddDoctor />
+            },
+            {
+                path: "all-patients",
+                element: <Users />
+            },
+            {
+                path: "add-patient",
+                element: <AddUser />
+            },
+            {
+                path: "edit-patient/:id",
+                element: <EditUser />
             },
         ]
     },

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from "react-toastify"
 import axios from "axios"
 import { FaCalendar, FaRegCalendarCheck, FaTimes, FaUserMd } from "react-icons/fa"
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 function DashBoard() {
   const [dashData, setDashData] = useState(false)
   const [aToken, setAToken] = useState(localStorage.getItem("adminToken"))
@@ -21,6 +21,7 @@ function DashBoard() {
       if (data.success) {
         setDashData(data.dashData)
         console.log(data)
+        console.log(data.dashData)
       } else {
         toast.error(data.message)
       }
@@ -40,13 +41,13 @@ function DashBoard() {
   const slotDateFormat = (slotDate) => {
     const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     if (!slotDate) {
-      return "Invalid Date";  // Date mövcud deyilsə, uyğun mesaj qaytarır
+      return "Invalid Date";  
     }
 
     const dateArray = slotDate.split("_");
 
     if (dateArray.length !== 3) {
-      return "Invalid Date Format";  // Əgər format uyğun deyilsə, mesaj qaytarır
+      return "Invalid Date Format"; 
     }
 
     return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
@@ -70,7 +71,7 @@ function DashBoard() {
           }}
           onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          onClick={() =>navigate("admin-doctors")}
+          onClick={() => navigate("admin-doctors")}
         >
           <img style={{ width: "65px", height: "65px" }} src="../../../images/doctor.png" alt="" />
           <div>
@@ -91,7 +92,7 @@ function DashBoard() {
           }}
           onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          onClick={() =>navigate("appointments")}
+          onClick={() => navigate("appointments")}
 
         >
           <FaRegCalendarCheck style={{ width: "65px", height: "65px" }} />
@@ -113,6 +114,7 @@ function DashBoard() {
           }}
           onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          onClick={() => navigate("all-patients")}
         >
           <img style={{ width: "65px", height: "65px" }} src="../../../images/hospitalisation.png" alt="" />
           <div>
@@ -135,13 +137,13 @@ function DashBoard() {
                 <p className="fw-medium m-0">Dr. {item.docData.firstName}</p>
                 <p className="text-muted small m-0">{slotDateFormat(item.slotDate)}</p>
               </div>
-              {item.cancelled ? (
-                <span className="text-danger fw-bold">Cancelled</span>
-              ) : (
-                <button className="btn btn-outline-danger btn-sm">
-                  <FaTimes />
-                </button>
-              )}
+              {
+                item.cancelled
+                  ? <p className="text-danger fs-6 fw-medium">Cancelled</p>
+                  : item.isCompleted
+                    ? <p className="text-success fs-6 fw-medium">Completed</p>
+                    : <button className="btn btn-secondary btn-sm" onClick={() => cancelAppointment(appointment._id)}><FaTimes /></button>
+              }
             </div>
           ))}
         </div>

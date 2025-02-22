@@ -139,17 +139,14 @@ export const cancelAppointmentForDoctor = async (req,res) =>{
 }
 
 
-// API for doctor dashboard data
 export const doctorDashboard = async (req, res) => {
   try {
-    const { docId } = req.body;  // docId request body-də olacaq
-    console.log("Fetching dashboard data for doctor with ID:", docId); // Yoxlamaq üçün
+    const { docId } = req.body;  
+    console.log("Fetching dashboard data for doctor with ID:", docId); 
 
-    // Appointment-ləri tapmaq
     const appointments = await AppointmentModel.find({ docId });
     let patients = [];
 
-    // Unikal xəstələri tapmaq
     appointments.map((item) => {
       if (!patients.includes(item.userId)) {
         patients.push(item.userId);
@@ -159,11 +156,11 @@ export const doctorDashboard = async (req, res) => {
     const dashData = {
       appointments: appointments.length,
       patients: patients.length,
-      latestAppointments: appointments.reverse().slice(0, 5),  // Son 5 təyinat
+      latestAppointments: appointments.reverse().slice(0, 5), 
     };
 
-    console.log("Dashboard data:", dashData);  // Yoxlamaq üçün
-    res.json({ success: true, dashData });  // Nəticəni qaytarırıq
+    console.log("Dashboard data:", dashData);  
+    res.json({ success: true, dashData });  
   } catch (error) {
     console.log("Error in doctorDashboard:", error);
     res.status(500).json({ success: false, message: error.message });
@@ -187,17 +184,24 @@ export const doctorProfile = async (req,res) =>{
   }
 }
 //API for update doctor data in doctor panel
-export const updateDoctdotProfile = async (req,res) =>{
-    try{
+export const updateDoctdotProfile = async (req, res) => {
+  try {
+      const { docId, available, bio } = req.body;
 
-      const {docId,available} = req.body
-      
-      await DoctorModel.findOneAndUpdate(docId,{available})
-      res.json({success:true,message:"Profile updated..."})
-      
+      const updatedDoctor = await DoctorModel.findOneAndUpdate(
+          { _id: docId },  
+          { available, bio },  
+          { new: true }  
+      );
 
-    }catch (error) {
-    console.log("Error in doctorDashboard:", error);
-    res.status(500).json({ success: false, message: error.message });
+      if (!updatedDoctor) {
+          return res.status(404).json({ success: false, message: "Doctor not found" });
+      }
+
+      res.json({ success: true, message: "Profile updated...", doctor: updatedDoctor });
+
+  } catch (error) {
+      console.log("Error in doctorDashboard:", error);
+      res.status(500).json({ success: false, message: error.message });
   }
-}
+};

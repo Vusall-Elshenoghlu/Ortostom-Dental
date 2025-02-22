@@ -43,6 +43,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  height: 75vh;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {

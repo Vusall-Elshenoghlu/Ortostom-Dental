@@ -43,9 +43,9 @@ function DoctorNavbar() {
             boxShadow:"0px 0px 0px 0.1px"
         }}>
             <Navbar.Brand style={{ marginRight: "100px" }}>
-                <div className="logo-container">
+                {/* <div className="logo-containerrr">
                     {}
-                </div>
+                </div> */}
             </Navbar.Brand>
             <Button 
                 variant="outline-primary" 

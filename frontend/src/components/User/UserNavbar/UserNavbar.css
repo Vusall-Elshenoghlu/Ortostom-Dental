@@ -1,7 +1,6 @@
-.logo-container {
-    width: 400px ;
-    height: 60px ;
-    background-image: url("../../../public/images/Artboard 3@4x-8.png");
-    background-size: cover; 
-    background-position: center;
+.logo-img {
+    width: 350px; 
+    height: 90px;  
+    object-fit: cover; 
+    object-position: center; 
 }

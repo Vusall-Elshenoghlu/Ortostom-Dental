@@ -4,15 +4,9 @@ import './Slider.css';
 
 function Slider() {
   return (
-    <Carousel interval={3000} fade>
+    <Carousel interval={5000} fade>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="dent.webp"
-          alt="First slide"
-          style={{height:"70vh",}}
-          
-        />
+      <img className="d-block w-100" src="/images/slider1.webp" alt="First slide"/>
         <Carousel.Caption className="carousel-caption">
           <h3 className="carousel-title">Healthy Smile</h3>
           <p className="carousel-description">
@@ -24,7 +18,7 @@ function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="slider2.webp"
+          src="/images/slider2.webp"
           alt="Second slide"
         />
         <Carousel.Caption className="carousel-caption">

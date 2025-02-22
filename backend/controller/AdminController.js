@@ -11,7 +11,7 @@ export const addDoctor = async (req, res) => {
         if (!firstName || !lastName || !email || !password || !specialty || !profileImage || !experienceYears || !education || !ratings || !certificates || !availableTimes || !bio || !contact) {
             return res.json({ success: false, message: "Missing Details..." })
         }
-
+        
         const doctor = await DoctorModel.findOne({ email });
 
         if (doctor) {
@@ -92,6 +92,112 @@ export const appointmentsAdmin = async (req, res) => {
     }
 }
 
+//API for patients
+
+export const allPatients = async (req, res) => {
+    try {
+        const patients = await UserModel.find({}).select("-password");
+        res.json({ success: true, patients });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+};
+//API for one patient
+export const onePatient = async (req, res) => {
+    try {
+        const { id } = req.body; 
+        if (!id) {
+            return res.json({ success: false, message: "Patient ID is required" });
+        }
+
+        const patient = await UserModel.findById(id).select("-password");
+        if (!patient) {
+            return res.json({ success: false, message: "Patient not found" });
+        }
+
+        res.json({ success: true, patient });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+};
+
+
+//API for adding new patient
+export const addPatient = async (req, res) => {
+    try {
+        const { name, surname, email, phone, dob, password } = req.body;
+
+        if (!name || !surname || !email || !phone || !dob || !password) {
+            return res.json({ success: false, message: "All fields are required." });
+        }
+
+        const existingUser = await UserModel.findOne({ email });
+        if (existingUser) {
+            return res.json({ success: false, message: "User with this email already exists." });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newPatient = new UserModel({
+            name,
+            surname,
+            email,
+            phone,
+            dob,
+            password: hashedPassword, // Hash olunmuş şifrə
+        });
+
+        await newPatient.save();
+        res.json({ success: true, message: "Patient added successfully" });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+};
+
+//API for update patient
+
+
+export const updatePatient = async (req, res) => {
+    try {
+        const { id, password, confirmPassword, name, surname, email, address, gender, dob, phone } = req.body;
+
+        if (!id) {
+            return res.json({ success: false, message: "Patient ID is required" });
+        }
+
+        let updateData = { name, surname, email, address, gender, dob, phone };
+
+        if (password) {
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+            updateData.password = hashedPassword;
+        }
+
+        const updatedPatient = await UserModel.findByIdAndUpdate(id, updateData, { new: true });
+
+        if (!updatedPatient) {
+            return res.json({ success: false, message: "Patient not found" });
+        }
+
+        res.json({ success: true, message: "Patient updated successfully", updatedPatient });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+};
+
+
+//API for delete patient
+export const deletePatient = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await UserModel.findByIdAndDelete(id);
+        res.json({ success: true, message: "Patient deleted successfully" });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
+};
+
 //API for appointment cancellation
 
 export const adminCancelAppointment = async (req, res) => {
@@ -130,13 +236,13 @@ export const adminDashboard = async (req, res) => {
     try {
 
         const doctors = await DoctorModel.find({})
-        const users = await UserModel.find({})
+        const patients = await UserModel.find({})
         const appointments = await AppointmentModel.find({})
 
         const dashData = {
             doctors:doctors.length,
             appointments:appointments.length,
-            patients:users.length,
+            patients:patients.length,
             latestAppointments:appointments.reverse().slice(0,5)
         }
 
