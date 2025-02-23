@@ -60,7 +60,6 @@ function Mapp() {
   return (
     <Container className="py-5">
       <Row className="justify-content-center align-items-center">
-        {/* Sol tərəfdə xəritə */}
         <Col lg={8} md={12} className="mb-4 mb-lg-0">
           <div className="shadow rounded overflow-hidden">
             <iframe
@@ -75,7 +74,6 @@ function Mapp() {
           </div>
         </Col>
 
-        {/* Sağ tərəfdə contact form */}
         <Col lg={4} md={12}>
           <h2 className="text-center mb-3">{translations[lang].contact}</h2>
           {state.succeeded && (

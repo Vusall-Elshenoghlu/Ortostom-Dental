@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./DoctorCard.css"
 import { LanguageContext } from "../../../context/LanguageContext";
 const DoctorCard = ({ doctor }) => {
-  const navigate = useNavigate(); // useHistory yerine useNavigate istifadə olunur
+  const navigate = useNavigate(); 
 
   const handleClick = () => {
     navigate(`/doctors/${doctor._id}`);

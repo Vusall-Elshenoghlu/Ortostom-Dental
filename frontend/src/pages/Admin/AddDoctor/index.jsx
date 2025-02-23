@@ -166,7 +166,7 @@ const AddDoctor = () => {
                                             <Field
                                                 type="text"
                                                 className="form-control mb-2"
-                                                name={`certificates.${index}.title`} // name yox, title istifadə et
+                                                name={`certificates.${index}.title`} 
                                                 placeholder="Enter Certificate Title"
                                             />
 

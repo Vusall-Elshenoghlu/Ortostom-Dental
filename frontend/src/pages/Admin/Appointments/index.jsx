@@ -7,13 +7,13 @@ const Appointments = () => {
   const slotDateFormat = (slotDate) => {
     const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     if (!slotDate) {
-      return "Invalid Date";  // Date mövcud deyilsə, uyğun mesaj qaytarır
+      return "Invalid Date";  
     }
 
     const dateArray = slotDate.split("_");
 
     if (dateArray.length !== 3) {
-      return "Invalid Date Format";  // Əgər format uyğun deyilsə, mesaj qaytarır
+      return "Invalid Date Format";  
     }
 
     return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;

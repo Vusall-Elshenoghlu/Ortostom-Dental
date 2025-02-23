@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ToothCupGame.css";
 
 const ToothCupGame = () => {
-  const [cups, setCups] = useState([false, true, false]); // Diş ortadadır
+  const [cups, setCups] = useState([false, true, false]); 
   const [shuffling, setShuffling] = useState(false);
   const [message, setMessage] = useState("Tapmağa hazır olun!");
   const [showTooth, setShowTooth] = useState(true);

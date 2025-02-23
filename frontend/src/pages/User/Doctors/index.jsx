@@ -3,7 +3,7 @@ import axios from "axios";
 import { Row, Col } from "react-bootstrap";
 import DoctorCard from "../../../components/User/DoctorCard";
 import { LanguageContext } from "../../../context/LanguageContext";
-import { motion } from "framer-motion"; // `motion`-u daxil etdik
+import { motion } from "framer-motion"; 
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);

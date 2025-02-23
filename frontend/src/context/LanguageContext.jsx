@@ -66,17 +66,23 @@ const content = {
   az: {
     heroTitle: "Gülümsəməniz Bizim Üçün Önəmlidir",
     heroText: "Peşəkar diş həkimlərimiz sizin sağlam dişlərə sahib olmağınızı təmin edir.",
-    button: "Randevu al"
+    button: "Randevu al",
+    logAppoint:"Rezervasiya üçün daxil olun",
+    navDoctor:"Rezervasiya üçün həkim seçin"
   },
   en: {
     heroTitle: "Your Smile Matters to Us",
     heroText: "Our professional dentists ensure you have healthy teeth.",
-    button: "Book an Appointment"
+    button: "Book an Appointment",
+    logAppoint:"login to appointment",
+    navDoctor:"choose doctor for reservation"
   },
   ru: {
     heroTitle: "Ваша улыбка важна для нас",
     heroText: "Наши профессиональные стоматологи обеспечат вам здоровые зубы.",
-    button: "Записаться на прием"
+    button: "Записаться на прием",
+    logAppoint:"Войдите для записи на приём",
+    navDoctor:"Выберите врача для записи"
   }
 };
 

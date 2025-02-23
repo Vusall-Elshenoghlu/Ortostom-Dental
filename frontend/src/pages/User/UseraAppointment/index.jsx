@@ -10,7 +10,6 @@ const UserAppointment = () => {
   const [reservationCode, setReservationCode] = useState('');
 
   useEffect(() => {
-    // Görüş tarixləri və saatları gətirmək üçün API çağırışı
     axios.get('http://localhost:3000/appointments/')
       .then((response) => {
         setAppointments(response.data);
@@ -46,7 +45,7 @@ const UserAppointment = () => {
 
     try {
       const response = await axios.post('/appointments', appointmentData);
-      setReservationCode(response.data.reservationCode); // Yeni kodu əldə et
+      setReservationCode(response.data.reservationCode); 
       alert('Rezervasiya təsdiq olundu! Kodunuz emailinizə göndəriləcək.');
     } catch (error) {
       console.error('Error creating appointment:', error);
@@ -57,7 +56,6 @@ const UserAppointment = () => {
     <div className="container mt-5">
       <h2>Appointment Booking</h2>
       
-      {/* Rezervasiya formu */}
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="form-group">
           <label htmlFor="patientName">Ad və Soyad</label>

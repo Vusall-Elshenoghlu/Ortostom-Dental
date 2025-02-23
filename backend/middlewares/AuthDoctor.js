@@ -15,7 +15,7 @@ export const AuthDoctor = async (req, res, next) => {
         console.log("Decoded Token:", decodeToken);
 
         req.body.docId = decodeToken.id;  
-        console.log("Updated req.body (after adding docId):", req.body); // <== Burada docId var?
+        console.log("Updated req.body (after adding docId):", req.body); 
 
         next();
     } catch (error) {

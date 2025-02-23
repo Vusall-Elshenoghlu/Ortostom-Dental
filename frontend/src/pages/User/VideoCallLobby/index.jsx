@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast } from "react-toastify";
 import { LanguageContext } from '../../../context/LanguageContext';
+import { Helmet } from 'react-helmet-async';
 
 const generateRoomName = () => {
     return `DentalCall-${Date.now()}`;
@@ -18,19 +19,22 @@ const VideoCallLobby = () => {
           video_call: "Video Zəng", 
           lobby: "Otağı", 
           videoCallDesc: "Bu sistem vasitəsilə təhlükəsiz və rahat şəkildə video zənglər edə bilərsiniz.",
-          startCall: "Hazıram, Başlayaq!"
+          startCall: "Hazıram, Başlayaq!",
+          login:"Zəng üçün daxil olun."
         },
         en: { 
           video_call: "Video Call", 
           lobby: "Lobby", 
           videoCallDesc: "You can make secure and comfortable video calls using this system.",
-          startCall: "I'm Ready, Let's Start!"
+          startCall: "I'm Ready, Let's Start!",
+          login:"Log in to call."
         },
         ru: { 
           video_call: "Видеозвонок", 
           lobby: "Лобби", 
           videoCallDesc: "С помощью этой системы вы можете безопасно и удобно совершать видеозвонки.",
-          startCall: "Я готов, давайте начнем!"
+          startCall: "Я готов, давайте начнем!",
+          login:"Войдите для звонка."
         }
       };
       
@@ -59,6 +63,11 @@ const VideoCallLobby = () => {
 
     return (
         <div className="d-flex flex-column align-items-center justify-content-center text-center p-4" style={{ height: "90vh", backgroundColor: "#f0f4f8" }}>
+            <Helmet>
+                <title>
+                    Videocall-Lobby
+                </title>
+            </Helmet>
             <h1 className="display-4 fw-bold mb-4" style={{ color: "#2a3d66" }}>
                 {translations[lang].video_call} {translations[lang].lobby}
             </h1>

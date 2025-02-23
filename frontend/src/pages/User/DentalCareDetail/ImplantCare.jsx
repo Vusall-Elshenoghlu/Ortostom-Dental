@@ -67,7 +67,7 @@ function ImplantCare() {
       <Row className="justify-content-center align-items-center text-center" style={{ backgroundColor: '#3c1a6f', color: '#fff' }}>
         <Col md={6}>
           <h1 className="display-4">{translations[lang].title}</h1>
-          <p style={{fontSize:"20px"}}>{translations[lang].subtitle}</p>
+          <p style={{fontSize:"23px"}}>{translations[lang].subtitle}</p>
         </Col>
         <Col md={4}>
           <Card className="border-0">

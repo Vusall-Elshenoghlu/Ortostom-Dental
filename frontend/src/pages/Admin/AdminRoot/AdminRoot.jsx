@@ -1,4 +1,3 @@
-// AdminRoot.jsx
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import Sidebar from '../../../components/Admin/SideBar';

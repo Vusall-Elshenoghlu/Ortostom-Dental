@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { Card, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { LanguageContext } from '../../../context/LanguageContext';
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet-async"
-import { LanguageContext } from '../../../context/LanguageContext';
 
 const about = {
     az: {
@@ -35,11 +35,6 @@ const About = () => {
             transition={{ duration: 0.8 }}
         >
             <Container>
-                <Helmet>
-                    <title>
-                        About
-                    </title>
-                </Helmet>
                 <Row className="justify-content-center align-items-center">
                     <Col lg={10}>
                         <Card className="shadow-lg rounded overflow-hidden border-0">
@@ -53,7 +48,7 @@ const About = () => {
                                 <Col md={6} className="p-4 text-center">
                                     <h1 className="fw-bold text-primary mb-3">{about[lang].title}</h1>
                                     <p className="text-muted lead">{about[lang].description}</p>
-                                    <Link to={"/dental-care"}>
+                                    <Link to={"dental-care"}>
                                         <Button variant="primary" className="mt-3 px-4 py-2 fw-bold shadow-sm">
                                             {lang === 'az' ? 'Daha çox öyrən' : lang === 'en' ? 'Learn More' : 'Узнать больше'}
                                         </Button>

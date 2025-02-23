@@ -90,3 +90,44 @@
     text-decoration: underline;
   }
   
+  @media (max-width: 768px) {
+    .auth-container::before, 
+    .auth-container::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: url('../../../../public/images/ff86188c-0dc3-48ef-a0d9-d12796935796.webp') no-repeat center center/contain;
+      opacity: 0.8;
+      display: none;
+    }
+  
+    .auth-form {
+      width: 70%;
+      max-width: 100%;
+    }
+  
+    .input-field {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .register-input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+    }
+  
+    .redirect-text {
+      font-size: 14px;
+    }
+  
+    .redirect-link {
+      font-size: 14px;
+    }
+  }
+  

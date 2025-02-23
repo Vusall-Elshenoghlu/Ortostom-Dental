@@ -4,3 +4,8 @@
     object-fit: cover; 
     object-position: center; 
 }
+.nav-link.active {
+    text-decoration: underline; 
+    text-decoration-thickness: 1px; 
+    font-weight: bold;
+  }

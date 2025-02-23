@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';  
+import { toast } from 'react-toastify';
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(4, 'Too Short!').max(20, 'Too Long!').required('Required'),
@@ -39,15 +40,15 @@ const DoctorLogin = () => {
                 if (response.data.success) {
                   localStorage.setItem('doctorToken', response.data.token);
                   setDToken(response.data.token)
-                  alert('Login successful!');
+                  toast.success("Login successfull");
                   console.log(response.data.token)
                   navigate("/doctor-dashboard")
                 } else {
-                  alert('Invalid email or password');
+                  toast.error('Invalid email or password');
                 }
               } catch (error) {
                 console.error('Error during login:', error);
-                alert('An error occurred during login');
+                toast.error('An error occurred during login');
               } finally {
                 setSubmitting(false);
               }

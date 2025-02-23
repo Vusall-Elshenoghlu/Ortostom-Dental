@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap stilini daxil edirik
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 function AdminDoctors() {
   const [doctors, setDoctors] = useState([]);

@@ -4,8 +4,9 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import './Contact.css'; // Burada xüsusi CSS faylı əlavə edirik
+import './Contact.css'; 
 import { LanguageContext } from '../../../context/LanguageContext';
+import { Helmet } from 'react-helmet-async';
 
 function Contact() {
   const [state, handleSubmit] = useForm("xovjylba");
@@ -67,6 +68,11 @@ function Contact() {
 
   return (
     <Container className="py-5">
+      <Helmet>
+        <title>
+          Contact
+        </title>
+      </Helmet>
       <h2 className="text-center mb-4">{translations[lang].contactUs}</h2>
       <Row className="justify-content-center">
         <Col lg={6} md={8} sm={12}>

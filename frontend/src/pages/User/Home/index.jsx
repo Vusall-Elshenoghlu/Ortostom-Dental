@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "../../../context/LanguageContext";
 import HeroSection from "../../../components/User/HeroSection";
-import Slider from "../../../components/User/Slider";
 import Helmet from "react-helmet"
 import "./Home.css"
 import DoctorList from "../Doctors";
 import Mapp from "../../../components/User/Map";
-import About from "../About";
+import Features from "../../../components/User/Cards";
+import Information from "../../../components/User/Information";
+import About from "../../../components/User/About";
 
 const Home = () => {
   const { lang } = useContext(LanguageContext);
@@ -17,10 +18,13 @@ const Home = () => {
         <title>Home</title>
       </Helmet>
       <HeroSection language = "az"/>
-      <Slider/>
       <DoctorList language = "az"/>
+      <br /><br /><br />
+      <Features/>
       <br /><br />
       <About/>
+      <br /><br />
+      <Information/>
       <br />
       <Mapp/>
       

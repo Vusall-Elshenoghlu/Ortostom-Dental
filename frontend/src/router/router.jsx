@@ -1,14 +1,10 @@
-import ToothCupGame from "../components/User/ElliminationGame";
 import AddDoctor from "../pages/Admin/AddDoctor";
-import AddProduct from "../pages/Admin/AddProduct";
 import AddUser from "../pages/Admin/AddUser";
 import AdminDoctors from "../pages/Admin/AdminDoctors";
 import AdminLogin from "../pages/Admin/AdminLogin";
-import AdminProducts from "../pages/Admin/AdminProducts";
 import AdminRoot from "../pages/Admin/AdminRoot/AdminRoot";
 import Appointments from "../pages/Admin/Appointments";
 import DashBoard from "../pages/Admin/DashBoard";
-import EditProduct from "../pages/Admin/EditProduct";
 import EditUser from "../pages/Admin/EditUser";
 import Users from "../pages/Admin/Users";
 import DoctorAppointments from "../pages/Doctor/DoctorAppointments";
@@ -40,6 +36,7 @@ import TMJDisorder from "../pages/User/DentalCareDetail/TMJDisorder";
 import Tobacco from "../pages/User/DentalCareDetail/Tobacco";
 import WisdomTeeth from "../pages/User/DentalCareDetail/WisdomTeeth";
 import DoctorDetail from "../pages/User/DoctorDetail";
+import DoctorList from "../pages/User/Doctors";
 import Doctors from "../pages/User/Doctors";
 import Home from "../pages/User/Home";
 import Login from "../pages/User/Login";
@@ -48,7 +45,6 @@ import MyProfile from "../pages/User/Myprofile";
 import NoPage from "../pages/User/NoPage";
 import Register from "../pages/User/Register";
 import UserAppointment from "../pages/User/UseraAppointment";
-import ProductDetail from "../pages/User/UserProdDetail";
 import UserRoot from "../pages/User/UserRoot";
 import VideoCall from "../pages/User/VideoCall";
 import VideoCallLobby from "../pages/User/VideoCallLobby";
@@ -61,10 +57,6 @@ export const ROUTES = [
             {
                 path: "",
                 element: <Home />
-            },
-            {
-                path: "products/:id",
-                element: <ProductDetail />
             },
             {
                 path: "login",
@@ -89,6 +81,10 @@ export const ROUTES = [
             {
                 path: "my-appointments",
                 element: <MyAppointments />
+            },
+            {
+                path: "doctors",
+                element: <DoctorList />
             },
             {
                 path: "doctors/:id",
@@ -149,18 +145,6 @@ export const ROUTES = [
             {
                 path: "",
                 element: <DashBoard />
-            },
-            {
-                path: "products",
-                element: <AdminProducts />
-            },
-            {
-                path: "addproduct",
-                element: <AddProduct />
-            },
-            {
-                path: "editproduct",
-                element: <EditProduct />
             },
             {
                 path: "appointments",

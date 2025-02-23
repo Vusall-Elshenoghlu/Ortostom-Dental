@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate } from 'react-router';
 import Swal from "sweetalert2"
-
+import "./AdminNavbar.css"
 function AdminNavbar() {
     const navigate = useNavigate();
 
@@ -38,13 +38,12 @@ function AdminNavbar() {
             left: "0",
             right: "0",
             zIndex: "1000",
-            height: "80px" // Navbar hündürlüyünü müəyyən edirik
+            height: "80px" 
         }}>
             <Navbar.Brand style={{ marginRight: "100px" }}>
-                {/* <div className="logo-containerr">
-                </div> */}
+                <img className='logo-containerr' src="/images/logoo.jpg" alt="" />
             </Navbar.Brand>
-            <h6>Admin panel</h6>
+            <h3>Admin panel</h3>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">

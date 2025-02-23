@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { LanguageContext } from "../../../context/LanguageContext";
 import Helmet from "react-helmet";
-import { FaEye, FaEyeSlash } from "react-icons/fa";  // Göz ikonları
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false); // Parolun görünüşünü idarə etmək üçün state
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const { lang, setLang, translations } = useContext(LanguageContext);
 
@@ -24,13 +25,19 @@ const Register = () => {
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
       surname: Yup.string().required("Surname is required"),
-      email: Yup.string().email("Invalid email").required("Email is required"),
+      email: Yup.string()
+        .email("Invalid email")
+        .matches(
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+          "Enter a valid email"
+        )
+        .required("Email is required"),
       password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
     }),
     onSubmit: (values) => {
       axios.post("http://localhost:3000/users/register", values)
         .then(() => {
-          alert("User has registered successfully");
+          toast.success("User has registered successfully");
           navigate("/login");
         })
         .catch(() => alert("Registration failed"));
@@ -57,13 +64,13 @@ const Register = () => {
 
               <div className="position-relative">
                 <input
-                  type={passwordVisible ? "text" : "password"} 
+                  type={passwordVisible ? "text" : "password"}
                   name="password"
                   placeholder={translations[lang].password}
                   {...formik.getFieldProps("password")}
                   className="register-input"
-                  style={{width:"100%"}}
-                  
+                  style={{ width: "100%" }}
+
                 />
                 <div
                   className="position-absolute"

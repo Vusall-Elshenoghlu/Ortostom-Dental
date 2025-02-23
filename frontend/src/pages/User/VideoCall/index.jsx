@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom'; // URL-dən parametr oxumaq üçün
+import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom'; 
 
 const VideoCall = () => {
     const { roomName } = useParams(); 
@@ -9,7 +10,7 @@ const VideoCall = () => {
     const [isInCall, setIsInCall] = useState(false);
 
     useEffect(() => {
-        if (!roomName) return; // Əgər roomName yoxdursa, çıx
+        if (!roomName) return; 
 
         const script = document.createElement('script');
         script.src = 'https://meet.jit.si/external_api.js';
@@ -19,7 +20,7 @@ const VideoCall = () => {
         script.onload = () => {
             const domain = 'meet.jit.si';
             const options = {
-                roomName, // URL-dən gələn otaq adı
+                roomName, 
                 width: '100%',
                 height: 600,
                 parentNode: jitsiContainerRef.current,
@@ -54,7 +55,7 @@ const VideoCall = () => {
             }
             document.body.removeChild(script);
         };
-    }, [roomName]); // roomName dəyişəndə yenidən yüklə
+    }, [roomName]); 
 
     const handleCallEnd = () => {
         if (apiRef.current) apiRef.current.executeCommand('hangup');
@@ -62,6 +63,11 @@ const VideoCall = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>
+                    VideoCall
+                </title>
+            </Helmet>
             <div ref={jitsiContainerRef} style={{ width: '100%', height: '600px' }} />
             {isInCall ? (
                 <button onClick={handleCallEnd}>Zəngi Bitir</button>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LanguageContext } from "../../../context/LanguageContext";
 import { Link } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const DentalCare = () => {
   const { lang, translations } = useContext(LanguageContext);
@@ -36,6 +37,11 @@ const DentalCare = () => {
 
   return (
     <div className="container py-5">
+      <Helmet>
+        <title>
+          Dental Care
+        </title>
+      </Helmet>
       <div className="row align-items-center">
         <motion.div
           className="col-md-6 text-center"

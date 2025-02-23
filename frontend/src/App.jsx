@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router-dom";
 import { ROUTES } from "./router/router";
-import ToothCupGame from "./components/User/ElliminationGame"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { LanguageContext } from "./context/LanguageContext";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import ToothCupGame from "./components/User/ToothCupGame";
 
 const router = createBrowserRouter(ROUTES);
 
@@ -37,23 +38,25 @@ function App() {
 
   return (
     <>
-      <ToastContainer 
-        position="top-right"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      
-      {isOffline ? (
-        <ToothCupGame /> 
-      ) : (
-        <RouterProvider router={router} />
-      )}
+      <HelmetProvider>
+        <ToastContainer
+          position="top-right"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
+        {isOffline ? (
+          <ToothCupGame />
+        ) : (
+          <RouterProvider router={router} />
+        )}
+      </HelmetProvider>
     </>
   );
 }

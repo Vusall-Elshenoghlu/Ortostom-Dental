@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router';
 import Swal from "sweetalert2"
+import "./DoctorNavbar.css"
 
 function DoctorNavbar() {
     const navigate = useNavigate();
@@ -43,9 +44,7 @@ function DoctorNavbar() {
             boxShadow:"0px 0px 0px 0.1px"
         }}>
             <Navbar.Brand style={{ marginRight: "100px" }}>
-                {/* <div className="logo-containerrr">
-                    {}
-                </div> */}
+                <img className='logo-containerrr' src="/images/logoo.jpg" alt="" />
             </Navbar.Brand>
             <Button 
                 variant="outline-primary" 

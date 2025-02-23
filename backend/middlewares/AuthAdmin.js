@@ -9,7 +9,7 @@ export const authAdmin = async (req, res, next) => {
             return res.json({ success: false, message: "Not Authorized. Login Again..." });
         }
 
-        const token = authHeader.split(' ')[1]; // Bearer token formatında tokeni alırıq
+        const token = authHeader.split(' ')[1]; 
         const decodeToken = jwt.verify(token, process.env.ADMIN_JWT_SECRET);
         
         if (decodeToken !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD) {

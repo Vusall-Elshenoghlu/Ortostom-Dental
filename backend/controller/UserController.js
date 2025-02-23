@@ -195,14 +195,11 @@ export const cancelAppointment = async (req, res) => {
 
         const appointmentData = await AppointmentModel.findById(appointmentId)
 
-        //verify appointment user
         if(appointmentData.userId !== userId){
             return res.json({success:false,message:"Unauthorized action..."})
         }
 
         await AppointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
-
-        //releasin doctor slot
 
         const {docId,slotDate,slotTime} = appointmentData
         const doctorData = await DoctorModel.findById(docId)

@@ -1,6 +1,5 @@
 import express from "express"
 import cors from "cors"
-import { route } from "./router/ProductRouter.js"
 import { connect } from "mongoose"
 import { userRoute } from "./router/UserRouter.js"
 import dotenv from 'dotenv';
@@ -12,7 +11,6 @@ dotenv.config();
 const app = express()
 app.use(express.json())
 app.use(cors())
-app.use("/products",route)
 app.use("/users",userRoute)
 app.use("/appointments",AppointmentRouter)
 app.use("/doctors",DoctorRouter)
