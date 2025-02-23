@@ -72,7 +72,7 @@ function Diabetes() {
           <Card className="border-0">
             <Card.Img
               src="/images/diabet.webp"
-              alt="Person brushing teeth"
+              alt="Diabetes"
               className="rounded"
             />
           </Card>

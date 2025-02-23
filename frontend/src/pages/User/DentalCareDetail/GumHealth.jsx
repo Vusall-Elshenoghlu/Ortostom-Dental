@@ -58,7 +58,7 @@ function GumHealth() {
           <Card className="border-0">
             <Card.Img
               src="/images/Gum.jpg"
-              alt="Person brushing teeth"
+              alt="Gum"
               className="rounded"
             />
           </Card>

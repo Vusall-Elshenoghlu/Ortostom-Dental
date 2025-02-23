@@ -58,7 +58,7 @@ function OralLesions() {
           <Card className="border-0">
             <Card.Img
               src="/images/oralLesion.avif"
-              alt="Person brushing teeth"
+              alt="Oral lesion"
               className="rounded"
             />
           </Card>

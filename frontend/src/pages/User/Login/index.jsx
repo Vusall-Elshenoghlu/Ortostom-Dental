@@ -9,6 +9,7 @@ import Helmet from "react-helmet"
 import "./Login.css";
 import { LanguageContext } from "../../../context/LanguageContext";
 import { FaEye,FaEyeSlash } from "react-icons/fa";
+import {toast} from "react-toastify"
 const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
@@ -27,7 +28,7 @@ const Login = () => {
       sessionStorage.setItem("userEmail",res.data.user.email)
       setUser(res.data.user);
 
-      alert("Login successful");
+      toast.success("Login successful");
       navigate("/");
     } catch (err) {
       if (err.response?.data === "Invalid password") {

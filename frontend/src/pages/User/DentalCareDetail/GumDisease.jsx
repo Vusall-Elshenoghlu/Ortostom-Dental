@@ -3,77 +3,81 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function GumDisease() {
-    const { lang } = useContext(LanguageContext);
+    const { lang, } = useContext(LanguageContext);
 
-    const translationss = {
-        en: {
-            title: "Brushing Advice",
-            intro: "Brushing with a fluoridated toothpaste is the best way to care for your teeth and gums.",
-            manualElectricTitle: "Manual and Electric Toothbrushing",
-            manualElectricDesc: "The mechanical action of brushing removes soft bacterial plaque from your teeth while fluoride helps to strengthen the outer layer of enamel against bacteria that causes cavities.",
-            replaceBrush: "It is recommended to use a soft bristled toothbrush with gentle pressure and brushes should be replaced about every 3 months or when you notice the bristles are splayed.",
-            effectiveness: "Both manual and electric toothbrushes are effective at cleaning your teeth; however, studies have shown electric toothbrushing to be more efficient. Each requires specific techniques in order to be effective. Both require a pea-sized amount of toothpaste, and it’s important to brush each tooth on both the tongue and the cheek sides. Use a system to ensure that each tooth is brushed; ideally, start at the very back and work your way along the arch before switching to the other side. Once finished with both sides of that arch, switch to the other arch.",
-            manual: "Manual Toothbrushing:",
-            manualStep1: "Point the bristles at a 45° angle towards the gums.",
-            manualStep2: "Gently agitate the bristles to remove plaque.",
-            manualStep3: "Sweep the bristles toward the chewing surface.",
-            manualStep4: "Move the toothbrush to the next tooth and repeat the sequence.",
-            manualStep5: "Once all the sides of the teeth are brushed, don’t forget to brush the chewing surfaces.",
-            electric: "Electric Toothbrushing:",
-            electricStep1: "Place the toothbrush so bristles engage the back side of the tooth.",
-            electricStep2: "Move the angle to allow engagement of the flat side.",
-            electricStep3: "Ensure the front-facing side is brushed.",
-            electricStep4: "Adjust the angle again to ensure the front-facing side of the tooth is brushed.",
-            electricStep5: "Move to the next tooth.",
-            electricStep6: "Once all the sides of the teeth are brushed, don’t forget to brush the chewing surfaces.",
-            electricStep7: "It’s especially important to use gentle pressure to avoid damage to the gums, but the bristles should still be positioned to sweep along the gumline."
-        },
+    const translations = {
         az: {
-            title: "Diş Fırçalama Məsləhətləri",
-            intro: "Flüorlu diş pastası ilə fırçalamaq dişlərinizə və diş ətlərinizə qulluq etməyin ən yaxşı yoludur.",
-            manualElectricTitle: "Əl və Elektrik Diş Fırçalama",
-            manualElectricDesc: "Fırçalama zamanı yaranan mexaniki təsir dişlərinizdəki yumşaq bakterial ərpi təmizləyir, flüorid isə emal qatını çürüməyə səbəb olan bakteriyalara qarşı möhkəmləndirir.",
-            replaceBrush: "Yumşaq tüklü diş fırçasından istifadə və fırçaya yumşaq təzyiq tətbiq etmək tövsiyə olunur. Fırçalar təxminən hər 3 aydan bir və ya tüklərin yayılmağa başladığını gördükdə dəyişdirilməlidir.",
-            effectiveness: "Həm əl, həm də elektrik diş fırçaları dişlərinizi təmizləmək üçün təsirlidir; lakin araşdırmalar elektrik diş fırçalarının daha səmərəli olduğunu göstərmişdir. Hər biri effektiv olmaq üçün xüsusi texnikalar tələb edir. Hər ikisi üçün noxud ölçüsündə diş pastası istifadə edilməlidir və hər bir dişin həm dil, həm də yanaq tərəfindən fırçalanması vacibdir. Hər dişin fırçalandığından əmin olmaq üçün bir sistemdən istifadə edin; ideal olaraq ən arxadakı dişdən başlayın və tağın boyunca irəliləyin, sonra digər tərəfə keçin. Həmin tağın hər iki tərəfini bitirdikdən sonra digər tağa keçin.",
-            manual: "Əl ilə Diş Fırçalama:",
-            manualStep1: "Fırçanın tüklərini diş ətinə 45° bucaq altında yönəldin.",
-            manualStep2: "Ərpi təmizləmək üçün tükləri yumşaq şəkildə hərəkət etdirin.",
-            manualStep3: "Tükləri çeynəmə səthinə doğru süpürün.",
-            manualStep4: "Fırçanı növbəti dişə keçirin və prosesi təkrarlayın.",
-            manualStep5: "Bütün dişlərin səthləri fırçalandıqdan sonra çeynəmə səthlərini unutmayın.",
-            electric: "Elektrik Diş Fırçalama:",
-            electricStep1: "fırçanı elə yerləşdirin ki, tüklər dişin arxa tərəfinə toxunsun.",
-            electricStep2: "Bucağı dəyişdirərək düz tərəfə toxunmasını təmin edin.",
-            electricStep3: "Ön tərəfin də fırçalandığından əmin olun.",
-            electricStep4: "Bucağı yenidən düzəldin ki, ön tərəf də tam fırçalansın.",
-            electricStep5: "Növbəti dişə keçin.",
-            electricStep6: "Bütün diş səthləri fırçalandıqdan sonra çeynəmə səthlərini unutmayın.",
-            electricStep7: "Diş ətlərinə zərər verməmək üçün yumşaq təzyiqdən istifadə etmək xüsusilə vacibdir, lakin tüklər hələ də diş əti xətti boyunca süpürmə mövqeyində olmalıdır."
+            gumDiseaseTitle: "Diş Əti Xəstəliyi",
+            gumDiseaseDescription: "Diş əti xəstəliyi yalnız ağız sağlamlığına zərər vermir, həm də tədqiqatçılar bunu müxtəlif sistem xəstəlikləri ilə əlaqələndiriblər, o cümlədən ürək xəstəliyi, insult və hamiləlik problemləri.",
+            preventableDiseaseTitle: "Asanlıqla qarşısı alına bilən xəstəlik",
+            gumDiseaseStats: "Periodontal xəstəlik, Şimali Amerikanın böyüklər əhalisinin 70%-dən çoxunu təsir edir. Bu xəstəliyin başlanğıcında diş ətləri həssaslaşır və yüngül qanama meydana gəlir.",
+            gumDiseaseImpact: "Diş əti xəstəliyi yalnız ağız sağlamlığına zərər vermir, həm də tədqiqatçılar bunu müxtəlif sistem xəstəlikləri ilə əlaqələndiriblər, o cümlədən ürək xəstəliyi, insult və hamiləlik problemləri.",
+            commonForms: "Ən yaygın periodontal xəstəlik formaları bunlardır:",
+            gingivitisTitle: "Qingivit",
+            gingivitisDescription: "Bu başlanğıc mərhələdir, burada diş ətləri həssasdır və asanlıqla qanamağa başlayır. Düzgün evdə və peşəkar qayğı ilə asanlıqla nəzarət edilə bilər.",
+            periodontitisTitle: "Periodontit",
+            periodontitisDescription: "Diş ətləri dişlərdən ayrılaraq 'cib' yaradır. Bu 'cibləri' təmizləmək çox çətindir, çünki onlar diş əti səviyyəsindən aşağıdır və bakterial zəhərlər dişi dəstəkləyən sümük və əlaqələndirici toxumaları dağıtmağa başlayır.",
+            gumDiseaseCauses: "Periodontal xəstəliyin əsas səbəbi düzgün olmayan ağız gigiyenası nəticəsində plazma əmələ gəlməsidir (diş fırçalama və ip istifadə etmə), amma aşağıdakı amillər də xəstəliyə töhfə verə bilər:",
+            smoking: "Siqaret çəkmə",
+            poorNutrition: "Zəif qidalanma",
+            stress: "Stres",
+            hormonalChanges: "Yeniyetməlik və hamiləlik dövründə hormonal dəyişikliklər",
+            medicationSideEffects: "Dərmanların diş ətinə təsir edən yan təsirləri",
+            diabetes: "Diabet",
+            genetics: "Genetik",
+            earlySymptoms: "Təəssüf ki, periodontal xəstəliyin başlanğıc mərhələsində çox az simptom mövcuddur və diş həkimi və ya gigiyenist adətən bu vəziyyəti diş həkimi ofisində diaqnoz edir.",
+            treatmentOptions: "Müalicə cərrahiyyə xarici və cərrahiyyə üsulundan ibarət ola bilər. Əgər cibələr diş alətləri ilə təmizlənə bilirsə, dərin çöküntülər kök səthlərindən təmizlənir.",
+            tissueGraft: "Ciddi diş əti geriləmələri halında toxuma köçürməsi tövsiyə oluna bilər."
+        },
+        en: {
+            gumDiseaseTitle: "Gum Disease",
+            gumDiseaseDescription: "Gum disease not only harms your oral health, but researchers have linked it to several systemic diseases, including heart disease, stroke, and pregnancy complications.",
+            preventableDiseaseTitle: "Easily Preventable Disease",
+            gumDiseaseStats: "Periodontal disease affects more than 70% of adults in North America. In the early stages of this disease, the gums become sensitive and may bleed slightly.",
+            gumDiseaseImpact: "Gum disease harms more than just your oral health. Researchers have linked it to several systemic diseases, including heart disease, stroke, and pregnancy complications.",
+            commonForms: "The most common forms of periodontal disease are:",
+            gingivitisTitle: "Gingivitis",
+            gingivitisDescription: "This is the early stage, where the gums become sensitive and bleed easily. It can be controlled with proper home care and professional treatment.",
+            periodontitisTitle: "Periodontitis",
+            periodontitisDescription: "The gums begin to separate from the teeth, creating 'pockets.' These 'pockets' are difficult to clean, as they are below the gum line, and bacterial toxins begin to break down the bone and supporting tissue.",
+            gumDiseaseCauses: "The main cause of periodontal disease is the buildup of plaque caused by improper oral hygiene (not brushing and flossing), but the following factors can also contribute to the disease:",
+            smoking: "Smoking",
+            poorNutrition: "Poor nutrition",
+            stress: "Stress",
+            hormonalChanges: "Hormonal changes during puberty and pregnancy",
+            medicationSideEffects: "Side effects of certain medications affecting the gums",
+            diabetes: "Diabetes",
+            genetics: "Genetics",
+            earlySymptoms: "Unfortunately, in the early stages of periodontal disease, symptoms are minimal, and your dentist or hygienist will typically diagnose this condition in their office.",
+            treatmentOptions: "Treatment can involve both non-surgical and surgical methods. If pockets can be cleaned with dental tools, deep scaling may be done to remove bacteria from the root surface.",
+            tissueGraft: "In cases of severe gum recession, tissue grafting may be recommended."
         },
         ru: {
-            title: "Рекомендации по чистке зубов",
-            intro: "Чистка зубов с использованием фторированной зубной пасты — это лучший способ ухода за зубами и деснами.",
-            manualElectricTitle: "Чистка зубов вручную и электрической щеткой",
-            manualElectricDesc: "Механическое воздействие при чистке удаляет мягкий бактериальный налет с зубов, в то время как фтор укрепляет внешний слой эмали, защищая его от бактерий, вызывающих кариес.",
-            replaceBrush: "Рекомендуется использовать щетку с мягкой щетиной и наносить легкое давление. Щетки следует менять примерно каждые 3 месяца или, если заметите, что щетинки распушились.",
-            effectiveness: "И ручная, и электрическая зубные щетки эффективны для чистки зубов. Однако исследования показали, что электрическая чистка более эффективна. Каждая из них требует определенных техник для достижения максимального результата. Для обеих нужно использовать количество зубной пасты размером с горошину. Важно чистить каждую сторону зуба — как языковую, так и щечную. Используйте методичную систему, чтобы убедиться, что каждый зуб был почищен. Идеально начинать с самого заднего зуба и двигаться вдоль дуги, прежде чем перейти на другую сторону. Закончив одну дугу, переходите к следующей.",
-            manual: "Чистка вручную:",
-            manualStep1: "Расположите щетинки под углом 45° к деснам.",
-            manualStep2: "Осторожно встряхивайте щетку для удаления налета.",
-            manualStep3: "Ведите щетинки в направлении к жевательной поверхности.",
-            manualStep4: "Перейдите к следующему зубу и повторите последовательность.",
-            manualStep5: "После того как все стороны зубов будут почищены, не забудьте почистить жевательные поверхности.",
-            electric: "Чистка электрической зубной щеткой:",
-            electricStep1: "Расположите щетку так, чтобы щетинки захватывали заднюю сторону зуба.",
-            electricStep2: "Измените угол, чтобы обеспечить чистку плоской стороны.",
-            electricStep3: "Убедитесь, что передняя сторона зуба также почищена.",
-            electricStep4: "Снова измените угол, чтобы чистить переднюю сторону зуба.",
-            electricStep5: "Перейдите к следующему зубу.",
-            electricStep6: "После того как все стороны зубов будут почищены, не забудьте о жевательных поверхностях.",
-            electricStep7: "Особенно важно использовать легкое давление, чтобы не повредить десны, но щетинки должны быть направлены вдоль линии десен."
+            gumDiseaseTitle: "Заболевание десен",
+            gumDiseaseDescription: "Заболевание десен не только вредит вашему оральному здоровью, но и связано с несколькими системными заболеваниями, включая заболевания сердца, инсульт и осложнения при беременности.",
+            preventableDiseaseTitle: "Легко предотвращаемое заболевание",
+            gumDiseaseStats: "Периодонтальное заболевание затрагивает более 70% взрослого населения Северной Америки. На ранних стадиях этого заболевания десны становятся чувствительными и могут немного кровоточить.",
+            gumDiseaseImpact: "Заболевание десен вредит не только вашему оральному здоровью, но также связано с несколькими системными заболеваниями, включая заболевания сердца, инсульт и осложнения при беременности.",
+            commonForms: "Наиболее распространенные формы периодонтальных заболеваний:",
+            gingivitisTitle: "Гингивит",
+            gingivitisDescription: "Это ранняя стадия, когда десны становятся чувствительными и начинают легко кровоточить. Это можно контролировать с помощью правильного ухода за полостью рта и профессионального лечения.",
+            periodontitisTitle: "Периодонтит",
+            periodontitisDescription: "Десны начинают отдаляться от зубов, создавая «карманы». Эти «карманы» трудно очищать, так как они находятся ниже уровня десен, и бактериальные токсины начинают разрушать кости и поддерживающие ткани.",
+            gumDiseaseCauses: "Основной причиной заболевания десен является образование налета, вызванного неправильной гигиеной полости рта (недостаточное очищение зубов и использование зубной нити), но следующие факторы также могут способствовать заболеванию:",
+            smoking: "Курение",
+            poorNutrition: "Плохое питание",
+            stress: "Стресс",
+            hormonalChanges: "Гормональные изменения в подростковом возрасте и беременности",
+            medicationSideEffects: "Побочные эффекты некоторых лекарств, влияющих на десны",
+            diabetes: "Диабет",
+            genetics: "Генетика",
+            earlySymptoms: "К сожалению, на ранних стадиях заболевания десен симптомы минимальны, и обычно ваш стоматолог или гигиенист диагностирует это состояние на приеме.",
+            treatmentOptions: "Лечение может включать как нехирургические, так и хирургические методы. Если карманы можно очистить с помощью стоматологических инструментов, может быть выполнено глубокое очищение для удаления бактерий с поверхности корня.",
+            tissueGraft: "В случаях серьезного сокращения десен может быть рекомендована пересадка ткани."
         }
-        
-    }
+    };
+
+
     const containerStyle = {
         display: 'flex',
         justifyContent: 'space-between',
@@ -90,61 +94,57 @@ function GumDisease() {
         transition: 'transform 0.3s ease',
         cursor: 'pointer',
     };
+
     return (
         <Container fluid className="py-5" >
             <Row className="justify-content-center align-items-center text-center" style={{ backgroundColor: '#3c1a6f', color: '#fff' }}>
                 <Col md={6}>
-                    <h1 className="display-4">{translationss[lang].title}</h1>
-                    <p>{translationss[lang].intro}</p>
-
+                    <h1 className="display-4">{translations[lang].gumDiseaseTitle}</h1>
+                    <p>{translations[lang].gumDiseaseDescription}</p>
                 </Col>
                 <Col md={4}>
                     <Card className="border-0">
                         <Card.Img
-                            src="/images/brushing.webp"
-                            alt="Person brushing teeth"
+                            src="/images/gumDisease.webp"
+                            alt="Gum"
                             className="rounded"
                         />
                     </Card>
                 </Col>
             </Row>
 
-            <Row className="py-5 bg-light text-dark">
-
-                <h1 style={{ fontWeight: "600", fontSize: "50px" }}>{translationss[lang].manualElectricTitle}</h1>
+            <Row className="py-5 bg-light text-dark px-5">
+                <h1 style={{ fontWeight: "600", fontSize: "50px" }}>{translations[lang].preventableDiseaseTitle}</h1>
                 <p style={{ color: "#6F3D85", fontSize: "23px", fontWeight: "600" }}>
-                {translationss[lang].manualElectricDesc}
+                    {translations[lang].gumDiseaseStats}
                 </p>
                 <br />
-                <p style={{ color: "#54595F", fontSize: "20px" }}>{translationss[lang].replaceBrush}</p>
+                <p style={{ color: "#54595F", fontSize: "20px" }}>{translations[lang].gumDiseaseImpact}</p>
                 <br />
-                <p style={{ color: "#54595F", fontSize: "20px" }}>{translationss[lang].effectiveness}</p>
+                <p style={{ color: "#54595F", fontSize: "20px" }}>{translations[lang].commonForms}</p>
                 <div style={containerStyle}>
                     <div style={instructionCardStyle}>
-                        <h3>{translationss[lang].manual}</h3>
-                        <ul>
-                            <li>{translationss[lang].manualStep1}</li>
-                            <li>{translationss[lang].manualStep2}</li>
-                            <li>{translationss[lang].manualStep3}</li>
-                            <li>{translationss[lang].manualStep4}</li>
-                            <li>{translationss[lang].manualStep5}</li>
-                            
-                        </ul>
+                        <h3>{translations[lang].gingivitisTitle}</h3>
+                        <p>{translations[lang].gingivitisDescription}</p>
                     </div>
                     <div style={instructionCardStyle}>
-                        <h3>{translationss[lang].electric}</h3>
-                        <ul>
-                            <li>{translationss[lang].electricStep1}</li>
-                            <li>{translationss[lang].electricStep2}</li>
-                            <li>{translationss[lang].electricStep3}</li>
-                            <li>{translationss[lang].electricStep4}</li>
-                            <li>{translationss[lang].electricStep5}</li>
-                            <li>{translationss[lang].electricStep6}</li>
-                            <li>{translationss[lang].electricStep7}</li>
-                            
-                        </ul>
+                        <h3>{translations[lang].periodontitisTitle}</h3>
+                        <p>{translations[lang].periodontitisDescription}</p>
                     </div>
                 </div>
+                <p>{translations[lang].gumDiseaseCauses}</p>
+                <ul style={{ listStyleType: "none" }}>
+                    <li>&#x25B6; {translations[lang].smoking}</li> <br />
+                    <li>&#x25B6; {translations[lang].poorNutrition}</li><br />
+                    <li>&#x25B6; {translations[lang].stress}</li><br />
+                    <li>&#x25B6; {translations[lang].hormonalChanges}</li><br />
+                    <li>&#x25B6; {translations[lang].medicationSideEffects}</li> <br />
+                    <li>&#x25B6; {translations[lang].diabetes}</li><br />
+                    <li>&#x25B6; {translations[lang].genetics}</li><br />
+                </ul>
+                <p>{translations[lang].earlySymptoms}</p><br />
+                <p>{translations[lang].treatmentOptions}</p><br />
+                <p>{translations[lang].tissueGraft}</p>
             </Row>
         </Container>
     );

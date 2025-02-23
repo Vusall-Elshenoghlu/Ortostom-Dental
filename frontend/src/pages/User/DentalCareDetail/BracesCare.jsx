@@ -74,7 +74,7 @@ function BracesCare() {
           <Card className="border-0">
             <Card.Img
               src="/images/brecet.webp"
-              alt="Person brushing teeth"
+              alt="Braces"
               className="rounded"
             />
           </Card>

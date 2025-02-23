@@ -58,7 +58,7 @@ function BadBreath() {
           <Card className="border-0">
             <Card.Img
               src="/images/badBreath.webp"
-              alt="Person brushing teeth"
+              alt="Bad breath"
               className="rounded"
             />
           </Card>

@@ -3,84 +3,73 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function Pregnancy() {
-  const { lang, } = useContext(LanguageContext);
+  const {lang} = useContext(LanguageContext)
   const translations = {
     az: {
-      title: "Diş ipi ilə təmizləmə",
-      subtitle: "Düzgün diş fırçalama texnikası dişlərin səthlərindəki bütün ərpi təmizləyəcək, lakin yalnız diş ipi ilə təmizləmə dişlər arasındakı ərpi aradan qaldıra bilər.",
-      description: "Diş ipi ilə təmizləmə məsləhətləri və addımlar",
-      higyen: "Bizim gigiyenistimiz ağızınıza ən uyğun diş ipi növünü və diş ipi istifadə texnikasını seçməkdə sizə kömək edə bilər.",
-      thumbSucking:"Diş ipinin təxminən bir yarım fut uzunluğunda bir parçasını istifadə edin.",
-      nursingBottleCavities: "Diş ipini barmaq uclarınıza dolayın.",
-      eruptionOfTeeth: "Diş ipini dişlərinizin arasına yumşaqca salmaq üçün baş barmaqlarınızı və ya orta barmaqlarınızı istifadə edin.",
-      dentalEmergencies: "Diş ipini bir dişin ətrafına dolayın və onu yuxarı və aşağı hərəkət etdirməklə diş əti xəttinə qədər hamar bir şəkildə sürüşdürün.",
-      grinding: "Diş ipini çıxarmadan, onu eyni şəkildə digər dişin ətrafına dolayın, ta ki, hər iki bitişik dişin tərəfləri tamamilə təmizlənənə qədər.",
-      orthodontics: "Повторите это между всеми зубами.",
+      heroTitle: "Gülümsəməniz Bizim Üçün Önəmlidir",
+      heroText: "Peşəkar diş həkimlərimiz sizin sağlam dişlərə sahib olmağınızı təmin edir.",
+      care: "Diş qayğısı",
+      dentalCareIntro: "Hamiləlik dövründə yaxşı ağız gigiyenasını qorumaq çox vacibdir, dişləri fırçalamağa və diş ipi istifadə etməyə davam etməlisiniz, hətta diş əti şişkin və ağrılı olsa da.",
+      pregnancyGingivitis: "Hamiləlik gingivitisi ümumiyyətlə hamiləliyin son dövründə daha şiddətlidir və doqquzuncu ayda azalır. Bəzən ağrılı diş ətindən şişkinliklər inkişaf edə bilər, amma onlar adətən zərərsizdir və müdaxilə edilmədən, yalnız narahat olduqda və ya danışmağa mane olduqda müalicə edilə bilər.",
+      researchSupport: "Araşdırmalar, hamiləlik zamanı yalnız təcili hallarda rentgen şüalarının çəkilməsini dəstəkləyir, çünki müalicə edilmədikdə infeksiyalar hamiləliyi çətinləşdirə bilər. Tetratsiklin və Aspirin kimi ağrı kəsiciləri istifadə edilməməlidir, lakin Penicillin, Amoxicillin və Tylenol həkimlə məsləhətləşməklə istifadə edilə bilər.",
+      electiveTreatment: "Ümumiyyətlə, seçilmiş diş müalicələri doğumdan sonra ertələnməlidir, lakin qırıq dişlər və dolğular və ya çürük kimi lazımi müalicələr ikinci trimestrdə ən yaxşı şəkildə müalicə edilə bilər.",
+      prePregnancyCheckup: "Ailə qurmağı planlaşdırarkən, hamiləlikdən əvvəlki yoxlamalar və rentgen çəkilişləri çox vacibdir, çünki diaqnoz qoyulmuş hər hansı bir müalicə hamiləlikdən əvvəl edilə bilər. Bu həmçinin hamiləlik dövründə qulluq üçün bir əsas təmin edəcək."
     },
     en: {
-      title: "Flossing",
-      subtitle: "A proper brushing technique will remove all the plaque from the surfaces of the teeth but only flossing can remove the plaque between the teeth.",
-      description: "Flossing advice and steps",
-      higyen: "Our hygienist can guide you in choosing the right floss type and the flossing technique best suited to your mouth.",
-      thumbSucking:"Use a piece of floss about a foot and a half long.",
-      nursingBottleCavities: "Wrap the floss around your index fingers.",
-      eruptionOfTeeth: "Use your thumbs or middle fingers to guide the floss gently between your teeth.",
-      dentalEmergencies: "Wrap the floss around one tooth and slide it smoothly up to the gum line with an up and down motion.",
-      grinding: "Without removing the floss, wrap it around the other tooth in the same manner until the sides of both adjacent teeth are squeaky clean.",
-      orthodontics: "Repeat this between all teeth",
+      heroTitle: "Your Smile Matters to Us",
+      heroText: "Our professional dentists ensure you have healthy teeth.",
+      care: "Dental Care",
+      dentalCareIntro: "It is crucial to maintain good oral hygiene by brushing and flossing even though the gums are swollen and sore.",
+      pregnancyGingivitis: "Pregnancy gingivitis is generally most severe in the latter part of the pregnancy and diminishes during the ninth month. Tumours can sometimes develop from sore gums, but they are usually harmless and require no intervention unless they are uncomfortable or inhibit speech.",
+      researchSupport: "Research supports a ban on X-rays during pregnancy except in emergencies, when they may be necessary to diagnose infections, which can spread and complicate a pregnancy if left untreated. Antibiotics such as Tetracycline, and painkillers such as Aspirin and Ibuprofen should be avoided although Penicillin, Amoxicillin and Tylenol may be used after consultation with the attending obstetrician.",
+      electiveTreatment: "In general, elective dental treatment should be postponed until after childbirth although necessary treatment such as broken teeth and fillings or cavities are best treated during the second trimester.",
+      prePregnancyCheckup: "When planning a family, pre-pregnancy checkups and X-rays are essential, as any treatment diagnosed can then be performed prior to the onset of pregnancy. This will also provide a foundation for maintenance care during pregnancy."
     },
     ru: {
-      title: "Молочные зубы важны",
-      subtitle: "Правильная техника чистки зубов удалит весь налет с поверхностей зубов, но только чистка зубной нитью может удалить налет между зубами.",
-      description: "Советы и шаги по использованию зубной нити.",
-      higyen: "Наш гигиенист может помочь вам выбрать подходящий тип зубной нити и технику чистки, которая лучше всего подходит для вашего рта.",
-      thumbSucking:"Используйте отрезок зубной нити длиной около полтора фута.",
-      nursingBottleCavities: "Обвяжите зубную нить вокруг указательных пальцев.",
-      eruptionOfTeeth: "Используйте большие пальцы или средние пальцы, чтобы аккуратно направить зубную нить между зубами.",
-      dentalEmergencies: "Обвяжите зубную нить вокруг одного зуба и плавно проведите её вверх до линии десны движением вверх и вниз.",
-      grinding: "Не снимая зубную нить, обвяжите её вокруг другого зуба таким же образом, пока боковые поверхности обоих соседних зубов не будут чистыми.",
-      orthodontics: "Повторите это между всеми зубами.",
+      heroTitle: "Ваша улыбка важна для нас",
+      heroText: "Наши профессиональные стоматологи обеспечат вам здоровые зубы.",
+      care: "Уход за зубами",
+      dentalCareIntro: "Очень важно поддерживать хорошую гигиену полости рта, чистить зубы и пользоваться зубной нитью, даже если дёсна опухли и болят.",
+      pregnancyGingivitis: "Гингивит при беременности обычно наиболее выражен в последней части беременности и уменьшается на девятом месяце. Иногда из больных дёсен могут развиваться опухоли, но они обычно безвредны и не требуют вмешательства, если они не вызывают дискомфорт или не мешают речи.",
+      researchSupport: "Исследования поддерживают запрет на рентгенографию во время беременности, за исключением экстренных случаев, когда рентген может быть необходим для диагностики инфекций, которые могут распространиться и осложнить беременность, если их не лечить. Такие антибиотики, как тетрациклин, и болеутоляющие средства, такие как аспирин и ибупрофен, следует избегать, хотя пенициллин, амоксициллин и тайленол можно использовать после консультации с акушером-гинекологом.",
+      electiveTreatment: "В общем, плановое лечение зубов следует отложить до родов, хотя необходимое лечение, такое как лечение сломанных зубов, пломб или кариеса, лучше всего проводить на втором триместре.",
+      prePregnancyCheckup: "При планировании семьи необходимы предварительные осмотры и рентгеновские снимки, так как любые выявленные заболевания могут быть лечены до наступления беременности. Это также создаст основу для ухода за зубами во время беременности."
     }
-
-
-  }
+  };
+  
+  
   return (
     <Container fluid className="py-5">
       <Row className="justify-content-center align-items-center text-center" style={{ backgroundColor: '#3c1a6f', color: '#fff' }}>
         <Col md={6}>
-          <h1 className="display-4">{translations[lang].title}</h1>
-          <p style={{fontSize:"20px"}}>{translations[lang].subtitle}</p>
+          <h1 className="display-4">{translations[lang].heroTitle}</h1>
+          <p style={{fontSize:"20px"}}>{translations[lang].heroText}</p>
         </Col>
         <Col md={4}>
           <Card className="border-0">
             <Card.Img
-              src="/images/floss.webp"
-              alt="Person brushing teeth"
+              src="/images/pregnancy.webp"
+              alt="pregnancy"
               className="rounded"
             />
           </Card>
         </Col>
       </Row>
 
-      <Row className="py-5 bg-light text-dark">
-        <h1 style={{ fontWeight: "600", fontSize: "30px" }}>{translations[lang].description}</h1><br /><br />
+      <Row className="py-5 bg-light text-dark mx-5">
+      <h1 style={{ fontWeight: "600", fontSize: "30px" }}>{translations[lang].care}</h1><br /><br />
         <p style={{ color: "#6F3D85", fontSize: "20px", fontWeight: "600" }}>
-          {translations[lang].subtitle}
+          {translations[lang].dentalCareIntro}
         </p>
         <br />
         <br />
-        <p style={{fontSize:"19px",color:"#9A9DA0"}}>{translations[lang].higyen}</p>
-        
+        <p>{translations[lang].pregnancyGingivitis}</p>
         <br />
-
-        <ul style={{ listStyleType: "none" }}>
-          <li>&#x25B6; <b>{translations[lang].thumbSucking}</b> </li> <br />
-          <li>&#x25B6; <b>{translations[lang].nursingBottleCavities}</b></li><br />
-          <li>&#x25B6; <b>{translations[lang].eruptionOfTeeth}</b></li><br />
-          <li>&#x25B6; <b>{translations[lang].dentalEmergencies}</b></li><br />
-          <li>&#x25B6; <b>{translations[lang].grinding}</b></li> <br />
-          <li>&#x25B6; <b>{translations[lang].orthodontics}</b></li>
-        </ul>
+        <p>{translations[lang].researchSupport}</p>
+        <br />
+        <p>{translations[lang].electiveTreatment}</p>
+        <br />
+        <p>{translations[lang].prePregnancyCheckup}</p>
       </Row>
     </Container>
   );

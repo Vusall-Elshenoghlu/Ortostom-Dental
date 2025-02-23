@@ -62,7 +62,7 @@ function Flossing() {
         </Col>
       </Row>
 
-      <Row className="py-5 bg-light text-dark">
+      <Row className="py-5 bg-light text-dark mx-5">
         <h1 style={{ fontWeight: "600", fontSize: "30px" }}>{translations[lang].description}</h1><br /><br />
         <p style={{ color: "#6F3D85", fontSize: "20px", fontWeight: "600" }}>
           {translations[lang].subtitle}

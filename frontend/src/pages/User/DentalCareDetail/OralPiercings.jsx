@@ -55,7 +55,7 @@ function OralPiercings() {
           <Card className="border-0">
             <Card.Img
               src="/images/piercing.jpg"
-              alt="Person brushing teeth"
+              alt="Oral piercing"
               className="rounded"
             />
           </Card>

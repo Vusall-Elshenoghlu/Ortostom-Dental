@@ -1,45 +1,86 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { toast } from "react-toastify";
+import { LanguageContext } from '../../../context/LanguageContext';
 
 const generateRoomName = () => {
-  return `DentalCall-${Date.now()}`;
+    return `DentalCall-${Date.now()}`;
 };
 
 const VideoCallLobby = () => {
-  const navigate = useNavigate();
+    const { lang } = useContext(LanguageContext);
+    const [uEmail, setUEmail] = useState(sessionStorage.getItem("userEmail") || "");
+    const navigate = useNavigate();
+    const translations = {
+        az: { 
+          video_call: "Video Zəng", 
+          lobby: "Otağı", 
+          videoCallDesc: "Bu sistem vasitəsilə təhlükəsiz və rahat şəkildə video zənglər edə bilərsiniz.",
+          startCall: "Hazıram, Başlayaq!"
+        },
+        en: { 
+          video_call: "Video Call", 
+          lobby: "Lobby", 
+          videoCallDesc: "You can make secure and comfortable video calls using this system.",
+          startCall: "I'm Ready, Let's Start!"
+        },
+        ru: { 
+          video_call: "Видеозвонок", 
+          lobby: "Лобби", 
+          videoCallDesc: "С помощью этой системы вы можете безопасно и удобно совершать видеозвонки.",
+          startCall: "Я готов, давайте начнем!"
+        }
+      };
+      
 
-  const handleStartCall = async () => {
-    const token = localStorage.getItem("token");
-    const roomName = generateRoomName();
-    const roomLink = `https://meet.jit.si/${roomName}`;
+    const handleStartCall = async () => {
+        if (uEmail) {
+            const roomName = generateRoomName();
+            const roomLink = `https://meet.jit.si/${roomName}`;
+            console.log(roomLink);
 
-    try {
-      await axios.post(
-        'http://localhost:3000/videocall/send-email',
-        { link: roomLink }, 
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+            try {
+                await axios.post(
+                    'http://localhost:3000/videocall/send-email',
+                    { email: uEmail, link: roomLink },
+                    { headers: { "Content-Type": "application/json" } }
+                );
+                navigate(`/videocall/${roomName}`);
+            } catch (error) {
+                console.error("E-poçt göndərilə bilmədi:", error);
+            }
+        } else {
+            toast.warn(translations[lang].login);
+            navigate("/login");
+        }
+    };
 
-      navigate(`/videocall/${roomName}`);
-    } catch (error) {
-      console.error("E-poçt göndərilə bilmədi:", error);
-    }
-  };
-
-  return (
-    <div className="d-flex flex-column align-items-center justify-content-center vh-100 text-center p-4">
-      <h1 className="display-4 fw-bold mb-4">Video Zəng Otağına Xoş Gəlmisiniz!</h1>
-      <p className="mb-3 fs-5">Bu sistem vasitəsilə təhlükəsiz və rahat şəkildə video zənglər edə bilərsiniz.</p>
-      <button 
-        className="btn btn-primary btn-lg"
-        onClick={handleStartCall}
-      >
-        Hazıram, Başlayaq!
-      </button>
-    </div>
-  );
+    return (
+        <div className="d-flex flex-column align-items-center justify-content-center text-center p-4" style={{ height: "90vh", backgroundColor: "#f0f4f8" }}>
+            <h1 className="display-4 fw-bold mb-4" style={{ color: "#2a3d66" }}>
+                {translations[lang].video_call} {translations[lang].lobby}
+            </h1>
+            <p className="mb-3 fs-5" style={{ color: "#6c757d", maxWidth: "500px" }}>
+                {translations[lang].videoCallDesc}
+            </p>
+            <button
+                className="btn btn-lg"
+                style={{
+                    backgroundColor: "#007bff",
+                    color: "white",
+                    padding: "12px 30px",
+                    fontSize: "1.2rem",
+                    borderRadius: "50px",
+                    transition: "background-color 0.3s",
+                }}
+                onClick={handleStartCall}
+            >
+                {translations[lang].startCall}
+            </button>
+        </div>
+    );
 };
 
 export default VideoCallLobby;

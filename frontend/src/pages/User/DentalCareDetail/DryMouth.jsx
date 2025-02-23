@@ -55,7 +55,7 @@ function DryMouth() {
           <Card className="border-0">
             <Card.Img
               src="/images/dryMouth.jpg"
-              alt="Person brushing teeth"
+              alt="Dry mouth"
               className="rounded"
             />
           </Card>

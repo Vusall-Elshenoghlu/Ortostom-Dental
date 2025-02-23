@@ -91,14 +91,14 @@ function ChildrensTeeth() {
           <Card className="border-0">
             <Card.Img
               src="/images/childrenTeeth.webp"
-              alt="Person brushing teeth"
+              alt="Child teeth"
               className="rounded"
             />
           </Card>
         </Col>
       </Row>
 
-      <Row className="py-5 bg-light text-dark">
+      <Row className="py-5 bg-light text-dark mx-5">
         <h1 style={{ fontWeight: "600", fontSize: "25px" }}>{translations[lang].title}</h1>
         <p style={{ color: "#6F3D85", fontSize: "20px", fontWeight: "600" }}>
           {translations[lang].subtitle}

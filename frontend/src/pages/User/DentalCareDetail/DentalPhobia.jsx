@@ -55,7 +55,7 @@ function DentalPhobia() {
           <Card className="border-0">
             <Card.Img
               src="/images/dentalPhobia.webp"
-              alt="Person brushing teeth"
+              alt="Dental phobia"
               className="rounded"
             />
           </Card>

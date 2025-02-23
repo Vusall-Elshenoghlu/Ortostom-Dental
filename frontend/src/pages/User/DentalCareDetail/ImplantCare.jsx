@@ -73,7 +73,7 @@ function ImplantCare() {
           <Card className="border-0">
             <Card.Img
               src="/images/implant.jpg"
-              alt="Person brushing teeth"
+              alt="Implant"
               className="rounded"
             />
           </Card>

@@ -98,7 +98,7 @@ export const ROUTES = [
                 element: <UserAppointment />
             },
             {
-                path: "videocall/:room",
+                path: "videocall/:roomName",
                 element: <VideoCall />
             },
             {
