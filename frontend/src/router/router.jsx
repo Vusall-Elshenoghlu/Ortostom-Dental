@@ -1,3 +1,4 @@
+import ToothCupGame from "../components/User/ElliminationGame";
 import AddDoctor from "../pages/Admin/AddDoctor";
 import AddProduct from "../pages/Admin/AddProduct";
 import AddUser from "../pages/Admin/AddUser";
@@ -94,6 +95,10 @@ export const ROUTES = [
                 element: <DoctorDetail />
             },
             {
+                path: "*",
+                element: <NoPage />
+            },
+            {
                 path: "appointment/:docId",
                 element: <UserAppointment />
             },
@@ -132,10 +137,6 @@ export const ROUTES = [
 
 
         ]
-    },
-    {
-        path: "*",
-        element: <NoPage />
     },
     {
         path: "/admin",

@@ -28,7 +28,7 @@ const DoctorDetail = () => {
   };
   async function getAvailableSlots() {
     if (!doctor || !doctor.slots_booked) {
-      return; // doctor boş olduğu halda funksiyanı qaytarırıq
+      return;
     }
     
     setDocSlots([]);
@@ -197,7 +197,7 @@ const DoctorDetail = () => {
               ))}
           </div>
 
-          <Button variant="primary" onClick={bookAppointment}>{doctorss[lang].appoint}</Button>
+          <Button className="mt-3 mb-1" variant="primary" onClick={bookAppointment}>{doctorss[lang].appoint}</Button>
         </Col>
       </Row>
     </Container>
