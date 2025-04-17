@@ -27,7 +27,6 @@ const Home = () => {
       <Information/>
       <br />
       <Mapp/>
-      
     </div>
   );
 };

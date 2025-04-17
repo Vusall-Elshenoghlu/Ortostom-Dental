@@ -3,18 +3,17 @@ import { LanguageContext } from '../../../context/LanguageContext'
 import { Link } from 'react-router'
 
 function NoPage() {
-  const { lang } = useContext(LanguageContext)
+  const { lang,darkMode } = useContext(LanguageContext)
   const translations = {
     az: { notFound: "Təəssüf ki, bu səhifə ya köçürülüb, ya da mövcud deyil.", home: "Əsas səhifəyə qayıt" },
     en: { notFound: "Sorry, this page has either moved or doesn't exist", home: "Return to homepage" },
     ru: { notFound: "Извините, эта страница либо перемещена, либо не существует.", home: "Вернуться на главную страницу" }
   }
   return (
-    <div style={{ height: "70vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white",flexDirection:"column",gap:"10px" }}>
-
+    <div style={{ height: "70vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center",backgroundColor:`${darkMode ? "#121212" : ""}`,flexDirection:"column",gap:"10px" }}>
       <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
         <h1 style={{ fontSize: "200px" }}>4</h1>
-        <span><img src="/images/cracked.png" alt="" /></span>
+        <span><img src={darkMode ? "/images/404DarkMode.png" : "/images/cracked.png"} alt="" /></span>
         <h1 style={{ fontSize: "200px" }}>4</h1>
       </div>
       <h2>{translations[lang].notFound}</h2>

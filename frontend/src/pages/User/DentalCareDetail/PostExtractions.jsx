@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function PostExtractions() {
-  const { lang } = useContext(LanguageContext);
+  const { lang,darkMode } = useContext(LanguageContext);
   
   const content = {
     en: {
@@ -79,7 +79,7 @@ function PostExtractions() {
         </Col>
       </Row>
 
-      <Row className="py-5 bg-light text-dark mx-5">
+      <Row className="py-5 mx-5" style={{backgroundColor:`${darkMode ? "#121212" : ""}`}}>
         <h1 style={{ fontWeight: "600", fontSize: "36px"}} className='mx-4' >{selectedContent.adviceTitle}</h1><br />
         <h2 style={{color: "#6F3D85",}} className='mx-4'>{content[lang].subtitle}</h2>
         <p style={{  fontSize: "18px", fontWeight: "400" }}>

@@ -3,7 +3,7 @@ import './Footer.css';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 const UserFooter = () => {
-  const { lang, } = useContext(LanguageContext );
+  const { lang,darkMode } = useContext(LanguageContext );
   const translations = {
     az: { home: "Ana səhifə", about: "Haqqımızda", contact: "Əlaqə", care: "Diş qayğısı",rights:"Bütün hüquqlar qorunur.",email:"Elektron poçt",phone:"Telefon" },
     en: { home: "Home", about: "About Us", contact: "Contact", care: "Dental care",rights:"All Rights Reserved.",email:"Email",phone:"Phone" },
@@ -11,11 +11,11 @@ const UserFooter = () => {
   };
 
   return (
-    <footer className="footer">
+    <footer className={`${darkMode ? "custom-dark-bg text-light" : "footer"}`} style={{height:`${darkMode ? "20vh" : ""}`}}>
       <div className="footer-container">
         <div className="footer-logo">
-          <div className="logo-container"></div>
-          <p>Dental Clinic</p>
+          <img className='logo-img' src="/images/navbarLogoDarkMode.png" alt="" />
+          <p className='text-center'>Dental Clinic</p>
         </div>
         <div className="footer-links">
           <ul>
@@ -32,7 +32,7 @@ const UserFooter = () => {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2025 Dental Clinic. {translations[lang].care}. {translations[lang].rights}</p>
+        <p className='text-center'>&copy; 2025 Dental Clinic. {translations[lang].care}. {translations[lang].rights}</p>
       </div>
     </footer>
   );

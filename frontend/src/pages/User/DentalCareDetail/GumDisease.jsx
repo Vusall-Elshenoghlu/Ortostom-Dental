@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function GumDisease() {
-    const { lang, } = useContext(LanguageContext);
+    const { lang,darkMode } = useContext(LanguageContext);
 
     const translations = {
         az: {
@@ -88,9 +88,9 @@ function GumDisease() {
     const instructionCardStyle = {
         width: '45%',
         padding: '20px',
-        backgroundColor: '#f9f9f9',
+        backgroundColor: `${darkMode ? "#121212" : "#f9f9f9"}`,
         borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        boxShadow: `${darkMode ? "0 4px 8px rgba(167, 162, 162, 0.1)" : "0 4px 8px rgba(0, 0, 0, 0.1)"}`,
         transition: 'transform 0.3s ease',
         cursor: 'pointer',
     };
@@ -113,7 +113,7 @@ function GumDisease() {
                 </Col>
             </Row>
 
-            <Row className="py-5 bg-light text-dark px-5">
+            <Row className="py-5 mx-5" style={{backgroundColor:`${darkMode ? "#121212" : ""}`}}>
                 <h1 style={{ fontWeight: "600", fontSize: "50px" }}>{translations[lang].preventableDiseaseTitle}</h1>
                 <p style={{ color: "#6F3D85", fontSize: "23px", fontWeight: "600" }}>
                     {translations[lang].gumDiseaseStats}

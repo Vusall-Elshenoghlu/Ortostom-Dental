@@ -1,5 +1,5 @@
 import express from "express"
-import { addDoctor,addPatient,adminCancelAppointment,adminDashboard,allDoctors,allPatients,appointmentsAdmin,deletePatient,loginAdmin, onePatient, updatePatient } from "../controller/AdminController.js"
+import { addDoctor,addPatient,adminCancelAppointment,adminDashboard,allDoctors,allPatients,appointmentsAdmin,deleteDoctor,deletePatient,loginAdmin, onePatient, updatePatient, } from "../controller/AdminController.js"
 import { doctorValidationMiddleware } from "../middlewares/DoctorMiddleware.js"
 import { authAdmin } from "../middlewares/AuthAdmin.js"
 import { changeAvailability } from "../controller/DoctorController.js"
@@ -17,6 +17,8 @@ AdminRouter.post("/all-patients/id", authAdmin, onePatient);
 AdminRouter.post("/add-patient", authAdmin, addPatient);
 AdminRouter.post("/update-patient", authAdmin, updatePatient);
 AdminRouter.delete("/delete-patient/:id", authAdmin, deletePatient);
+AdminRouter.delete("/delete-doctor/:id",authAdmin,deleteDoctor);
+
 
 
 

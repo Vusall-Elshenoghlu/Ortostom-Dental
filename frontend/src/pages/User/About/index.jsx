@@ -3,8 +3,9 @@ import { Card, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import {Helmet} from "react-helmet-async"
+import { Helmet } from "react-helmet-async";
 import { LanguageContext } from '../../../context/LanguageContext';
+import "./About.css";
 
 const about = {
     az: {
@@ -25,46 +26,49 @@ const about = {
 };
 
 const About = () => {
-    const { lang } = useContext(LanguageContext);
+    const { lang, darkMode } = useContext(LanguageContext);
 
     return (
-        <motion.div
-            className="py-5"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-        >
-            <Container>
-                <Helmet>
-                    <title>
-                        About
-                    </title>
-                </Helmet>
-                <Row className="justify-content-center align-items-center">
-                    <Col lg={10}>
-                        <Card className="shadow-lg rounded overflow-hidden border-0">
-                            <Row className="g-0 align-items-center">
-                                <Col md={6} className="d-none d-md-block">
-                                    <Image
-                                        src="https://royalimplant.com/blogs/wp-content/uploads/2022/06/doctor-and-dentist-thumbs-up-510x340.jpg"
-                                        fluid className="rounded-start w-100 h-100 object-fit-cover"
-                                    />
-                                </Col>
-                                <Col md={6} className="p-4 text-center">
-                                    <h1 className="fw-bold text-primary mb-3">{about[lang].title}</h1>
-                                    <p className="text-muted lead">{about[lang].description}</p>
-                                    <Link to={"/dental-care"}>
-                                        <Button variant="primary" className="mt-3 px-4 py-2 fw-bold shadow-sm">
-                                            {lang === 'az' ? 'Daha çox öyrən' : lang === 'en' ? 'Learn More' : 'Узнать больше'}
-                                        </Button>
-                                    </Link>
-                                </Col>
-                            </Row>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
-        </motion.div>
+        <div className={`aboutt ${darkMode ? "dark-mode" : ""}`}>
+            <motion.div
+                className={`about-section ${darkMode ? "dark-mode" : ""}`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+            >
+                <Container >
+                    <Helmet>
+                        <title>About</title>
+                    </Helmet>
+                    <Row className="justify-content-center align-items-center">
+                        <Col lg={10}>
+                            <Card className="shadow-lg rounded border-0 about-card">
+                                <Row className="g-0 align-items-center">
+                                    <Col md={6} className="d-none d-md-block">
+                                        <Image
+                                            src="https://royalimplant.com/blogs/wp-content/uploads/2022/06/doctor-and-dentist-thumbs-up-510x340.jpg"
+                                            fluid className="rounded-start w-100 h-100 object-fit-cover"
+                                        />
+                                    </Col>
+                                    <Col md={6} className="p-4 text-center">
+                                        <h1 className="fw-bold about-title">{about[lang].title}</h1>
+                                        <p className="about-description">{about[lang].description}</p>
+                                        <Link to={"/dental-care"}>
+                                            <Button
+                                                variant={darkMode ? "outline-light" : "primary"}
+                                                className="mt-3 px-4 py-2 fw-bold shadow-sm"
+                                            >
+                                                {lang === 'az' ? 'Daha çox öyrən' : lang === 'en' ? 'Learn More' : 'Узнать больше'}
+                                            </Button>
+                                        </Link>
+                                    </Col>
+                                </Row>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </motion.div>
+        </div>
     );
 };
 

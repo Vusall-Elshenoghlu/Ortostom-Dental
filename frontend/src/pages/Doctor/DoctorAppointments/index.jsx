@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import { toast } from "react-toastify"
 import { FaCheck, FaChess, FaTimes, FaUniversalAccess } from 'react-icons/fa'
+import { Helmet } from 'react-helmet-async';
+
 function DoctorAppointments() {
 
   const [appointments, setAppointments] = useState([])
@@ -107,7 +109,12 @@ function DoctorAppointments() {
   }
 
   return (
-    <div style={{ marginTop: "100px", }}>
+    <div style={{ marginTop: "100px",marginLeft:"50px" }}>
+      <Helmet>
+        <title>
+          Doctor-Appointments
+        </title>
+      </Helmet>
       <div className="container my-5" style={{ width: "90vh", }}>
         <h1 className='text-center'>All Appointments</h1>
         <div className="bg-white border rounded small overflow-auto mt-4" style={{ maxHeight: "80vh", minHeight: "50vh" }}>

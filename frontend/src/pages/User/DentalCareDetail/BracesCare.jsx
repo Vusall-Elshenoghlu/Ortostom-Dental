@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function BracesCare() {
-  const { lang, } = useContext(LanguageContext);
+  const { lang,darkMode } = useContext(LanguageContext);
   const translations = {
     az: {
       care: "Diş qayğısı",
@@ -81,7 +81,7 @@ function BracesCare() {
         </Col>
       </Row>
 
-      <Row className="py-5 bg-light text-dark">
+      <Row className="py-5 mx-5" style={{backgroundColor:`${darkMode ? "#121212" : ""}`}}>
         <h1 style={{ fontWeight: "600", fontSize: "50px" }}>{translations[lang].createSmile}</h1>
         <p style={{ color: "#6F3D85", fontSize: "23px", fontWeight: "600" }}>
           {translations[lang].orthodonticsEffect}

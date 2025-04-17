@@ -58,3 +58,32 @@ body.dark input::placeholder,
 body.dark textarea::placeholder {
   color: #bbbbbb !important;
 }
+
+.Toastify__toast {
+  max-width: 300px !important; /* Maksimum genişlik */
+  font-size: 14px !important; /* Şrift ölçüsü */
+  padding: 8px !important; /* İç padding */
+  min-height: 40px !important; /* Minimum hündürlük */
+}
+
+/* Toast ikonları */
+.Toastify__toast-icon {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Close düyməsi */
+.Toastify__close-button {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* Kiçik ekranlar üçün Media Query */
+@media (max-width: 768px) {
+  .Toastify__toast {
+    max-width: 250px !important;
+    font-size: 12px !important;
+    padding: 6px !important;
+    min-height: 35px !important;
+  }
+}

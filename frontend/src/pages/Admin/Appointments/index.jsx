@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Appointments = () => {
   const slotDateFormat = (slotDate) => {
     const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     if (!slotDate) {
-      return "Invalid Date";  
+      return "Invalid Date";
     }
 
     const dateArray = slotDate.split("_");
 
     if (dateArray.length !== 3) {
-      return "Invalid Date Format";  
+      return "Invalid Date Format";
     }
 
     return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
@@ -78,6 +79,11 @@ const Appointments = () => {
 
   return (
     <div style={{ marginTop: "100px", marginLeft: "10px" }}>
+      <Helmet>
+        <title>
+          Appointments
+        </title>
+      </Helmet>
       <h2 className="mb-4 text-center">All Appointments</h2>
       <table className="table table-bordered table-striped" style={{ width: "100%", minWidth: "800px" }}>
         <thead className="table-dark text-center">

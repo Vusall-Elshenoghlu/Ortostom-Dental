@@ -3,6 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Helmet } from 'react-helmet-async';
+
 
 export const AddUser = () => {
     const [patient, setPatient] = useState({ name: "", surname: "", email: "", phone: "", dob: "", password: "" });
@@ -28,7 +30,12 @@ export const AddUser = () => {
 
     return (
         <div className="container mt-5">
-            <div className="card p-4 shadow-lg" style={{marginTop:"150px",marginLeft:"300px",width:"500px"}}>
+            <Helmet>
+                <title>
+                    Add-User
+                </title>
+            </Helmet>
+            <div className="card p-4 shadow-lg" style={{ marginTop: "150px", marginLeft: "300px", width: "500px" }}>
                 <h2 className="text-center mb-4">Add Patient</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">

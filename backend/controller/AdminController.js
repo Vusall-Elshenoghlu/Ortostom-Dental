@@ -3,7 +3,6 @@ import { DoctorModel } from "../model/DoctorModel.js"
 import jwt from "jsonwebtoken"
 import { AppointmentModel } from "../model/AppointmentModel.js"
 import { UserModel } from "../model/UserModel.js"
-
 export const addDoctor = async (req, res) => {
     try {
 
@@ -74,6 +73,19 @@ export const allDoctors = async (req, res) => {
 
     } catch (error) {
         res.json({ success: false, message: error.message })
+    }
+}
+
+//API to delete doctor 
+
+export const deleteDoctor = async (req,res) =>{
+    try{
+        const {id} = req.params
+        await DoctorModel.findByIdAndDelete(id)
+        res.json({success:true,message:"Doctor has deleted successfully..."})
+
+    }catch(error){
+        res.json({success:false,message:error.message})
     }
 }
 
@@ -254,3 +266,4 @@ export const adminDashboard = async (req, res) => {
     }
 
 }
+

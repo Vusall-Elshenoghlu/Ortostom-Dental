@@ -5,6 +5,8 @@ export const UserSchema = new Schema({
     surname:String,
     email:String,
     password:String,
+    resetPasswordToken:String,
+    resetPasswordExpires:Date,
     address:{type:Object,default:{line1:"",line2:""}},
     gender:{type:String,default:"Not selected"},
     dob:{type:String,default:"Not Selected"},

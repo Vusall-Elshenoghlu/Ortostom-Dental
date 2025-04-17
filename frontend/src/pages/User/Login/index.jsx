@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
-  const { lang, setLang, translations } = useContext(LanguageContext);
+  const { lang, setLang, translations,darkMode } = useContext(LanguageContext);
   const [passwordVisible, setPasswordVisible] = useState(false)
 
 
@@ -31,9 +31,12 @@ const Login = () => {
       toast.success("Login successful");
       navigate("/");
     } catch (err) {
-      if (err.response?.data === "Invalid password") {
-        setError("Invalid password");
-      } else {
+      console.log(err.response?.data)
+      if (err.response?.data === "Wrong password." || err.response?.data === "You need to register first.") {
+        setError("Invalid email or password...");
+        toast.error("Invalid email or password")
+      }
+       else {
         setError("This email is not registered");
       }
     }
@@ -58,21 +61,27 @@ const Login = () => {
   }
   return (
     <>
-      <div className="loginn">
+      <div className={`loginn ${darkMode ? "dark-login" : ""}`}>
         <div className="auth-container">
           <Helmet>
             <title>Login</title>
           </Helmet>
           <form className="auth-form form-box" onSubmit={formik.handleSubmit}>
             <h2 className="form-title">{translations[lang].login}</h2>
-            <input type="email" name="email" placeholder={translations[lang].email} {...formik.getFieldProps("email")} className="form-control input-field mt-2" />
+            <input 
+            type="email" 
+            name="email" 
+            placeholder={translations[lang].email} {...formik.getFieldProps("email")} 
+            className={`form-control input-field mt-2 ${darkMode ? "dark-email" : ""}`}
+            
+            />
             <div className="position-relative">
               <input
                 type={passwordVisible ? "text" : "password"}
                 name="password"
                 placeholder={translations[lang].password}
                 {...formik.getFieldProps("password")}
-                className="register-input"
+                className={`register-input ${darkMode ? "dark-password" : ""}`}
                 style={{ width: "100%" }}
 
               />
@@ -86,8 +95,9 @@ const Login = () => {
             </div>
 
             {error && <div className="text-danger mt-2">{error}</div>}
-
-            <button type="submit" className="btn btn-primary submit-btn mt-3">{translations[lang].login}</button>
+            
+            <Link to={"/forgot-password"} style={{color:"#7b42f6"}}>Forgot password?</Link>
+            <button type="submit" className={`btn btn-primary submit-btn mt-3 ${darkMode ? "submit-btn-dark" : ""}`}>{translations[lang].login}</button>
             <p className="redirect-text">{translations[lang].dontAccount} <a href="/register" className="redirect-link">{translations[lang].register}</a></p>
           </form>
         </div>

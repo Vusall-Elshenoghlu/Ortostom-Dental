@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { LanguageContext } from "../../../context/LanguageContext";
@@ -16,6 +16,18 @@ const UserNavbar = () => {
   const [token,setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : "")
   const navigate = useNavigate();
   const location = useLocation(); 
+
+  const [opacity,setOpacity] = useState(1)
+
+  useEffect(() =>{
+    const handleScroll = () =>{
+      const scrollY = window.scrollY;
+      setOpacity(scrollY > 110 ? 0.3 : 1)
+    }
+
+    window.addEventListener("scroll",handleScroll);
+    return () => window.removeEventListener("scroll",handleScroll)
+  },[])
 
   function handleReservation(){
     if(token){
@@ -56,10 +68,10 @@ const UserNavbar = () => {
   const isActive = (path) => location.pathname === path ? "active" : "";
 
   return (
-    <Navbar expand="lg" className={`bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} sticky="top">
+    <Navbar expand="lg" className={`bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} sticky="top" style={{opacity, transition:"opacity 0.3s ease-in-out" }}>
       <Navbar.Brand>
         <Link to="/">
-          <img src="images/logoo.jpg" alt="" className="logo-img" />
+          <img src="/images/navbarLogoDarkMode.png" alt="" className="logo-img" />
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -90,9 +102,9 @@ const UserNavbar = () => {
             🌍 {lang.toUpperCase()}
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => setLang("az")}>🇦🇿 AZ</Dropdown.Item>
-            <Dropdown.Item onClick={() => setLang("en")}>🇬🇧 EN</Dropdown.Item>
-            <Dropdown.Item onClick={() => setLang("ru")}>🇷🇺 RU</Dropdown.Item>
+            <Dropdown.Item onClick={() => setLang("az")} style={{color:`${darkMode ? "blue" : ""}`}}>🇦🇿 AZ</Dropdown.Item>
+            <Dropdown.Item onClick={() => setLang("en")} style={{color:`${darkMode ? "blue" : ""}`}}>🇬🇧 EN</Dropdown.Item>
+            <Dropdown.Item onClick={() => setLang("ru")} style={{color:`${darkMode ? "blue" : ""}`}}>🇷🇺 RU</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
@@ -102,14 +114,14 @@ const UserNavbar = () => {
               👤 {user.name}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="/my-profile">
+              <Dropdown.Item as={Link} to="/my-profile" style={{color:`${darkMode ? "blue" : ""}`}}>
                 {translations[lang].profile}
               </Dropdown.Item>
-              <Dropdown.Item as={Link} to="/my-appointments">
+              <Dropdown.Item as={Link} to="/my-appointments" style={{color:`${darkMode ? "blue" : ""}`}}>
                 {translations[lang].appointments}
               </Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item onClick={logout} className="text-danger">
+              <Dropdown.Item onClick={logout} className="text-danger" style={{color:`${darkMode ? "blue" : ""}`}}>
                 {translations[lang].logout}
               </Dropdown.Item>
             </Dropdown.Menu>

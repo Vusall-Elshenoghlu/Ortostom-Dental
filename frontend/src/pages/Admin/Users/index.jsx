@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2"
+import { Helmet } from "react-helmet-async";
 
 const Users = () => {
     const [patients, setPatients] = useState([]);
@@ -16,7 +17,7 @@ const Users = () => {
                     Authorization: `Bearer ${aToken}`,
                 },
             });
-            
+
             if (data.success) {
                 setPatients(data.patients);
             } else {
@@ -36,7 +37,7 @@ const Users = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then( async (result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
                     await axios.delete(`http://localhost:3000/admin/delete-patient/${id}`, {
@@ -49,13 +50,13 @@ const Users = () => {
                 } catch (error) {
                     toast.error(error.message);
                 }
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
             }
-          });
+        });
     };
 
     useEffect(() => {
@@ -66,6 +67,11 @@ const Users = () => {
 
     return (
         <div style={{ marginTop: "100px", marginLeft: "150px" }}>
+            <Helmet>
+                <title>
+                    Users
+                </title>
+            </Helmet>
             <h2 className="mb-4 text-center">All Patients</h2>
             <button onClick={() => navigate("/dashboard/add-patient")} className="btn btn-primary mb-3">Add Patient</button>
             <table className="table table-bordered table-striped" style={{ width: "100%", minWidth: "800px" }}>

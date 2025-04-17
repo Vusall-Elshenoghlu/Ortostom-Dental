@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { toast } from "react-toastify"
 import axios from "axios"
 import { FaCalendar, FaRegCalendarCheck, FaTimes, FaUserMd } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
+import { LanguageContext } from '../../../context/LanguageContext'
+import { Helmet } from 'react-helmet-async'
 function DashBoard() {
   const [dashData, setDashData] = useState(false)
   const [aToken, setAToken] = useState(localStorage.getItem("adminToken"))
   const navigate = useNavigate()
-
+  const { darkMode } = useContext(LanguageContext)
   const getDashData = async () => {
 
     try {
@@ -41,21 +43,25 @@ function DashBoard() {
   const slotDateFormat = (slotDate) => {
     const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     if (!slotDate) {
-      return "Invalid Date";  
+      return "Invalid Date";
     }
 
     const dateArray = slotDate.split("_");
 
     if (dateArray.length !== 3) {
-      return "Invalid Date Format"; 
+      return "Invalid Date Format";
     }
 
     return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
   };
 
   return dashData && (
-    <div style={{ marginTop: "90px", marginLeft: "40px" }}>
-
+    <div style={{ marginTop: "120px", marginLeft: "40px", }}>
+      <Helmet>
+        <title>
+          Dashboard
+        </title>
+      </Helmet>
       <div className='d-flex flex-wrap g-3 gap-5'>
 
         <div
@@ -67,7 +73,7 @@ function DashBoard() {
             cursor: 'pointer',
             transition: 'all 0.2s',
             transform: 'scale(1)',
-            height: "7rem"
+            height: "7rem",
           }}
           onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -75,7 +81,7 @@ function DashBoard() {
         >
           <img style={{ width: "65px", height: "65px" }} src="../../../images/doctor.png" alt="" />
           <div>
-            <p style={{ fontSize: "30px", fontWeight: "500" }}>{dashData.doctors}</p>
+            <p style={{ fontSize: "30px", fontWeight: "500", color: "black" }}>{dashData.doctors}</p>
             <p style={{ color: "gray", fontSize: "20px", fontWeight: "600" }}>Doctors</p>
           </div>
         </div>
@@ -95,9 +101,9 @@ function DashBoard() {
           onClick={() => navigate("appointments")}
 
         >
-          <FaRegCalendarCheck style={{ width: "65px", height: "65px" }} />
+          <FaRegCalendarCheck style={{ width: "65px", height: "65px", color: "black" }} />
           <div>
-            <p style={{ fontSize: "30px", fontWeight: "500" }}>{dashData.appointments}</p>
+            <p style={{ fontSize: "30px", fontWeight: "500", color: "black" }}>{dashData.appointments}</p>
             <p style={{ color: "gray", fontSize: "20px", fontWeight: "600" }}>Appointments</p>
           </div>
         </div>
@@ -118,7 +124,7 @@ function DashBoard() {
         >
           <img style={{ width: "65px", height: "65px" }} src="../../../images/hospitalisation.png" alt="" />
           <div>
-            <p style={{ fontSize: "30px", fontWeight: "500" }}>{dashData.patients}</p>
+            <p style={{ fontSize: "30px", fontWeight: "500", color: "black" }}>{dashData.patients}</p>
             <p style={{ color: "gray", fontSize: "20px", fontWeight: "600" }}>Patients</p>
           </div>
         </div>

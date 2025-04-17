@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom'; 
+import { useNavigate, useParams } from 'react-router-dom';
 
 const VideoCall = () => {
-    const { roomName } = useParams(); 
+    const { roomName } = useParams();
     console.log(roomName)
     const jitsiContainerRef = useRef(null);
     const apiRef = useRef(null);
     const [isInCall, setIsInCall] = useState(false);
+    const navigate = useNavigate()
 
     useEffect(() => {
-        if (!roomName) return; 
+        if (!roomName) return;
 
         const script = document.createElement('script');
         script.src = 'https://meet.jit.si/external_api.js';
@@ -20,13 +21,13 @@ const VideoCall = () => {
         script.onload = () => {
             const domain = 'meet.jit.si';
             const options = {
-                roomName, 
+                roomName,
                 width: '100%',
                 height: 600,
                 parentNode: jitsiContainerRef.current,
-                configOverwrite: { 
-                    startWithAudioMuted: true, 
-                    startWithVideoMuted: true, 
+                configOverwrite: {
+                    startWithAudioMuted: true,
+                    startWithVideoMuted: true,
                 },
                 interfaceConfigOverwrite: {
                     filmStripOnly: false,
@@ -55,10 +56,15 @@ const VideoCall = () => {
             }
             document.body.removeChild(script);
         };
-    }, [roomName]); 
+    }, [roomName]);
 
     const handleCallEnd = () => {
-        if (apiRef.current) apiRef.current.executeCommand('hangup');
+        if (apiRef.current) {
+            apiRef.current.executeCommand('hangup');
+            setTimeout(() => {
+                navigate("/");
+            }, 500); 
+        }
     };
 
     return (

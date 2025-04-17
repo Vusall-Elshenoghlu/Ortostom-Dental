@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { FaRegCalendarCheck, FaTimes, FaUserMd } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { Helmet } from 'react-helmet-async';
+
 
 function DoctorDashBoard() {
   const [dToken, setDToken] = useState(localStorage.getItem("doctorToken") ? localStorage.getItem("doctorToken") : "")
@@ -55,8 +57,12 @@ function DoctorDashBoard() {
 
 
   return dashData && (
-      <div style={{ marginTop: "90px", marginLeft: "40px" }}>
-  
+      <div style={{ marginTop: "110px", marginLeft: "40px" }}>
+        <Helmet>
+          <title>
+            Doctor-Dashboard
+          </title>
+        </Helmet>
         <div className='d-flex flex-wrap g-3 gap-5'>
   
         <div

@@ -12,7 +12,7 @@ function Contact() {
   const [state, handleSubmit] = useForm("xovjylba");
   const navigate = useNavigate();
   const [phone, setPhone] = useState('');
-  const {lang} = useContext(LanguageContext)
+  const {lang,darkMode} = useContext(LanguageContext)
   const translations = {
     az: {
       fullName: "Ad Soyad",
@@ -76,10 +76,10 @@ function Contact() {
       <h2 className="text-center mb-4">{translations[lang].contactUs}</h2>
       <Row className="justify-content-center">
         <Col lg={6} md={8} sm={12}>
-          <Form onSubmit={handleSubmit} className="shadow p-4 rounded contact-form">
+          <Form onSubmit={handleSubmit} className={`shadow p-4 rounded contact-form ${darkMode ? "custom-dark-bg text-light" : "bg-light text-dark"}`}>
             <Form.Group className="mb-3">
               <Form.Label>{translations[lang].fullName}</Form.Label>
-              <Form.Control type="text" name="name" required className="custom-input" />
+              <Form.Control type="text" name="name" required className={`custom-input form-control bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} />
               <ValidationError prefix="Name" field="name" errors={state.errors} />
             </Form.Group>
 
@@ -87,25 +87,25 @@ function Contact() {
               <Form.Label>{translations[lang].phoneNumber}</Form.Label>
               <PhoneInput
                 international
-                defaultCountry="US"
+                defaultCountry="AZ"
                 value={phone}
                 onChange={setPhone}
-                className="form-control custom-input"
+                className={`form-control custom-input  bg-${darkMode ? "dark text-light" : "light"} shadow-sm`}
                 required
               />
               <ValidationError prefix="Phone" field="phone" errors={state.errors} />
-              <small className="text-muted">{translations[lang].example}</small>
+              <small style={{color: `${darkMode ? "white" : "gray"}`}}>{translations[lang].example}</small>
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>{translations[lang].emailAddress}</Form.Label>
-              <Form.Control type="email" name="email" required className="custom-input" />
+              <Form.Control type="email" name="email" required className={`custom-input form-control bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} />
               <ValidationError prefix="Email" field="email" errors={state.errors} />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>{translations[lang].message}</Form.Label>
-              <Form.Control as="textarea" name="message" rows={4} required className="custom-input" />
+              <Form.Control as="textarea" name="message" rows={4} required className={`custom-input form-control bg-${darkMode ? "dark text-light" : "light"} shadow-sm`} />
               <ValidationError prefix="Message" field="message" errors={state.errors} />
             </Form.Group>
 

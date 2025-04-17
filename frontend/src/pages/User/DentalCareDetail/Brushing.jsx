@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function Brushing() {
-    const { lang } = useContext(LanguageContext);
+    const { lang,darkMode } = useContext(LanguageContext);
 
     const translationss = {
         en: {
@@ -79,16 +79,18 @@ function Brushing() {
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         padding: '20px',
+        
     };
 
     const instructionCardStyle = {
         width: '45%',
         padding: '20px',
-        backgroundColor: '#f9f9f9',
+        backgroundColor: `${darkMode ? "#121212" : "#f9f9f9"}`,
         borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        boxShadow: `${darkMode ? "0 4px 8px rgba(167, 162, 162, 0.1)" : "0 4px 8px rgba(0, 0, 0, 0.1)"}`,
         transition: 'transform 0.3s ease',
         cursor: 'pointer',
+
     };
     return (
         <Container fluid className="py-5" >
@@ -109,16 +111,16 @@ function Brushing() {
                 </Col>
             </Row>
 
-            <Row className="py-5 bg-light text-dark">
+            <Row className="py-5 mx-5" style={{backgroundColor:`${darkMode ? "#121212" : "white"}`}}>
 
                 <h1 style={{ fontWeight: "600", fontSize: "50px" }}>{translationss[lang].manualElectricTitle}</h1>
                 <p style={{ color: "#6F3D85", fontSize: "23px", fontWeight: "600" }}>
                 {translationss[lang].manualElectricDesc}
                 </p>
                 <br />
-                <p style={{ color: "#54595F", fontSize: "20px" }}>{translationss[lang].replaceBrush}</p>
+                <p style={{ color: `${darkMode ? "white" : "#54595F"}`, fontSize: "20px" }}>{translationss[lang].replaceBrush}</p>
                 <br />
-                <p style={{ color: "#54595F", fontSize: "20px" }}>{translationss[lang].effectiveness}</p>
+                <p style={{ color: `${darkMode ? "white" : "#54595F"}`, fontSize: "20px" }}>{translationss[lang].effectiveness}</p>
                 <div style={containerStyle}>
                     <div style={instructionCardStyle}>
                         <h3>{translationss[lang].manual}</h3>

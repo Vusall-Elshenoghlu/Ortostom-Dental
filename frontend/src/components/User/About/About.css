@@ -1,0 +1,15 @@
+.dental-care-section {
+    background-color: #ffffff;
+    color: #333;
+    padding: 50px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dental-care-section.dark-mode {
+    background-color: #121212; 
+    color: #f1f1f1; 
+    
+}
+
+.aboutDarkButton:hover{
+    color: #333 !important;
+}

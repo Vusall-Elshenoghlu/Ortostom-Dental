@@ -38,6 +38,7 @@ import WisdomTeeth from "../pages/User/DentalCareDetail/WisdomTeeth";
 import DoctorDetail from "../pages/User/DoctorDetail";
 import DoctorList from "../pages/User/Doctors";
 import Doctors from "../pages/User/Doctors";
+import ForgotPassword from "../pages/User/ForgotPassword";
 import Home from "../pages/User/Home";
 import Login from "../pages/User/Login";
 import MyAppointments from "../pages/User/MyAppointments";
@@ -48,6 +49,7 @@ import UserAppointment from "../pages/User/UseraAppointment";
 import UserRoot from "../pages/User/UserRoot";
 import VideoCall from "../pages/User/VideoCall";
 import VideoCallLobby from "../pages/User/VideoCallLobby";
+import ResetPassword from "../pages/User/ResetPassword";
 
 export const ROUTES = [
     {
@@ -105,6 +107,14 @@ export const ROUTES = [
             {
                 path: "video-call-lobby",
                 element: <VideoCallLobby />
+            },
+            {
+                path: "forgot-password",
+                element: <ForgotPassword />
+            },
+            {
+                path: "reset-password",
+                element: <ResetPassword />
             },
             {
                 path: "dental-care",

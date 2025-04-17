@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { LanguageContext } from '../../../context/LanguageContext';
 import { Link } from 'react-router-dom';
-import {Helmet} from "react-helmet-async"
+import { Helmet } from "react-helmet-async"
+import "./About.css"
 
 const about = {
     az: {
@@ -25,19 +26,19 @@ const about = {
 };
 
 const About = () => {
-    const { lang } = useContext(LanguageContext);
+    const { lang, darkMode } = useContext(LanguageContext);
 
     return (
         <motion.div
-            className="py-5"
+            className={`py-5 dental-care-section ${darkMode ? "dark-mode" : ""}`}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
         >
-            <Container>
+            <Container className={` dental-care-section ${darkMode ? "dark-mode" : ""}`}>
                 <Row className="justify-content-center align-items-center">
                     <Col lg={10}>
-                        <Card className="shadow-lg rounded overflow-hidden border-0">
+                        <Card className={`shadow-lg rounded border-0 dental-care-section ${darkMode ? "dark-mode" : ""}`} style={{backgroundColor:`${darkMode ? "#333" : "white"}`}}>
                             <Row className="g-0 align-items-center">
                                 <Col md={6} className="d-none d-md-block">
                                     <Image
@@ -47,9 +48,11 @@ const About = () => {
                                 </Col>
                                 <Col md={6} className="p-4 text-center">
                                     <h1 className="fw-bold text-primary mb-3">{about[lang].title}</h1>
-                                    <p className="text-muted lead">{about[lang].description}</p>
+                                    <p className={`lead ${darkMode ? "text-light" : "text-muted"}`}>
+                                        {about[lang].description}
+                                    </p>
                                     <Link to={"dental-care"}>
-                                        <Button variant="primary" className="mt-3 px-4 py-2 fw-bold shadow-sm">
+                                        <Button variant={darkMode ? "outline-light" : "primary"} className={`mt-3 px-4 py-2 fw-bold shadow-sm ${darkMode ? "aboutDarkButton" : ""}`}>
                                             {lang === 'az' ? 'Daha çox öyrən' : lang === 'en' ? 'Learn More' : 'Узнать больше'}
                                         </Button>
                                     </Link>
@@ -60,6 +63,7 @@ const About = () => {
                 </Row>
             </Container>
         </motion.div>
+
     );
 };
 

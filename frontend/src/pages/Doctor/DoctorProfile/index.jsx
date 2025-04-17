@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Helmet } from 'react-helmet-async';
 
 function DoctorProfile() {
   const [profileData, setProfileData] = useState(false);
@@ -69,7 +70,12 @@ function DoctorProfile() {
 
   return (
     profileData && (
-      <div className="container" style={{ marginTop: '100px' }}>
+      <div className="container" style={{ marginTop: '110px' }}>
+        <Helmet>
+          <title>
+            Doctor-Profile
+          </title>
+        </Helmet>
         <div className="row justify-content-center">
           <div>
             <div className="card p-4 shadow-lg" style={{ height: '400px',width:"800px",marginLeft:"100px", }}>

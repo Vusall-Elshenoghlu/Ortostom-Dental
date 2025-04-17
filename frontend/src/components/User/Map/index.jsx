@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { LanguageContext } from '../../../context/LanguageContext';
+import "./Map.css"
 
 function Mapp() {
-  const { lang } = useContext(LanguageContext);
+  const { lang,darkMode } = useContext(LanguageContext);
   const [state, handleSubmit] = useForm("xovjylba");
   const [phone, setPhone] = useState('');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -18,11 +19,15 @@ function Mapp() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await handleSubmit(e);
+    
+  };
+
+  useEffect(() =>{
     if (state.succeeded) {
       setFormData({ name: '', email: '', message: '' });
       setPhone('');
     }
-  };
+  },[state.succeeded])
   const translations = {
     az: {
       contact: "Əlaqə",
@@ -74,17 +79,18 @@ function Mapp() {
           </div>
         </Col>
 
-        <Col lg={4} md={12}>
+        <Col lg={4} md={12} >
           <h2 className="text-center mb-3">{translations[lang].contact}</h2>
           {state.succeeded && (
             <Alert variant="success" className="text-center">
               {translations[lang].successMessage}
             </Alert>
           )}
-          <Form onSubmit={handleFormSubmit} className="shadow p-3 rounded contact-form" style={{height:"450px", marginBottom:"50px"}}>
+          <Form onSubmit={handleFormSubmit} className={`shadow p-3 rounded contact-form ${darkMode ? "custom-dark-bg text-light" : "bg-light text-dark"}`} style={{height:"450px", marginBottom:"50px"}}>
             <Form.Group className="mb-2">
               <Form.Label>{translations[lang].name}</Form.Label>
               <Form.Control 
+                className={`bg-${darkMode ? "dark text-light" : "light"} shadow-sm`}
                 type="text" 
                 name="name" 
                 value={formData.name} 
@@ -98,10 +104,10 @@ function Mapp() {
               <Form.Label>{translations[lang].phone}</Form.Label>
               <PhoneInput
                 international
-                defaultCountry="US"
+                defaultCountry="AZ"
                 value={phone}
                 onChange={setPhone}
-                className="form-control"
+                className={`form-control bg-${darkMode ? "dark text-light" : "light"} shadow-sm`}
                 required
               />
               <ValidationError prefix="Phone" field="phone" errors={state.errors} />
@@ -114,6 +120,7 @@ function Mapp() {
                 name="email" 
                 value={formData.email} 
                 onChange={handleChange} 
+                className={`form-control bg-${darkMode ? "dark text-light" : "light"} shadow-sm`}
                 required 
               />
               <ValidationError prefix="Email" field="email" errors={state.errors} />
@@ -127,6 +134,7 @@ function Mapp() {
                 rows={2} 
                 value={formData.message} 
                 onChange={handleChange} 
+                className={`form-control bg-${darkMode ? "dark text-light" : "light"} shadow-sm`}
                 required 
               />
               <ValidationError prefix="Message" field="message" errors={state.errors} />

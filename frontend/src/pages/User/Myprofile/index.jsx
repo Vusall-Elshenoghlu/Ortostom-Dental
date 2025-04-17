@@ -2,13 +2,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import { LanguageContext } from '../../../context/LanguageContext';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-
+import { Helmet } from 'react-helmet-async';
 function MyProfile() {
-    const { lang, profil } = useContext(LanguageContext);
+    const { lang, profil, darkMode } = useContext(LanguageContext);
 
     const [userData, setUserData] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
-
     const token = localStorage.getItem("token");
 
     async function loadUserProfileData() {
@@ -74,10 +73,15 @@ function MyProfile() {
     }, [token]);
 
     return userData && (
-        <div className="container p-4 bg-light rounded">
+        <div className={`container p-4 rounded ${darkMode ? "bg-dark text-light" : "bg-light text-dark"}`}>
+            <Helmet>
+                <title>
+                     Profile
+                </title>
+            </Helmet>
             {
                 isEdit
-                    ? <input type="text" className="form-control mb-3" value={userData.name} onChange={e => setUserData(prev => ({ ...prev, name: e.target.value }))} />
+                    ? <input type="text" className="form-control mb-3" style={{ backgroundColor: `${darkMode ? "#333" : ""}`, color: `${darkMode ? "white" : ""}` }} value={userData.name} onChange={e => setUserData(prev => ({ ...prev, name: e.target.value }))} />
                     : <h2>{userData.name}</h2>
             }
             <hr />
@@ -92,7 +96,7 @@ function MyProfile() {
                         <div>{profil[lang].phone}:</div>
                         {
                             isEdit
-                                ? <input type="text" className="form-control mb-3" value={userData.phone} onChange={e => setUserData(prev => ({ ...prev, phone: e.target.value }))} />
+                                ? <input type="text" className="form-control mb-3" style={{ backgroundColor: `${darkMode ? "#333" : ""}`, color: `${darkMode ? "white" : ""}` }} value={userData.phone} onChange={e => setUserData(prev => ({ ...prev, phone: e.target.value }))} />
                                 : <div>{userData.phone}</div>
                         }
                     </div><br />
@@ -101,8 +105,8 @@ function MyProfile() {
                         {
                             isEdit
                                 ? <div>
-                                    <input type="text" className="form-control mb-3" value={userData.address.line1} onChange={(e) => setUserData(prev => ({ ...prev, address: { ...prev.address, line1: e.target.value } }))} />
-                                    <input type="text" className="form-control" value={userData.address.line2} onChange={(e) => setUserData(prev => ({ ...prev, address: { ...prev.address, line2: e.target.value } }))} />
+                                    <input type="text" className="form-control mb-3" style={{ backgroundColor: `${darkMode ? "#333" : ""}`, color: `${darkMode ? "white" : ""}` }} value={userData.address.line1} onChange={(e) => setUserData(prev => ({ ...prev, address: { ...prev.address, line1: e.target.value } }))} />
+                                    <input type="text" className="form-control" style={{ backgroundColor: `${darkMode ? "#333" : ""}`, color: `${darkMode ? "white" : ""}` }} value={userData.address.line2} onChange={(e) => setUserData(prev => ({ ...prev, address: { ...prev.address, line2: e.target.value } }))} />
                                 </div>
                                 : <div>
                                     {userData.address.line1}
@@ -120,9 +124,14 @@ function MyProfile() {
                         <div>{profil[lang].gender}:</div>
                         {
                             isEdit
-                                ? <select className="form-select mb-3" style={{ width: "100px" }} onChange={(e) => setUserData(prev => ({ ...prev, gender: e.target.value }))}>
-                                    <option value="male">{profil[lang].male}</option>
+                                ? <select
+                                    className="form-select mb-3"
+                                    style={{ backgroundColor: `${darkMode ? "#333" : ""}`, color: `${darkMode ? "white" : ""}`, width: "100px" }}
+                                    value={userData.gender}
+                                    onChange={(e) => setUserData(prev => ({ ...prev, gender: e.target.value }))}
+                                >
                                     <option value="female">{profil[lang].female}</option>
+                                    <option value="male">{profil[lang].male}</option>
                                 </select>
                                 : <div>{userData.gender === "male" ? profil[lang].male : profil[lang].female}</div>
                         }
@@ -131,7 +140,7 @@ function MyProfile() {
                         <div>{profil[lang].birthday}</div>
                         {
                             isEdit
-                                ? <input type="date" className="form-control" style={{ width: "150px" }} value={userData.dob} onChange={e => setUserData(prev => ({ ...prev, dob: e.target.value }))} />
+                                ? <input type="date" className="form-control" style={{ backgroundColor: `${darkMode ? "#333" : ""}`, color: `${darkMode ? "white" : ""}`, width: "150px" }} value={userData.dob} onChange={e => setUserData(prev => ({ ...prev, dob: e.target.value }))} />
                                 : <div>{userData.dob}</div>
                         }
                     </div>

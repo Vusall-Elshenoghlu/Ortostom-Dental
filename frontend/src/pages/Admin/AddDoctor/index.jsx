@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { Helmet } from 'react-helmet-async';
 
 const AddDoctor = () => {
     const initialValues = {
@@ -17,7 +18,7 @@ const AddDoctor = () => {
         bio: "",
         contact: "",
         certificates: [{ title: "", date: "", organization: "" }],
-        profileImage:""
+        profileImage: ""
     };
 
 
@@ -69,7 +70,12 @@ const AddDoctor = () => {
     };
 
     return (
-        <div className="container mt-5" style={{width:"500px",marginLeft:"200px",padding:"50px"}}>
+        <div className="container mt-5" style={{ width: "500px", marginLeft: "200px", padding: "50px" }}>
+            <Helmet>
+                <title>
+                    Add-Doctor
+                </title>
+            </Helmet>
             <h2>Add Doctor</h2>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ values }) => (
@@ -78,7 +84,7 @@ const AddDoctor = () => {
                             <label>Profile Image URL</label>
                             <Field type="text" className="form-control" name="profileImage" />
                         </div>
-                        
+
                         <div className="mb-3">
                             <label>First Name</label>
                             <Field type="text" className="form-control" name="firstName" />
@@ -104,7 +110,7 @@ const AddDoctor = () => {
                             <Field type="text" className="form-control" name="specialty" />
                         </div>
 
-                        
+
 
                         <div className="mb-3">
                             <label>Experience Years</label>
@@ -166,7 +172,7 @@ const AddDoctor = () => {
                                             <Field
                                                 type="text"
                                                 className="form-control mb-2"
-                                                name={`certificates.${index}.title`} 
+                                                name={`certificates.${index}.title`}
                                                 placeholder="Enter Certificate Title"
                                             />
 

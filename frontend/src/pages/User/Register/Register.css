@@ -7,7 +7,19 @@
   align-items: center;
   font-family: 'Poppins', sans-serif;
 }
-
+.registration-dark-mode {
+  background: linear-gradient(135deg, #0F2027, #203A43);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+.registerr-dark-mode{
+  background-color: #333 !important;
+  color: white !important;
+}
 .register-container {
   display: flex;
   justify-content: center;
@@ -77,10 +89,21 @@
   cursor: pointer;
   transition: 0.3s;
 }
+.register-button-dark {
+  background: linear-gradient(135deg, #0F2027, #203A43);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
 .register-button:hover {
   background: linear-gradient(135deg, #b82efc, #7b42f6);
 }
+.register-button-dark:hover {
+  background: linear-gradient(135deg, #0F2027, #203A43);  }
 
 .register-redirect {
   color: #fff;

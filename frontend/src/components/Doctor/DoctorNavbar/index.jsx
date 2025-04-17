@@ -39,12 +39,12 @@ function DoctorNavbar() {
             left: "0",
             right: "0",
             zIndex: "1000",
-            height: "80px", 
+            height: "95px", 
             backgroundColor: "#f4f7fc;",
             boxShadow:"0px 0px 0px 0.1px"
         }}>
             <Navbar.Brand style={{ marginRight: "100px" }}>
-                <img className='logo-containerrr' src="/images/logoo.jpg" alt="" />
+                <img className='logo-containerrr' src="/images/navbarLogoDarkMode.png" alt="" />
             </Navbar.Brand>
             <Button 
                 variant="outline-primary" 

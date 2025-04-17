@@ -38,8 +38,8 @@ const DoctorList = () => {
       >
         <Row>
           {doctors.map((doctor) => (
-            <Col sm={12} md={6} lg={4} key={doctor._id}>
-              <DoctorCard doctor={doctor} />
+            <Col sm={12} md={6} lg={4} key={doctor._id} style={{marginTop:"15px"}}>
+              <DoctorCard doctor={doctor}/>
             </Col>
           ))}
         </Row>

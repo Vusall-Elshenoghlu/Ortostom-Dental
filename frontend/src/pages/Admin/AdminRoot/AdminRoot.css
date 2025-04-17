@@ -1,8 +1,8 @@
 .admin-root {
     display: flex;
     flex-direction: column;
-    height: auto;
-    max-height: auto;
+    height: 100vh;
+    max-height: auto !important;
     background-color: #f4f7fc;
   }
   

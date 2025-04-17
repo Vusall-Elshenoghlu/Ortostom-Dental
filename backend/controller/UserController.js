@@ -3,22 +3,15 @@ import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import crypto from "crypto"
 import { DoctorModel } from "../model/DoctorModel.js"
 import { AppointmentModel } from "../model/AppointmentModel.js"
+
 
 dotenv.config();
 
 const secretKey = process.env.JWT_SECRET;
 
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-    },
-    secure: true
-});
 
 export const UserController = {
     getAll: async (req, res) => {
@@ -29,11 +22,15 @@ export const UserController = {
 
 
     register: async (req, res) => {
-        const { email, name, surname, password } = req.body;
+        const { email, name, surname, password, confirmPassword } = req.body;
         const user = await UserModel.findOne({ email });
 
         if (user) {
             return res.status(400).send("User with this email already exists.");
+        }
+
+        if (password !== confirmPassword) {
+            return res.status(400).send("Passwords do not match.");
         }
 
         let hashPassword = await bcrypt.hash(password, 10);
@@ -47,6 +44,7 @@ export const UserController = {
         await newUser.save();
         res.send(newUser);
     },
+
 
     login: async (req, res) => {
 
@@ -191,26 +189,26 @@ export const userListAppointments = async (req, res) => {
 export const cancelAppointment = async (req, res) => {
     try {
 
-        const {userId,appointmentId} = req.body
+        const { userId, appointmentId } = req.body
 
         const appointmentData = await AppointmentModel.findById(appointmentId)
 
-        if(appointmentData.userId !== userId){
-            return res.json({success:false,message:"Unauthorized action..."})
+        if (appointmentData.userId !== userId) {
+            return res.json({ success: false, message: "Unauthorized action..." })
         }
 
-        await AppointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+        await AppointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true })
 
-        const {docId,slotDate,slotTime} = appointmentData
+        const { docId, slotDate, slotTime } = appointmentData
         const doctorData = await DoctorModel.findById(docId)
 
         let slots_booked = doctorData.slots_booked
 
         slots_booked[slotDate] = slots_booked[slotDate].filter(item => item !== slotTime)
 
-        await DoctorModel.findByIdAndUpdate(docId,{slots_booked})
+        await DoctorModel.findByIdAndUpdate(docId, { slots_booked })
 
-        res.json({success:true,message:"Appointment cancelled"})
+        res.json({ success: true, message: "Appointment cancelled" })
 
 
     } catch (error) {
@@ -218,3 +216,134 @@ export const cancelAppointment = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 }
+
+export const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body
+
+        if (!email) {
+            return res.status(400).json({ success: false, message: "Email is required.." })
+        }
+        console.log(email)
+
+        const user = await UserModel.findOne({ email });
+        console.log(user)
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" })
+        }
+
+        const resetToken = crypto.randomBytes(32).toString("hex")
+        const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex")
+
+        user.resetPasswordToken = hashedToken;
+        user.resetPasswordExpires = Date.now() + 30 * 60 * 1000;
+
+        const resetURL = `http://localhost:5173/reset-password?token=${resetToken}`;
+
+
+        await user.save();
+
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS_RESEND,
+            },
+            secure: true
+        });
+
+        transporter.verify((error, success) => {
+            console.log(transporter)
+            if (error) {
+                console.log("Error occurred:", error);
+                return res.status(500).json({ success: false, message: "SMTP connection failed" });
+            } else {
+                console.log("Server is ready to take our messages");
+            }
+        });
+        
+
+        const mailOptions = {
+            from: process.env.SMTP_USER,
+            to: user.email,
+            subject: "Password Reset",
+            html: `
+        <p>You requested a password reset. Click the link below to reset your password:</p>
+        <a href="${resetURL}">${resetURL}</a>
+        <p>This link is valid for 30 minutes.</p>
+            `,
+        }
+
+        await transporter.sendMail(mailOptions)
+
+        res.json({ success: true, message: "Pasword reset link has been sent to your email" })
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export const verifyResetToken = async (req, res) => {
+    try {
+        const { token } = req.query
+
+        if (!token) {
+            return res.status(400).json({ success: false, message: "Token is required" })
+        }
+
+        const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+        const user = await UserModel.findOne({
+            resetPasswordToken: hashedToken,
+            resetPasswordExpires: { $gt: Date.now() }
+        })
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: "Invalid or expired token" })
+        }
+
+        res.json({ success: true, message: "Token is valid" })
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+export const resetPassword = async (req, res) => {
+    try {
+        const { token, password } = req.body
+
+        if (!token || !password) {
+            return res.status(400).json({ success: false, message: "Token and password are required..." })
+        }
+
+        const hashedToken = crypto.createHash("sha256").update(token).digest("hex")
+
+        const user = await UserModel.findOne({
+            resetPasswordToken: hashedToken,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: "Invalid or expired token" })
+        }
+
+        const salt = await bcrypt.genSalt(10)
+        user.password = await bcrypt.hash(password, salt)
+
+
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+
+        await user.save()
+
+
+        res.json({ success: true, message: "Password reset successfully.." })
+
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}   

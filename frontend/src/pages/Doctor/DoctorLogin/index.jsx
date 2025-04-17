@@ -4,29 +4,36 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';  
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
+
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(4, 'Too Short!').max(20, 'Too Long!').required('Required'),
 });
 
 const DoctorLogin = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false); 
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
-  const [dToken,setDToken] = useState(localStorage.getItem("doctorToken" ? localStorage.getItem("doctorToken") : ""))
-  
+  const [dToken, setDToken] = useState(localStorage.getItem("doctorToken" ? localStorage.getItem("doctorToken") : ""))
+
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible); 
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+
       <div className="card shadow-lg" style={{ width: '25rem' }}>
         <div className="card-body p-4">
           <h1 className="text-center mb-4">Doctor Login</h1>
-
+          <Helmet>
+            <title>
+              Doctor-Login
+            </title>
+          </Helmet>
           <Formik
             initialValues={{
               email: '',
@@ -101,8 +108,8 @@ const DoctorLogin = () => {
                   >
                     {isSubmitting ? 'Logging in...' : 'Login'}
                   </button>
-                  <div style={{display:"flex",gap:"20px"}}>
-                  Admin Login? <a href="/admin">Admin</a>
+                  <div style={{ display: "flex", gap: "20px" }}>
+                    Admin Login? <a href="/admin">Admin</a>
                   </div>
                 </div>
               </Form>

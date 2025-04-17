@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function ChildrensTeeth() {
-  const { lang, } = useContext(LanguageContext);
+  const { lang,darkMode } = useContext(LanguageContext);
   const translations = {
     az: {
       header:"Uşaqların Dişləri",
@@ -98,7 +98,7 @@ function ChildrensTeeth() {
         </Col>
       </Row>
 
-      <Row className="py-5 bg-light text-dark mx-5">
+      <Row className="py-5 mx-5" style={{backgroundColor:`${darkMode ? "#121212" : ""}`}}>
         <h1 style={{ fontWeight: "600", fontSize: "25px" }}>{translations[lang].title}</h1>
         <p style={{ color: "#6F3D85", fontSize: "20px", fontWeight: "600" }}>
           {translations[lang].subtitle}

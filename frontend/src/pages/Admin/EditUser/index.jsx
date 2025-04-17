@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Helmet } from "react-helmet-async";
 
 export const EditUser = () => {
     const [patient, setPatient] = useState({ name: "", surname: "", email: "", phone: "", dob: "", password: "" });
@@ -54,7 +55,7 @@ export const EditUser = () => {
                 },
                 { headers: { Authorization: `Bearer ${aToken}` } }
             );
-    
+
             if (data.success) {
                 toast.success("Patient updated successfully");
                 navigate("/dashboard/all-patients");
@@ -68,39 +69,44 @@ export const EditUser = () => {
 
     return (
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
-            <div className="row w-100 justify-content-center" style={{marginTop:"100px",marginLeft:"300px"}}>
-                    <div className="card p-4 shadow-lg border-0 rounded-4">
-                        <h2 className="text-center mb-4">Edit Patient</h2>
-                        <form onSubmit={handleSubmit} style={{width:"500px"}}>
-                            <div className="mb-3">
-                                <label className="form-label">Name</label>
-                                <input type="text" className="form-control" name="name" value={patient.name} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Surname</label>
-                                <input type="text" className="form-control" name="surname" value={patient.surname} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Email</label>
-                                <input type="email" className="form-control" name="email" value={patient.email} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Phone</label>
-                                <input type="text" className="form-control" name="phone" value={patient.phone} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Date of Birth</label>
-                                <input type="date" className="form-control" name="dob" value={patient.dob} onChange={handleChange} required />
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label">Password</label>
-                                <input type="password" className="form-control" name="password" value={patient.password} onChange={handleChange} />
-                            </div>
-                            <button type="submit" className="btn btn-primary w-100">Update</button>
-                        </form>
-                    </div>
+            <Helmet>
+                <title>
+                    Edit-User
+                </title>
+            </Helmet>
+            <div className="row w-100 justify-content-center" style={{ marginTop: "100px", marginLeft: "300px" }}>
+                <div className="card p-4 shadow-lg border-0 rounded-4">
+                    <h2 className="text-center mb-4">Edit Patient</h2>
+                    <form onSubmit={handleSubmit} style={{ width: "500px" }}>
+                        <div className="mb-3">
+                            <label className="form-label">Name</label>
+                            <input type="text" className="form-control" name="name" value={patient.name} onChange={handleChange} required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Surname</label>
+                            <input type="text" className="form-control" name="surname" value={patient.surname} onChange={handleChange} required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Email</label>
+                            <input type="email" className="form-control" name="email" value={patient.email} onChange={handleChange} required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Phone</label>
+                            <input type="text" className="form-control" name="phone" value={patient.phone} onChange={handleChange} required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Date of Birth</label>
+                            <input type="date" className="form-control" name="dob" value={patient.dob} onChange={handleChange} required />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Password</label>
+                            <input type="password" className="form-control" name="password" value={patient.password} onChange={handleChange} />
+                        </div>
+                        <button type="submit" className="btn btn-primary w-100">Update</button>
+                    </form>
                 </div>
             </div>
+        </div>
     );
 };
 

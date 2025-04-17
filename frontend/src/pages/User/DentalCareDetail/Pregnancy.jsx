@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 function Pregnancy() {
-  const {lang} = useContext(LanguageContext)
+  const {lang,darkMode} = useContext(LanguageContext)
   const translations = {
     az: {
       heroTitle: "Gülümsəməniz Bizim Üçün Önəmlidir",
@@ -56,7 +56,7 @@ function Pregnancy() {
         </Col>
       </Row>
 
-      <Row className="py-5 bg-light text-dark mx-5">
+      <Row className="py-5 mx-5" style={{backgroundColor:`${darkMode ? "#121212" : ""}`}}>
       <h1 style={{ fontWeight: "600", fontSize: "30px" }}>{translations[lang].care}</h1><br /><br />
         <p style={{ color: "#6F3D85", fontSize: "20px", fontWeight: "600" }}>
           {translations[lang].dentalCareIntro}

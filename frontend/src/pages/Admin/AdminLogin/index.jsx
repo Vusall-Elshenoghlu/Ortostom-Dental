@@ -4,8 +4,9 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';  
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet-async';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -13,15 +14,20 @@ const LoginSchema = Yup.object().shape({
 });
 
 const AdminLogin = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false); 
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible); 
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <Helmet>
+        <title>
+          Admin-Login
+        </title>
+      </Helmet>
       <div className="card shadow-lg" style={{ width: '25rem' }}>
         <div className="card-body p-4">
           <h1 className="text-center mb-4">Admin Login</h1>
@@ -39,7 +45,7 @@ const AdminLogin = () => {
                 if (response.data.success) {
                   localStorage.setItem('adminToken', response.data.token);
                   toast.success('Login successful!');
-                  navigate('/dashboard'); 
+                  navigate('/dashboard');
                 } else {
                   toast.error(response.data.message || 'Invalid credentials');
                 }
@@ -52,7 +58,7 @@ const AdminLogin = () => {
                   toast.error('An error occurred during login');
                 }
               } finally {
-                setSubmitting(false); 
+                setSubmitting(false);
               }
             }}
           >
@@ -80,7 +86,7 @@ const AdminLogin = () => {
                   <Field
                     id="password"
                     name="password"
-                    type={passwordVisible ? 'text' : 'password'} 
+                    type={passwordVisible ? 'text' : 'password'}
                     className={`form-control ${errors.password && touched.password ? 'is-invalid' : ''}`}
                   />
                   <div
@@ -103,7 +109,7 @@ const AdminLogin = () => {
                   >
                     {isSubmitting ? 'Logging in...' : 'Login'}
                   </button>
-                  <div style={{display:"flex",gap:"20px"}}>
+                  <div style={{ display: "flex", gap: "20px" }}>
                     Doctor Login? <a href="/doctor">Doctor</a>
                   </div>
                 </div>
